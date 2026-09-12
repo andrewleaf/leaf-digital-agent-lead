@@ -33,6 +33,17 @@ All UI work follows **shadcn/ui**.
 - Use the `user-shadcn` MCP tools to search, inspect, and get add commands for components.
 - Skill: [`.cursor/skills/shadcn-ui/SKILL.md`](.cursor/skills/shadcn-ui/SKILL.md)
 
+## Token usage
+
+Keep context and replies lean:
+
+- Ask clarifying questions instead of long speculative planning
+- Keep replies short (prefer few bullets; default max ~5 list items unless detail is requested)
+- Prefer skills + references over restating long docs in every turn
+- Read only the files needed; avoid dumping whole trees into context
+- One Doing story at a time; don’t expand scope beyond the card
+- Prefer shell/scripts in skills for repetitive work instead of re-deriving steps in prose
+
 ## Skills & references
 
 | Need | Location |

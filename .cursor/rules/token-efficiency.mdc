@@ -1,0 +1,13 @@
+---
+description: Keep agent context and replies token-efficient
+alwaysApply: true
+---
+
+# Token efficiency
+
+Follow [`agenda.md`](../../agenda.md#token-usage).
+
+- Ask instead of long speculative plans
+- Short replies (~5 bullets max by default)
+- Use skills/references; don’t paste long docs into every turn
+- Read only needed files; one Doing story at a time
