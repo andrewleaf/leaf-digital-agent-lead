@@ -61,6 +61,8 @@ Rules:
 - String values: always double-quoted
 - Nullable strings: bare `null` when unset
 - Labels: `["label1"]` or `[]`
+  - Epic card: `labels: ["epic"]`
+  - Story card: `labels: ["story", "epic:<epic-id>"]`
 - Field order must match the template exactly
 - One blank line between closing `---` and content
 
@@ -82,16 +84,62 @@ Rules:
 
 ## Content Format
 
+### Story Cards
+
+Standard actionable cards claimed to **Doing** before writing code:
+
 ```markdown
 # Feature Title
 
 Description of the feature.
 
+Parent epic: [`epic-id`](epic-id.md)
+
 ## Acceptance Criteria
 
 - [ ] Criterion 1
 - [ ] Criterion 2
+
+## Further breakdown
+
+- [ ] Candidate subtask or child slice 1
+- [ ] Candidate subtask or child slice 2
 ```
+
+### Epic Cards
+
+Planning parents that group related stories and capture comprehensive technical and domain specifications:
+
+```markdown
+# Epic Title
+
+## 1. Intent & Business Value
+Problem solved, beneficiaries, and business outcome.
+
+## 2. Source Specifications
+Full domain rules, data contracts, tables, and constraints transcribed from PRD/proposal.
+
+## 3. Scope Boundaries
+- **In Scope (v1)**: Delivered capabilities.
+- **Explicit Non-Goals (v2+)**: Deferred features to avoid scope creep.
+
+## 4. Architecture & Flow
+Mermaid flowcharts, state diagrams, and schema definitions.
+
+## 5. Stories
+- [Story Title](story-id.md) (`story-id`): Story role.
+
+## 6. Milestone Definition of Done
+Functional, testable completion criteria for the milestone.
+- [ ] Condition 1
+- [ ] Condition 2
+
+## 7. Dependencies & Sequencing
+- **Prerequisites**: Required prior epics.
+- **Unblocks**: Subsequent epics or phases.
+```
+
+See [card-format.md](card-format.md) for full examples.
 
 ## Further reading
 
