@@ -1,0 +1,13 @@
+---
+description: Enforce agenda.md — no application code without a Kanban story card
+alwaysApply: true
+---
+
+# Story-gated work
+
+Follow [`agenda.md`](../../agenda.md).
+
+- Do not write application code without a Kanban story card in **Doing** (`status: "in-progress"` under `.devtool/features/`).
+- Create or claim cards via the kanban-markdown skill before implementing.
+- UI follows shadcn (`shadcn-ui` skill).
+- Board pointer: [`KANBAN.md`](../../KANBAN.md).

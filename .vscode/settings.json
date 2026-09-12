@@ -1,0 +1,10 @@
+{
+  "kanban-markdown.featuresDirectory": ".devtool/features",
+  "kanban-markdown.defaultStatus": "backlog",
+  "kanban-markdown.columns": [
+    { "id": "backlog", "name": "Backlog", "color": "#6b7280" },
+    { "id": "todo", "name": "Todo", "color": "#3b82f6" },
+    { "id": "in-progress", "name": "Doing", "color": "#f59e0b" },
+    { "id": "done", "name": "Done", "color": "#22c55e" }
+  ]
+}
