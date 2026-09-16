@@ -5,7 +5,7 @@ priority: "critical"
 assignee: null
 dueDate: null
 created: "2026-09-15T13:41:00.000Z"
-modified: "2026-09-15T13:41:00.000Z"
+modified: "2026-09-16T22:52:00.000Z"
 completedAt: null
 labels: ["epic"]
 order: "bG"
@@ -398,6 +398,7 @@ flowchart TD
 - [UI component inventory](ui-component-inventory-2026-09-15.md) (`ui-component-inventory-2026-09-15`): Map shadcn/ui components to UI requirements and document customization needs.
 - [API route design](api-route-design-2026-09-15.md) (`api-route-design-2026-09-15`): Define server action signatures and API route contracts with TypeScript types.
 - [Pipeline service interfaces](pipeline-service-interfaces-2026-09-15.md) (`pipeline-service-interfaces-2026-09-15`): TypeScript interfaces for DiscoveryService, ScraperService, EnrichmentService, and DraftingService.
+- [Project dependency manifest](project-dependency-manifest-2026-09-16.md) (`project-dependency-manifest-2026-09-16`): Derive the dependency set from the board and author the root `package.json` (no installs).
 
 ## 6. Milestone Definition of Done
 
