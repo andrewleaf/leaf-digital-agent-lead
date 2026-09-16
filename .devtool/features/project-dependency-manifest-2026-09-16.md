@@ -80,7 +80,7 @@ Stack layers come from [`epic-application-architecture-2026-09-15`](epic-applica
 
 ## Further breakdown
 
-- [ ] Bootstrap story: `tsconfig.json`, `next.config.ts`, `postcss.config.mjs`, `app/globals.css`, `components.json`, `drizzle.config.ts`, `vitest.config.ts`.
+- [ ] Bootstrap story: `tsconfig.json`, `next.config.ts`, `postcss.config.mjs`, `app/globals.css`, `components.json`, `drizzle.config.ts`, `vitest.config.ts`, `.gitignore`, ESLint/Prettier config.
 - [ ] Decide the LLM provider package and add it alongside the `ai` SDK.
 - [ ] Decide the Maps/Places discovery adapter and its client dependency.
 - [ ] Revisit `@libsql/client` and the TypeScript major when the hosted-deployment path is scheduled.
