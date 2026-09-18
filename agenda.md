@@ -27,11 +27,13 @@ When planning, break work into story cards on the board. Do not keep a second ta
 
 ## UI style guide: shadcn
 
-All UI work follows **shadcn/ui**.
+All UI work follows **shadcn/ui** plus **LocalDraft Operator Core** tokens.
 
 - Prefer registry components over one-off primitives.
-- Use the `user-shadcn` MCP tools to search, inspect, and get add commands for components.
+- Discover primitives from [ui.shadcn.com/docs](https://ui.shadcn.com/docs) / the shadcn CLI (`user-shadcn` MCP is not installed).
 - Skill: [`.cursor/skills/shadcn-ui/SKILL.md`](.cursor/skills/shadcn-ui/SKILL.md)
+- Tokens: [`.cursor/skills/shadcn-ui/references/operator-core.md`](.cursor/skills/shadcn-ui/references/operator-core.md)
+- File rule: [`.cursor/rules/operator-core-ui.mdc`](.cursor/rules/operator-core-ui.mdc)
 
 ## Skills & references
 
@@ -40,5 +42,6 @@ All UI work follows **shadcn/ui**.
 | Kanban workflow | `.cursor/skills/kanban-markdown/` |
 | Kanban card / data model | `.cursor/skills/kanban-markdown/references/` |
 | shadcn UI | `.cursor/skills/shadcn-ui/` |
+| Operator Core tokens | `.cursor/skills/shadcn-ui/references/operator-core.md` |
 
 Create a new project skill when a workflow is repetitive (especially if it can be a shell script) or when domain instructions would otherwise be re-explained each session. Put durable detail in `references/` and keep `SKILL.md` short.
