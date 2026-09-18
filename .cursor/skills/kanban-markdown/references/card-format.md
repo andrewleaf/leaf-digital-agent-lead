@@ -50,6 +50,35 @@ Parent epic: [`epic-parent-id-2026-09-11`](epic-parent-id-2026-09-11.md)
 - [ ] Subtask or smaller candidate story 2
 ```
 
+### Component Story (`labels` includes `"component"`)
+
+Presentational UI work sourced from Stitch and composed with shadcn. Keep the story frontmatter above. After the parent-epic link, add these sections (Acceptance Criteria still required):
+
+```md
+## File and primitives
+
+- File: `components/campaigns/widget-name.tsx`
+- shadcn: `Select`, `Badge` (registry names only; do not invent primitives)
+
+## Stitch contract
+
+Source: screen title (`projects/{id}/screens/{id}`). Tokens: Operator Core **designMd**, not Stitch Material `namedColors`.
+
+- Verbatim labels, helpers, and filled-mock copy.
+
+## Props
+
+Typed mock-driven props. No persistence, APIs, or page routes.
+
+## Visual tokens
+
+Operator Core sizes, colors, and radii (see `.cursor/skills/shadcn-ui/references/operator-core.md`).
+
+## Acceptance Criteria
+
+- [ ] Copy, states (empty / filled / disabled), a11y, and isolation checks
+```
+
 ---
 
 ## 2. Epic Card Reference Format

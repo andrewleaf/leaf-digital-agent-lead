@@ -1,16 +1,16 @@
 ---
 id: "geography-chips-input-2026-09-18"
-status: "backlog"
+status: "todo"
 priority: "medium"
 assignee: null
+epic: null
 dueDate: null
 created: "2026-09-18T20:12:00.000Z"
-modified: "2026-09-18T20:12:00.000Z"
+modified: "2026-09-18T21:06:54.745Z"
 completedAt: null
 labels: ["story", "component", "epic:epic-campaign-setup-2026-09-18"]
-order: "bN"
+order: "a1"
 ---
-
 # Geography chips input
 
 Dismissible metro/city chips plus an Add city/county control. Presentational only.

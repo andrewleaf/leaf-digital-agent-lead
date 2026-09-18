@@ -1,16 +1,16 @@
 ---
 id: "guardrail-protocol-banner-2026-09-18"
-status: "backlog"
+status: "todo"
 priority: "medium"
 assignee: null
+epic: null
 dueDate: null
 created: "2026-09-18T20:12:00.000Z"
-modified: "2026-09-18T20:12:00.000Z"
+modified: "2026-09-18T21:06:58.641Z"
 completedAt: null
 labels: ["story", "component", "epic:epic-campaign-setup-2026-09-18"]
-order: "bL"
+order: "a2"
 ---
-
 # Guardrail protocol banner
 
 Presentational RULE_01 Human-in-the-Loop alert from the Stitch Campaign Setup screen.

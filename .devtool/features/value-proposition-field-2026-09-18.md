@@ -1,16 +1,16 @@
 ---
 id: "value-proposition-field-2026-09-18"
-status: "backlog"
+status: "todo"
 priority: "medium"
 assignee: null
+epic: null
 dueDate: null
 created: "2026-09-18T20:12:00.000Z"
-modified: "2026-09-18T20:12:00.000Z"
+modified: "2026-09-18T21:06:53.993Z"
 completedAt: null
 labels: ["story", "component", "epic:epic-campaign-setup-2026-09-18"]
-order: "bP"
+order: "a0"
 ---
-
 # Value proposition field
 
 Offer/subject textarea with 80-character hint and crawler helper copy. Presentational controlled field.
