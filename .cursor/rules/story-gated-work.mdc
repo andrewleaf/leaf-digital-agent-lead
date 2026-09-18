@@ -9,5 +9,5 @@ Follow [`agenda.md`](../../agenda.md).
 
 - Do not write application code without a Kanban story card in **Doing** (`status: "in-progress"` under `.devtool/features/`).
 - Create or claim cards via the kanban-markdown skill before implementing.
-- UI follows shadcn (`shadcn-ui` skill) and Operator Core tokens.
+- UI follows shadcn (`shadcn-ui` skill), Operator Core tokens, and Stitch mapping (`stitch-to-shadcn` skill).
 - Board pointer: [`KANBAN.md`](../../KANBAN.md).

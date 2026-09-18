@@ -8,11 +8,13 @@ alwaysApply: false
 
 Compose [shadcn/ui](../skills/shadcn-ui/SKILL.md). Do not reimplement Button, Input, Select, Card, Badge, or Alert.
 
-Tokens: [Operator Core designMd](../skills/shadcn-ui/references/operator-core.md). Ignore Stitch Material `namedColors` (`#faf8ff`, `#005c55`).
+Tokens: [Operator Core designMd](../skills/shadcn-ui/references/operator-core.md). Ignore Stitch Material `namedColors` (`#faf8ff`, `#005c55`) and the YAML `colors:` dump in `designMd`. Mapping: [stitch-to-shadcn](../skills/stitch-to-shadcn/SKILL.md).
 
 - Campaign widgets: `components/campaigns/`. Do not assemble `app/(auth)/campaigns/new` on isolated component stories.
 - Density: chips 20px / 4px; controls 32px or 36px / 6px; cards 8px / `#E2E8F0` border. Prefer borders over shadows.
 - Status: emerald verified, amber attention, rose guardrail. Primary actions `#0F766E`.
+- Stitch glyphs → lucide (`Store`, `MapPin`, `ShieldAlert`, `X`). Do not use a Material icon font.
+- Compose `Label` + control. Do not invent `Field` or a one-off `<textarea>` / `<button>` when `Textarea` / `Button` belong in the registry (CLI-add Alert/Textarea if missing).
 
 ```tsx
 // BAD — one-off control + Material canvas

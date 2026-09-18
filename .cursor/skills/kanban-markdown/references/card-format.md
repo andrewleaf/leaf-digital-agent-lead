@@ -52,17 +52,20 @@ Parent epic: [`epic-parent-id-2026-09-11`](epic-parent-id-2026-09-11.md)
 
 ### Component Story (`labels` includes `"component"`)
 
-Presentational UI work sourced from Stitch and composed with shadcn. Keep the story frontmatter above. After the parent-epic link, add these sections (Acceptance Criteria still required):
+Presentational UI work sourced from Stitch and composed with shadcn. Keep the story frontmatter above. After the parent-epic link, **all** of the following sections are required. A one-paragraph stub (`Proposed file: … shadcn: …`) is **invalid** — rewrite it before the card can move to Doing.
+
+Follow [stitch-to-shadcn](../../stitch-to-shadcn/SKILL.md). Gold standard: [`.devtool/features/done/industry-niche-input-2026-09-18.md`](../../../../.devtool/features/done/industry-niche-input-2026-09-18.md).
 
 ```md
 ## File and primitives
 
 - File: `components/campaigns/widget-name.tsx`
-- shadcn: `Select`, `Badge` (registry names only; do not invent primitives)
+- shadcn: `Select`, `Badge` (registry names only; CLI-add if missing; do not invent primitives)
+- lucide icon names for Stitch Material glyphs
 
 ## Stitch contract
 
-Source: screen title (`projects/{id}/screens/{id}`). Tokens: Operator Core **designMd**, not Stitch Material `namedColors`.
+Source: screen title (`projects/{id}/screens/{id}`). Tokens: Operator Core `styleGuidelines` / `## Colors` prose, not Material `namedColors` and not the YAML `colors:` dump in `designMd`.
 
 - Verbatim labels, helpers, and filled-mock copy.
 

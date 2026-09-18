@@ -1,8 +1,10 @@
 # LocalDraft Operator Core
 
-Source of truth for visual tokens: Stitch design system **LocalDraft Operator Core** (`assets/1d9cca68b81c458ea10d71779c1a76ae`) **designMd** / style guidelines.
+Source of truth for visual tokens: Stitch design system **LocalDraft Operator Core** (`assets/1d9cca68b81c458ea10d71779c1a76ae`). Prefer `list_design_systems` **styleGuidelines** and the `## Colors` / `## Components` / `## Shapes` prose in **designMd**. In-repo tables below match that prose.
 
-Do **not** use Stitch generated Material `namedColors` (lavender canvas `#faf8ff`, primary `#005c55`). Those lose to the table below.
+Do **not** use Stitch generated Material `namedColors` (lavender canvas `#faf8ff`, primary `#005c55`). Do **not** use the YAML `colors:` dump at the top of `designMd` — that block repeats Material, not Operator Core. Both lose to the table below.
+
+MCP details: [stitch-to-shadcn/references/mcp-contract.md](../../stitch-to-shadcn/references/mcp-contract.md).
 
 ## Surfaces
 
