@@ -1,12 +1,12 @@
 ---
 id: "guardrail-protocol-banner-2026-09-18"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-18T20:12:00.000Z"
-modified: "2026-09-18T22:30:00.000Z"
-completedAt: null
+modified: "2026-09-18T22:40:00.000Z"
+completedAt: "2026-09-18T22:40:00.000Z"
 labels: ["story", "component", "epic:epic-campaign-setup-2026-09-18"]
 order: "a2"
 ---
@@ -15,7 +15,7 @@ order: "a2"
 
 Presentational RULE_01 Human-in-the-Loop alert from the Stitch Campaign Setup screen.
 
-Parent epic: [`epic-campaign-setup-2026-09-18`](epic-campaign-setup-2026-09-18.md)
+Parent epic: [`epic-campaign-setup-2026-09-18`](../epic-campaign-setup-2026-09-18.md)
 
 ## File and primitives
 
@@ -48,13 +48,13 @@ Copy is static Stitch protocol text, not props.
 
 ## Acceptance Criteria
 
-- [ ] Eyebrow copy is `Strict Guardrail Protocol` with a `RULE_01` token rendered as `Badge`.
-- [ ] Body copy matches Stitch: `Human-in-the-Loop: LocalDraft drafts emails based strictly on verified public websites. No automated emails are ever dispatched. Every single send requires physical operator sign-off.`
-- [ ] Visual treatment uses shadcn `Alert` with Operator Core guardrail rose tokens, not generic info blue and not amber missing-data tokens.
-- [ ] Component renders in isolation with optional `className` only; no dismiss-persist, settings, or page route.
-- [ ] `Alert` is CLI-added to `components/ui/` if missing; do not hand-write a parallel alert primitive.
+- [x] Eyebrow copy is `Strict Guardrail Protocol` with a `RULE_01` token rendered as `Badge`.
+- [x] Body copy matches Stitch: `Human-in-the-Loop: LocalDraft drafts emails based strictly on verified public websites. No automated emails are ever dispatched. Every single send requires physical operator sign-off.`
+- [x] Visual treatment uses shadcn `Alert` with Operator Core guardrail rose tokens, not generic info blue and not amber missing-data tokens.
+- [x] Component renders in isolation with optional `className` only; no dismiss-persist, settings, or page route.
+- [x] `Alert` is CLI-added to `components/ui/` if missing; do not hand-write a parallel alert primitive.
 
 ## Further breakdown
 
-- [ ] Confirm Alert title vs description mapping for eyebrow vs body
-- [ ] Include RULE_01 as Badge, not only as title suffix
+- [x] Confirm Alert title vs description mapping for eyebrow vs body
+- [x] Include RULE_01 as Badge, not only as title suffix
