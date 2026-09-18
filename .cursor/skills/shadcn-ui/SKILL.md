@@ -18,16 +18,14 @@ This repo’s UI style guide is **shadcn/ui** composed with **LocalDraft Operato
 
 ## Stitch → shadcn
 
-Full mapping: [stitch-to-shadcn](../stitch-to-shadcn/SKILL.md).
-
-- Pull copy from the story’s Stitch contract / parent epic (`get_screen`, `list_design_systems`; `get_project` for instance ids).
-- Map widgets to registry names: Select, Badge, Input, Label, Button, Card, Alert, Textarea, Switch, ToggleGroup. Compose `Label` + control. Do **not** use `Field` unless it already exists in `components/ui/`.
-- Tokens: Operator Core `styleGuidelines` and `## Colors` / `## Components` prose. Ignore Material `namedColors` (`#faf8ff`, primary `#005c55`) **and** the YAML `colors:` dump at the top of `designMd`. See [references/operator-core.md](references/operator-core.md).
+- Pull copy and layout from the story’s Stitch contract / parent epic (`get_project`, `get_screen`, `list_design_systems` when needed).
+- Map widgets to registry names: Select, Badge, Input, Label, Button, Card, Alert, Textarea, Switch, ToggleGroup.
+- Tokens come from Operator Core **designMd**, not Stitch Material `namedColors` (`#faf8ff`, primary `#005c55`). See [references/operator-core.md](references/operator-core.md).
 - Circular indicators (e.g. confidence rings) may be CSS or a small SVG. Do not add a chart library for one ring. Linear `Progress` is not a substitute when the contract specifies a ring.
 
 ## Conventions
 
-- Compose from shadcn; do not reimplement Button, Dialog, Input, Card, Select, Alert, Textarea.
+- Compose from shadcn; do not reimplement Button, Dialog, Input, Card, Select.
 - Campaign presentational widgets live under `components/campaigns/`.
 - After adding registry files, use the CLI; do not paste a parallel primitive into a feature folder.
 
@@ -35,5 +33,4 @@ Full mapping: [stitch-to-shadcn](../stitch-to-shadcn/SKILL.md).
 
 - https://ui.shadcn.com/docs
 - [Operator Core tokens](references/operator-core.md)
-- [Stitch MCP pitfalls](../stitch-to-shadcn/references/mcp-contract.md)
 - Process: [`agenda.md`](../../../agenda.md)

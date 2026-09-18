@@ -33,7 +33,7 @@ Do not invent a second board. Do not skip the Doing column.
 3. Link to parent epic: `Parent epic: [`<epic-id>`](<epic-id>.md)`.
 4. Body includes short description, concrete acceptance criteria, and optional `## Further breakdown` candidate tasks.
 5. Append `order` after existing cards in that column (`"a0"`, `"a1"`, …).
-6. If `labels` includes `component`, follow the **Component Story** section in [references/card-format.md](references/card-format.md) and [stitch-to-shadcn](../stitch-to-shadcn/SKILL.md). Stubs without File/primitives, Stitch contract, Props, and Visual tokens are invalid.
+6. If `labels` includes `component`, also follow the **Component Story** section in [references/card-format.md](references/card-format.md) (file path, shadcn primitives, Stitch contract, props, tokens).
 
 ### Epic Card (`labels: ["epic"]`)
 1. ID: `epic-` + slug + `-YYYY-MM-DD`.
