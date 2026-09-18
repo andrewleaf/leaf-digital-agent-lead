@@ -1,16 +1,16 @@
 ---
 id: "epic-ui-design-system-2026-09-15"
 status: "backlog"
-priority: "high"
+priority: "medium"
 assignee: null
+epic: null
 dueDate: null
 created: "2026-09-15T17:49:00.000Z"
-modified: "2026-09-15T17:49:00.000Z"
+modified: "2026-09-16T22:43:25.389Z"
 completedAt: null
 labels: ["epic"]
 order: "bH"
 ---
-
 # UI Design System
 
 ## 1. Intent & Business Value
@@ -18,6 +18,7 @@ order: "bH"
 This epic defines the complete UI/UX design specifications for LocalDraft before any implementation code is written. It breaks down the interface into discrete screens, components, and interaction patterns — each with wireframes, user flows, and shadcn/ui component mappings. By completing design specifications first, the team avoids mid-build UI pivots and ensures a cohesive, professional operator experience from day one.
 
 **Key Outcomes:**
+
 - Complete screen-by-screen wireframes and layout specifications
 - Consistent component patterns mapped to shadcn/ui primitives
 - Documented interaction states (loading, empty, error, success)
@@ -30,12 +31,7 @@ This epic defines the complete UI/UX design specifications for LocalDraft before
 
 LocalDraft requires 4 primary UI areas based on the v1 product scope:
 
-| Screen | Purpose | Key Components |
-|--------|---------|----------------|
-| **Dashboard** | At-a-glance campaign health and queue metrics | Stat cards, activity feed, quick actions |
-| **Campaign Management** | Create, view, and manage campaigns | List view, creation form, detail view |
-| **Agent Workspace (Queue)** | Review drafts, approve, send, track follow-ups | Filterable table, draft panel, citation viewer |
-| **Settings** | Suppression list, sender identity, preferences | Forms, tables, configuration panels |
+ScreenPurposeKey Components**Dashboard**At-a-glance campaign health and queue metricsStat cards, activity feed, quick actions**Campaign Management**Create, view, and manage campaignsList view, creation form, detail view**Agent Workspace (Queue**)Review drafts, approve, send, track follow-upsFilterable table, draft panel, citation viewer**Settings**Suppression list, sender identity, preferencesForms, tables, configuration panels
 
 ### B. User Flow Map
 
@@ -122,22 +118,12 @@ flowchart TD
 
 ### D. Status Badge Color System
 
-| Status | Color | Icon | Meaning |
-|--------|-------|------|---------|
-| `New` | Gray | Circle | Discovered, not yet enriched |
-| `Enriched` | Blue | Database | Website scraped, facts extracted |
-| `Drafted` | Purple | FileText | Draft generated, awaiting review |
-| `Needs Edit` | Orange | AlertTriangle | Agent flagged for revision |
-| `No Email` | Yellow | MailX | No contact email found |
-| `Skipped` | Muted | XCircle | Disqualified or out-of-ICP |
-| `Ready` | Green | CheckCircle | Approved, pending send |
-| `Sent` | Teal | Send | Dispatched via mail client |
-| `Replied` | Emerald | MessageCircle | Inbound response received |
-| `Follow-up Due` | Red | Clock | Next-touch date reached |
+StatusColorIconMeaning`New`GrayCircleDiscovered, not yet enriched`Enriched`BlueDatabaseWebsite scraped, facts extracted`Drafted`PurpleFileTextDraft generated, awaiting review`Needs Edit`OrangeAlertTriangleAgent flagged for revision`No Email`YellowMailXNo contact email found`Skipped`MutedXCircleDisqualified or out-of-ICP`Ready`GreenCheckCircleApproved, pending send`Sent`TealSendDispatched via mail client`Replied`EmeraldMessageCircleInbound response received`Follow-up Due`RedClockNext-touch date reached
 
 ## 3. Scope Boundaries
 
 ### In Scope (v1 Design)
+
 - Wireframes and layout specifications for all 4 primary screens
 - Component design mapped to shadcn/ui primitives
 - Interaction states (hover, focus, loading, empty, error, success)
@@ -146,6 +132,7 @@ flowchart TD
 - Design tokens (spacing, typography, color palette via Tailwind)
 
 ### Explicit Non-Goals (v2+)
+
 - High-fidelity mockups in Figma (wireframes and specs are sufficient)
 - Animation and micro-interaction timing curves
 - Multi-tenant branding or white-label theming
@@ -336,14 +323,14 @@ flowchart TD
 
 ## 6. Milestone Definition of Done
 
-- [ ] All 4 primary screens have complete wireframe specifications.
-- [ ] Component inventory maps every UI element to a shadcn/ui primitive.
-- [ ] Status badge system documents color, icon, and meaning for all 10 statuses.
-- [ ] Interaction states (loading, empty, error, success) are specified for each screen.
-- [ ] User flow diagrams show navigation paths between all screens.
-- [ ] Responsive breakpoint annotations identify mobile/tablet adaptations.
-- [ ] Accessibility notes document focus order and ARIA requirements.
-- [ ] No implementation code is written — this epic produces design artifacts only.
+- \[ \] All 4 primary screens have complete wireframe specifications.
+- \[ \] Component inventory maps every UI element to a shadcn/ui primitive.
+- \[ \] Status badge system documents color, icon, and meaning for all 10 statuses.
+- \[ \] Interaction states (loading, empty, error, success) are specified for each screen.
+- \[ \] User flow diagrams show navigation paths between all screens.
+- \[ \] Responsive breakpoint annotations identify mobile/tablet adaptations.
+- \[ \] Accessibility notes document focus order and ARIA requirements.
+- \[ \] No implementation code is written — this epic produces design artifacts only.
 
 ## 7. Dependencies & Sequencing
 

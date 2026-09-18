@@ -1,24 +1,26 @@
 ---
 id: "epic-immediate-next-steps-2026-09-12"
 status: "backlog"
-priority: "high"
+priority: "medium"
 assignee: null
+epic: null
 dueDate: null
 created: "2026-09-12T14:54:00.000Z"
-modified: "2026-09-12T17:25:00.000Z"
+modified: "2026-09-16T22:43:13.078Z"
 completedAt: null
 labels: ["epic"]
 order: "b9"
 ---
-
 # Immediate Next Steps
 
 ## 1. Intent & Business Value
+
 Planning without immediate tactical execution breeds stagnation. This epic captures the concrete operational and technical checklist required to initiate the LocalDraft pilot immediately upon proposal ratification. It defines the initial vertical selections, the first campaign brief, mailbox configuration, and legal review gates required before writing application code.
 
 ## 2. Source Specifications
 
 ### The Five Immediate Actions (Proposal Section 17)
+
 1. **Choose Two Categories & One Geography**: Formally select the two target local service verticals (e.g., independent hair salons and HVAC repair) and define the geographic boundary (e.g., Hennepin & Ramsey Counties, MN).
 2. **Write First Campaign Brief**: Draft the initial campaign messaging brief:
    - Specific offer value proposition (what is being offered this week).
@@ -29,6 +31,7 @@ Planning without immediate tactical execution breeds stagnation. This epic captu
 5. **Build the Thin Path & Refuse Extra Filters**: Execute the 21-day thin-path build plan (campaign form, Maps discovery, public scraper, LLM generator, agent queue) while strictly refusing extraneous filter requests until live pilot metrics exist.
 
 ## 3. Scope Boundaries
+
 - **In Scope (v1)**: Immediate execution checklists, campaign brief templates, sending mailbox configuration, legal check sign-off.
 - **Explicit Non-Goals (v2+)**:
   - Premature automated warmup sequences or complex domain rotation meshes.
@@ -59,12 +62,14 @@ flowchart TD
 - [Build thin path only](build-thin-path-only-2026-09-12.md) (`build-thin-path-only-2026-09-12`): Scope freeze policy enforcing delivery of the core thin path without distraction.
 
 ## 6. Milestone Definition of Done
-- [ ] Initial geography (Twin Cities) and two categories (e.g. Salons, HVAC) are written into configuration files.
-- [ ] Master brief for Campaign 1 is approved with offer, CTA, and negative constraints.
-- [ ] Sending mailbox has authenticated SPF, DKIM, and DMARC records and valid physical signature.
-- [ ] CAN-SPAM checklist signed off by counsel or designated risk owner.
-- [ ] Scope freeze confirmed: zero non-v1 stories in Doing during the Days 1–21 build.
+
+- \[ \] Initial geography (Twin Cities) and two categories (e.g. Salons, HVAC) are written into configuration files.
+- \[ \] Master brief for Campaign 1 is approved with offer, CTA, and negative constraints.
+- \[ \] Sending mailbox has authenticated SPF, DKIM, and DMARC records and valid physical signature.
+- \[ \] CAN-SPAM checklist signed off by counsel or designated risk owner.
+- \[ \] Scope freeze confirmed: zero non-v1 stories in Doing during the Days 1–21 build.
 
 ## 7. Dependencies & Sequencing
+
 - **Prerequisites**: [epic-recommended-decision](epic-recommended-decision-2026-09-12.md).
 - **Unblocks**: [epic-v1-product-scope](epic-v1-product-scope-2026-09-12.md), [epic-90-day-pilot-plan](epic-90-day-pilot-plan-2026-09-12.md).
