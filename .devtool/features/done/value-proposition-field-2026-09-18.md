@@ -1,12 +1,12 @@
 ---
 id: "value-proposition-field-2026-09-18"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-18T20:12:00.000Z"
-modified: "2026-09-18T22:30:00.000Z"
-completedAt: null
+modified: "2026-09-18T22:40:00.000Z"
+completedAt: "2026-09-18T22:40:00.000Z"
 labels: ["story", "component", "epic:epic-campaign-setup-2026-09-18"]
 order: "a0"
 ---
@@ -15,7 +15,7 @@ order: "a0"
 
 Offer/subject textarea with 80-character hint and crawler helper copy. Presentational controlled field.
 
-Parent epic: [`epic-campaign-setup-2026-09-18`](epic-campaign-setup-2026-09-18.md)
+Parent epic: [`epic-campaign-setup-2026-09-18`](../epic-campaign-setup-2026-09-18.md)
 
 ## File and primitives
 
@@ -53,14 +53,14 @@ Live character count reflects `value.length`.
 
 ## Acceptance Criteria
 
-- [ ] Eyebrow `Editorial Tone` and label `Specific Value Proposition / Subject of Outreach` are visible; the label is associated with the textarea.
-- [ ] Hint text is `Max 80 chars recommended`; a live character count reflects the current value.
-- [ ] Helper text matches Stitch: `The research crawler will specifically isolate facts related to this offer (e.g. mobile responsiveness, quote inquiry speed).`
-- [ ] Filled mock value is `Website conversion review and mobile booking-flow recommendations`.
-- [ ] Empty, filled, over-80-chars (warning style, not a hard block unless a `maxLength` prop is set), and disabled states render in isolation with `value` / `onChange` props only.
-- [ ] `Textarea` is CLI-added to `components/ui/` if missing; do not hand-write a textarea primitive or use `Field`.
+- [x] Eyebrow `Editorial Tone` and label `Specific Value Proposition / Subject of Outreach` are visible; the label is associated with the textarea.
+- [x] Hint text is `Max 80 chars recommended`; a live character count reflects the current value.
+- [x] Helper text matches Stitch: `The research crawler will specifically isolate facts related to this offer (e.g. mobile responsiveness, quote inquiry speed).`
+- [x] Filled mock value is `Website conversion review and mobile booking-flow recommendations`.
+- [x] Empty, filled, over-80-chars (warning style, not a hard block unless a `maxLength` prop is set), and disabled states render in isolation with `value` / `onChange` props only.
+- [x] `Textarea` is CLI-added to `components/ui/` if missing; do not hand-write a textarea primitive or use `Field`.
 
 ## Further breakdown
 
-- [ ] Do not persist or validate against the campaign schema in this story
-- [ ] Over-80 warning uses amber attention tokens, not error rose
+- [x] Do not persist or validate against the campaign schema in this story
+- [x] Over-80 warning uses amber attention tokens, not error rose

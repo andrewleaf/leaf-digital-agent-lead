@@ -1,12 +1,12 @@
 ---
 id: "geography-chips-input-2026-09-18"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-18T20:12:00.000Z"
-modified: "2026-09-18T22:30:00.000Z"
-completedAt: null
+modified: "2026-09-18T22:40:00.000Z"
+completedAt: "2026-09-18T22:40:00.000Z"
 labels: ["story", "component", "epic:epic-campaign-setup-2026-09-18"]
 order: "a1"
 ---
@@ -15,7 +15,7 @@ order: "a1"
 
 Dismissible metro/city chips plus an Add city/county control. Presentational only.
 
-Parent epic: [`epic-campaign-setup-2026-09-18`](epic-campaign-setup-2026-09-18.md)
+Parent epic: [`epic-campaign-setup-2026-09-18`](../epic-campaign-setup-2026-09-18.md)
 
 ## File and primitives
 
@@ -57,14 +57,14 @@ Activating the add control reveals or focuses the input. Submit (Enter) calls `o
 
 ## Acceptance Criteria
 
-- [ ] Label is `Target Geographies` and is associated with the text input.
-- [ ] Optional `regionCaption` mock is `Austin Metropolitan Area`; omit the caption when the prop is null or undefined.
-- [ ] Filled mock chips are `Austin, TX`, `Round Rock, TX`, `Cedar Park, TX` with a location affordance and dismiss control whose accessible name includes the chip label.
-- [ ] Add control copy is `Add city/county`; activating it reveals or focuses an input; Enter/submit calls `onAdd` with the typed string and does not write a campaign record.
-- [ ] Empty (no chips, caption optional), filled, and disabled states render in isolation.
-- [ ] Chip dismiss calls `onRemove(id)` only. No map geocoding or yield calculation.
+- [x] Label is `Target Geographies` and is associated with the text input.
+- [x] Optional `regionCaption` mock is `Austin Metropolitan Area`; omit the caption when the prop is null or undefined.
+- [x] Filled mock chips are `Austin, TX`, `Round Rock, TX`, `Cedar Park, TX` with a location affordance and dismiss control whose accessible name includes the chip label.
+- [x] Add control copy is `Add city/county`; activating it reveals or focuses an input; Enter/submit calls `onAdd` with the typed string and does not write a campaign record.
+- [x] Empty (no chips, caption optional), filled, and disabled states render in isolation.
+- [x] Chip dismiss calls `onRemove(id)` only. No map geocoding or yield calculation.
 
 ## Further breakdown
 
-- [ ] Keep chip height/radius on Operator Core chip spec (20px, 4px)
-- [ ] Do not implement map geocoding or yield calculation
+- [x] Keep chip height/radius on Operator Core chip spec (20px, 4px)
+- [x] Do not implement map geocoding or yield calculation
