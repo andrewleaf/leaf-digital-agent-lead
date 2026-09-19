@@ -6,12 +6,12 @@ alwaysApply: false
 
 # Component story cards
 
-When `labels` includes `component`, the card is not a stub. Follow [card-format Component Story](../skills/kanban-markdown/references/card-format.md) and [stitch-to-shadcn](../skills/stitch-to-shadcn/SKILL.md). Gold standard: `.devtool/features/done/industry-niche-input-2026-09-18.md`.
+When `labels` includes `component`, the card is not a stub. Follow [card-format Component Story](../skills/kanban-markdown/references/card-format.md) and [stitch-to-shadcn](../skills/stitch-to-shadcn/SKILL.md) including the [Stitch catalog](../skills/stitch-to-shadcn/references/projects.md). Gold standard: `.devtool/features/done/industry-niche-input-2026-09-18.md`.
 
 Required after the parent-epic link:
 
 - **File and primitives** — `components/campaigns/…`, registry names only, lucide for Stitch icons, CLI-add if missing
-- **Stitch contract** — project/screen path plus verbatim copy
+- **Stitch contract** — catalog project/screen path plus verbatim copy
 - **Props** — typed mocks; no persistence, APIs, or page routes
 - **Visual tokens** — Operator Core (`styleGuidelines` / `## Colors` prose), not Material `namedColors` and not YAML `colors:` in `designMd`
 - **Acceptance Criteria** — copy, empty/filled/disabled, a11y, isolation
