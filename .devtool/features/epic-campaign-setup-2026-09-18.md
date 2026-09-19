@@ -5,7 +5,7 @@ priority: "high"
 assignee: null
 dueDate: null
 created: "2026-09-18T20:12:00.000Z"
-modified: "2026-09-18T20:12:00.000Z"
+modified: "2026-09-19T01:50:00.000Z"
 completedAt: null
 labels: ["epic"]
 order: "bJ"
@@ -218,6 +218,19 @@ Components receive typed props only. No server actions, no campaign entity write
 - [Setup readiness chips](setup-readiness-chips-2026-09-18.md) (`setup-readiness-chips-2026-09-18`): Prohibition / boundary / website-gate status chips.
 - [Pipeline sequence rail](pipeline-sequence-rail-2026-09-18.md) (`pipeline-sequence-rail-2026-09-18`): Six-stage pipeline list.
 - [Campaign setup actions](campaign-setup-actions-2026-09-18.md) (`campaign-setup-actions-2026-09-18`): Save as Draft and Initialize Campaign Pipeline buttons.
+
+### Layout and navigation
+
+Page chrome mapped from the same Stitch screen. Section 3 still records shell, sidebar, page, and section wrappers as v1 non-goals; these cards are tracked here so the screen has a complete card trail and are not counted by section 6.
+
+- [Operator app shell](done/operator-app-shell-2026-09-18.md) (`operator-app-shell-2026-09-18`): Fixed 256px rail and 56px header ports around the main canvas.
+- [App sidebar nav](done/app-sidebar-nav-2026-09-18.md) (`app-sidebar-nav-2026-09-18`): Brand block, Campaigns / Review Queue / Follow-ups / Settings, footer slots.
+- [Workspace top bar](done/workspace-top-bar-2026-09-18.md) (`workspace-top-bar-2026-09-18`): Breadcrumb, search, human-in-the-loop pill, review stat, New Campaign, avatar.
+- [Workspace page header](done/workspace-page-header-2026-09-18.md) (`workspace-page-header-2026-09-18`): Spec strip, `Create Targeted Campaign` hero, `Guided Setup` badge.
+- [Form section shell](done/form-section-shell-2026-09-18.md) (`form-section-shell-2026-09-18`): Numbered panel wrapper with eyebrow and guardrail tone.
+- [Campaign setup page scaffold](done/campaign-setup-page-scaffold-2026-09-18.md) (`campaign-setup-page-scaffold-2026-09-18`): Auth layout, `/campaigns/new` route, and the 12 / 8 / 4 grid ports.
+
+The scaffold leaves four ports as `Pending story` placeholders until [research depth settings](research-depth-settings-2026-09-18.md), [campaign setup actions](campaign-setup-actions-2026-09-18.md), [setup readiness chips](setup-readiness-chips-2026-09-18.md), and [pipeline sequence rail](pipeline-sequence-rail-2026-09-18.md) are built.
 
 ## 6. Milestone Definition of Done
 
