@@ -1,12 +1,12 @@
 ---
 id: "operator-velocity-cards-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T21:00:00.000Z"
-modified: "2026-09-19T21:00:00.000Z"
-completedAt: null
+modified: "2026-09-19T21:20:00.000Z"
+completedAt: "2026-09-19T21:20:00.000Z"
 labels: ["story", "component", "epic:epic-campaigns-admin-dashboard-2026-09-19"]
 order: "aA"
 ---
@@ -15,7 +15,7 @@ order: "aA"
 
 Seven-day dispatch audit cards for lead operators: reviewed count, average speed, reply rate, citation flags, native-sent proof. Mock operators only.
 
-Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](epic-campaigns-admin-dashboard-2026-09-19.md)
+Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](../epic-campaigns-admin-dashboard-2026-09-19.md)
 
 ## File and primitives
 
@@ -63,13 +63,13 @@ Export `OPERATOR_VELOCITY_MOCK` as the three Stitch operators. Empty mock: `oper
 
 ## Acceptance Criteria
 
-- [ ] Section renders `Lead Operator Velocity & Precision` and `Realtime dispatch audit (Past 7 days)`.
-- [ ] Filled mock shows Alex, Sarah, and Marcus with the Stitch coverage lines, rank chips, `142` / `118` / `94` reviewed, speeds, reply rates, flag lines, and `100% Native Sent`.
-- [ ] Empty `operators` does not invent people. Isolation: no fetch.
-- [ ] Rank chips are not color-only. Avatar fallbacks expose the initials as text.
-- [ ] Metric labels `Reviewed`, `Avg Speed`, and `Reply Rate` match the Stitch strings.
+- [x] Section renders `Lead Operator Velocity & Precision` and `Realtime dispatch audit (Past 7 days)`.
+- [x] Filled mock shows Alex, Sarah, and Marcus with the Stitch coverage lines, rank chips, `142` / `118` / `94` reviewed, speeds, reply rates, flag lines, and `100% Native Sent`.
+- [x] Empty `operators` does not invent people. Isolation: no fetch.
+- [x] Rank chips are not color-only. Avatar fallbacks expose the initials as text.
+- [x] Metric labels `Reviewed`, `Avg Speed`, and `Reply Rate` match the Stitch strings.
 
 ## Further breakdown
 
-- [ ] Rank tone only changes chip color; the visible label is `rankLabel`
-- [ ] Do not add a fourth invented operator to fill the grid
+- [x] Rank tone only changes chip color; the visible label is `rankLabel`
+- [x] Do not add a fourth invented operator to fill the grid

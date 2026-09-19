@@ -1,12 +1,12 @@
 ---
 id: "dashboard-pipeline-funnel-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T21:00:00.000Z"
-modified: "2026-09-19T21:00:00.000Z"
-completedAt: null
+modified: "2026-09-19T21:20:00.000Z"
+completedAt: "2026-09-19T21:20:00.000Z"
 labels: ["story", "component", "epic:epic-campaigns-admin-dashboard-2026-09-19"]
 order: "aB"
 ---
@@ -15,7 +15,7 @@ order: "aB"
 
 Cross-campaign six-stage funnel with live business counts. New widget; do not reuse Setup or Pipeline steppers.
 
-Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](epic-campaigns-admin-dashboard-2026-09-19.md)
+Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](../epic-campaigns-admin-dashboard-2026-09-19.md)
 
 ## File and primitives
 
@@ -66,13 +66,13 @@ Export `DASHBOARD_FUNNEL_STAGES` for the page scaffold.
 
 ## Acceptance Criteria
 
-- [ ] Title is `6-Stage Pipeline Funnel` and the helper matches the Stitch sentence.
-- [ ] Six stages render with the titles, details, and metrics above, including `1,428 Targets` on stage 2.
-- [ ] Empty `stages` does not invent funnel steps. Isolation: no fetch.
-- [ ] File does not import `PipelineSequenceRail` or `PipelineStageStepper`.
-- [ ] Stage titles are visible text; index numbers are not color-only.
+- [x] Title is `6-Stage Pipeline Funnel` and the helper matches the Stitch sentence.
+- [x] Six stages render with the titles, details, and metrics above, including `1,428 Targets` on stage 2.
+- [x] Empty `stages` does not invent funnel steps. Isolation: no fetch.
+- [x] File does not import `PipelineSequenceRail` or `PipelineStageStepper`.
+- [x] Stage titles are visible text; index numbers are not color-only.
 
 ## Further breakdown
 
-- [ ] Keep stage titles as props so a later domain rename does not require a rewrite
-- [ ] Do not add Setup titles (`Directory & Maps Discovery` … `Manual Dispatch Desk`) as fallbacks
+- [x] Keep stage titles as props so a later domain rename does not require a rewrite
+- [x] Do not add Setup titles (`Directory & Maps Discovery` … `Manual Dispatch Desk`) as fallbacks

@@ -188,18 +188,18 @@ flowchart TD
 
 Widget stories receive typed props only. No server actions, no campaign entity writes, no shared page store until the scaffold story, which uses a **local mock object** in the page file.
 
-Do not import [`pipeline-summary-metrics`](pipeline-summary-metrics-2026-09-19.md), [`pipeline-workbench-table`](pipeline-workbench-table-2026-09-19.md), [`pipeline-stage-stepper`](pipeline-stage-stepper-2026-09-19.md), or [`pipeline-sequence-rail`](done/pipeline-sequence-rail-2026-09-18.md). [`PageHeader`](done/workspace-page-header-2026-09-18.md) does not cover metro chips plus the telemetry eyebrow.
+Do not import [`pipeline-summary-metrics`](done/pipeline-summary-metrics-2026-09-19.md), [`pipeline-workbench-table`](done/pipeline-workbench-table-2026-09-19.md), [`pipeline-stage-stepper`](done/pipeline-stage-stepper-2026-09-19.md), or [`pipeline-sequence-rail`](done/pipeline-sequence-rail-2026-09-18.md). [`PageHeader`](done/workspace-page-header-2026-09-18.md) does not cover metro chips plus the telemetry eyebrow.
 
 ## 5. Stories
 
-- [Campaigns dashboard header](campaigns-dashboard-header-2026-09-19.md) (`campaigns-dashboard-header-2026-09-19`): Title, telemetry eyebrow, description, manual-gate chip, metro ToggleGroup.
-- [Dashboard telemetry metrics](dashboard-telemetry-metrics-2026-09-19.md) (`dashboard-telemetry-metrics-2026-09-19`): Five KPI cards (pipelines, domain valid, triage time, citation integrity, reply rate).
-- [Campaign portfolio table](campaign-portfolio-table-2026-09-19.md) (`campaign-portfolio-table-2026-09-19`): Six monitored campaigns with stage, targets, desk queue, operator, integrity, and actions.
-- [Operator velocity cards](operator-velocity-cards-2026-09-19.md) (`operator-velocity-cards-2026-09-19`): Three-operator 7-day dispatch audit.
-- [Dashboard pipeline funnel](dashboard-pipeline-funnel-2026-09-19.md) (`dashboard-pipeline-funnel-2026-09-19`): Cross-campaign six-stage counts. New widget.
-- [Dashboard audit alerts](dashboard-audit-alerts-2026-09-19.md) (`dashboard-audit-alerts-2026-09-19`): Missing-domain and guardrail-intercept alerts.
-- [Platform guardrails strip](platform-guardrails-strip-2026-09-19.md) (`platform-guardrails-strip-2026-09-19`): Manual-gate stats and zero-blast footer.
-- [Campaigns dashboard page scaffold](campaigns-dashboard-page-scaffold-2026-09-19.md) (`campaigns-dashboard-page-scaffold-2026-09-19`): Compose the seven widgets into `app/(auth)/campaigns/page.tsx`.
+- [Campaigns dashboard header](done/campaigns-dashboard-header-2026-09-19.md) (`campaigns-dashboard-header-2026-09-19`): Title, telemetry eyebrow, description, manual-gate chip, metro ToggleGroup.
+- [Dashboard telemetry metrics](done/dashboard-telemetry-metrics-2026-09-19.md) (`dashboard-telemetry-metrics-2026-09-19`): Five KPI cards (pipelines, domain valid, triage time, citation integrity, reply rate).
+- [Campaign portfolio table](done/campaign-portfolio-table-2026-09-19.md) (`campaign-portfolio-table-2026-09-19`): Six monitored campaigns with stage, targets, desk queue, operator, integrity, and actions.
+- [Operator velocity cards](done/operator-velocity-cards-2026-09-19.md) (`operator-velocity-cards-2026-09-19`): Three-operator 7-day dispatch audit.
+- [Dashboard pipeline funnel](done/dashboard-pipeline-funnel-2026-09-19.md) (`dashboard-pipeline-funnel-2026-09-19`): Cross-campaign six-stage counts. New widget.
+- [Dashboard audit alerts](done/dashboard-audit-alerts-2026-09-19.md) (`dashboard-audit-alerts-2026-09-19`): Missing-domain and guardrail intercept alerts.
+- [Platform guardrails strip](done/platform-guardrails-strip-2026-09-19.md) (`platform-guardrails-strip-2026-09-19`): Manual-gate stats and zero-blast footer.
+- [Campaigns dashboard page scaffold](done/campaigns-dashboard-page-scaffold-2026-09-19.md) (`campaigns-dashboard-page-scaffold-2026-09-19`): Compose the seven widgets into `app/(auth)/campaigns/page.tsx`.
 
 ### Layout and navigation
 
@@ -211,13 +211,13 @@ Page chrome is reused from Campaign Setup. These cards are **not** created in th
 
 ## 6. Milestone Definition of Done
 
-- [ ] All 7 components exist under `components/campaigns/` and render in isolation with mock props.
-- [ ] Empty, filled, and disabled (or inactive) states are implemented where the Stitch screen implies them.
-- [ ] Visible copy matches the Stitch strings in section 2 (labels, KPI names, table headers, mock rows, funnel stages, alert copy, guardrail stats).
-- [ ] Components compose shadcn/ui primitives listed on each story card; `Table` is CLI-added if missing, not hand-rolled.
-- [ ] Visual tokens match Operator Core (teal primary, chip/card radii, border colors) from the Stitch design system.
-- [ ] Funnel, KPI row, and portfolio table are new widgets; they do not import pipeline-summary-metrics, pipeline-workbench-table, pipeline-stage-stepper, or pipeline-sequence-rail.
-- [ ] `app/(auth)/campaigns/page.tsx` composes the widgets with a local mock; no sidebar rebuild, persistence, or API client is introduced.
+- [x] All 7 components exist under `components/campaigns/` and render in isolation with mock props.
+- [x] Empty, filled, and disabled (or inactive) states are implemented where the Stitch screen implies them.
+- [x] Visible copy matches the Stitch strings in section 2 (labels, KPI names, table headers, mock rows, funnel stages, alert copy, guardrail stats).
+- [x] Components compose shadcn/ui primitives listed on each story card; `Table` is CLI-added if missing, not hand-rolled.
+- [x] Visual tokens match Operator Core (teal primary, chip/card radii, border colors) from the Stitch design system.
+- [x] Funnel, KPI row, and portfolio table are new widgets; they do not import pipeline-summary-metrics, pipeline-workbench-table, pipeline-stage-stepper, or pipeline-sequence-rail.
+- [x] `app/(auth)/campaigns/page.tsx` composes the widgets with a local mock; no sidebar rebuild, persistence, or API client is introduced.
 
 ## 7. Dependencies & Sequencing
 

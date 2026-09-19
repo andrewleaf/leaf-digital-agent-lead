@@ -1,12 +1,12 @@
 ---
 id: "campaign-portfolio-table-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T21:00:00.000Z"
-modified: "2026-09-19T21:00:00.000Z"
-completedAt: null
+modified: "2026-09-19T21:20:00.000Z"
+completedAt: "2026-09-19T21:20:00.000Z"
 labels: ["story", "component", "epic:epic-campaigns-admin-dashboard-2026-09-19"]
 order: "a9"
 ---
@@ -15,7 +15,7 @@ order: "a9"
 
 Campaign-level health table with metro, stage, targets, desk queue, operator, integrity, and next action. Mock rows only.
 
-Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](epic-campaigns-admin-dashboard-2026-09-19.md)
+Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](../epic-campaigns-admin-dashboard-2026-09-19.md)
 
 ## File and primitives
 
@@ -76,15 +76,15 @@ This table does not filter by metro; the parent mock passes already-filtered `ro
 
 ## Acceptance Criteria
 
-- [ ] Column headers match `Campaign & Metro`, `Pipeline Stage`, `Targets`, `Desk Queue`, `Operator`, `Integrity`, `Actions`.
-- [ ] Filled mock renders the six Stitch campaigns with names, metros, stage labels, target lines, queue lines, operators, integrity labels, and action labels above.
-- [ ] `Triage` uses the primary teal button; `Resume` and `Audit` use secondary. Clicks call `onAction(id)` only.
-- [ ] Phoenix row shows `Paused: Capacity Guard`, `Unassigned`, integrity `Check`, and action `Resume`.
-- [ ] Empty `rows` renders headers and an empty body (no invented campaigns). Isolation: no fetch, no metro filter logic, no route.
-- [ ] `Table` lives in `components/ui/` (CLI-add if missing). Header cells are `th`; overflow buttons have accessible names.
+- [x] Column headers match `Campaign & Metro`, `Pipeline Stage`, `Targets`, `Desk Queue`, `Operator`, `Integrity`, `Actions`.
+- [x] Filled mock renders the six Stitch campaigns with names, metros, stage labels, target lines, queue lines, operators, integrity labels, and action labels above.
+- [x] `Triage` uses the primary teal button; `Resume` and `Audit` use secondary. Clicks call `onAction(id)` only.
+- [x] Phoenix row shows `Paused: Capacity Guard`, `Unassigned`, integrity `Check`, and action `Resume`.
+- [x] Empty `rows` renders headers and an empty body (no invented campaigns). Isolation: no fetch, no metro filter logic, no route.
+- [x] `Table` lives in `components/ui/` (CLI-add if missing). Header cells are `th`; overflow buttons have accessible names.
 
 ## Further breakdown
 
-- [ ] Export the six-row mock constant for page-assembly later
-- [ ] CLI-add watch: if `table` emits a bad `cn` import, correct to `@/lib/utils`
-- [ ] Do not open a menu on `more_vert` unless a dropdown primitive is already in `components/ui/`
+- [x] Export the six-row mock constant for page-assembly later
+- [x] CLI-add watch: if `table` emits a bad `cn` import, correct to `@/lib/utils`
+- [x] Do not open a menu on `more_vert` unless a dropdown primitive is already in `components/ui/`
