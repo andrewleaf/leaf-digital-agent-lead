@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { CallToActionField } from "@/components/campaigns/call-to-action-field";
+import { CampaignSetupActions } from "@/components/campaigns/campaign-setup-actions";
 import { CampaignSetupStatusBar } from "@/components/campaigns/campaign-setup-status-bar";
 import { ComposerVoiceProfile } from "@/components/campaigns/composer-voice-profile";
 import { DiscoveryYieldCard } from "@/components/campaigns/discovery-yield-card";
@@ -10,6 +11,12 @@ import { GeographyChipsInput } from "@/components/campaigns/geography-chips-inpu
 import { GuardrailProtocolBanner } from "@/components/campaigns/guardrail-protocol-banner";
 import { IndustryNicheInput } from "@/components/campaigns/industry-niche-input";
 import { NegativeConstraintsInput } from "@/components/campaigns/negative-constraints-input";
+import { PipelineSequenceRail } from "@/components/campaigns/pipeline-sequence-rail";
+import {
+  FALLBACK_ACTIONS,
+  ResearchDepthSettings,
+} from "@/components/campaigns/research-depth-settings";
+import { SetupReadinessChips } from "@/components/campaigns/setup-readiness-chips";
 import { ValuePropositionField } from "@/components/campaigns/value-proposition-field";
 import { FormSection } from "@/components/layout/form-section";
 import { PageHeader } from "@/components/shared/page-header";
@@ -39,16 +46,11 @@ const MOCK = {
   ],
   discoveryEstimate: "~120-140 local businesses",
   discoveryConfidence: 94,
+  discoveryDetail: "Austin, Round Rock, Cedar Park",
+  requireWebsite: true,
+  extractProofPoints: true,
+  fallbackAction: FALLBACK_ACTIONS[0].value,
 };
-
-/** Placeholder for a Stitch port whose widget story has not been built yet. */
-function PendingPort({ storyId }: { storyId: string }) {
-  return (
-    <p className="rounded-lg border border-dashed border-[#CBD5E1] bg-[#F8FAFC] px-3 py-4 text-[12px] leading-4 text-[#64748B]">
-      Pending story: <span className="font-mono">{storyId}</span>
-    </p>
-  );
-}
 
 export default function NewCampaignPage() {
   const [selectedCampaignId, setSelectedCampaignId] = useState(
@@ -67,6 +69,13 @@ export default function NewCampaignPage() {
   );
   const [constraints, setConstraints] = useState(MOCK.constraints);
   const [constraintInput, setConstraintInput] = useState("");
+  const [requireWebsite, setRequireWebsite] = useState(MOCK.requireWebsite);
+  const [extractProofPoints, setExtractProofPoints] = useState(
+    MOCK.extractProofPoints,
+  );
+  const [fallbackAction, setFallbackAction] = useState<string | null>(
+    MOCK.fallbackAction,
+  );
 
   return (
     <div className="flex w-full flex-col gap-6 pt-4">
@@ -185,16 +194,23 @@ export default function NewCampaignPage() {
             />
           </FormSection>
 
-          <FormSection
-            index={4}
-            title="Research Depth & Verification Settings"
-            eyebrow="Fact Engine"
-          >
-            <PendingPort storyId="research-depth-settings-2026-09-18" />
+          {/* ResearchDepthSettings already renders the Fact Engine eyebrow. */}
+          <FormSection index={4} title="Research Depth & Verification Settings">
+            <ResearchDepthSettings
+              requireWebsite={requireWebsite}
+              onRequireWebsiteChange={setRequireWebsite}
+              extractProofPoints={extractProofPoints}
+              onExtractProofPointsChange={setExtractProofPoints}
+              fallbackAction={fallbackAction}
+              onFallbackActionChange={setFallbackAction}
+            />
           </FormSection>
 
           <div className="rounded-lg border border-[#E2E8F0] bg-white p-4">
-            <PendingPort storyId="campaign-setup-actions-2026-09-18" />
+            <CampaignSetupActions
+              onSaveDraft={() => undefined}
+              onInitialize={() => undefined}
+            />
           </div>
 
           <p className="text-center text-[12px] leading-4 text-[#64748B]">
@@ -208,8 +224,12 @@ export default function NewCampaignPage() {
             estimateLabel={MOCK.discoveryEstimate}
             confidence={MOCK.discoveryConfidence}
           />
-          <PendingPort storyId="setup-readiness-chips-2026-09-18" />
-          <PendingPort storyId="pipeline-sequence-rail-2026-09-18" />
+          <SetupReadinessChips
+            prohibitionFilters={constraints.length}
+            metros={geographies.length}
+            websiteGateEnabled={requireWebsite}
+          />
+          <PipelineSequenceRail discoveryDetail={MOCK.discoveryDetail} />
         </aside>
       </div>
     </div>
