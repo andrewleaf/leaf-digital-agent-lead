@@ -5,7 +5,7 @@ priority: "high"
 assignee: null
 dueDate: null
 created: "2026-09-19T18:20:00.000Z"
-modified: "2026-09-19T18:20:00.000Z"
+modified: "2026-09-19T19:52:00.000Z"
 completedAt: null
 labels: ["epic"]
 order: "bK"
@@ -173,13 +173,13 @@ Components receive typed props only. No server actions, no campaign entity write
 
 ## 5. Stories
 
-- [Campaign pipeline header](campaign-pipeline-header-2026-09-19.md) (`campaign-pipeline-header-2026-09-19`): Campaign id chip, processing badge, guard chip, title, and created/target/rule meta.
-- [Campaign pipeline actions](campaign-pipeline-actions-2026-09-19.md) (`campaign-pipeline-actions-2026-09-19`): Pause Research, Campaign Settings, Jump to Review Queue.
-- [Pipeline stage stepper](pipeline-stage-stepper-2026-09-19.md) (`pipeline-stage-stepper-2026-09-19`): Six-stage progress grid with linear meters.
-- [Pipeline summary metrics](pipeline-summary-metrics-2026-09-19.md) (`pipeline-summary-metrics-2026-09-19`): Five KPI cards (discovered, matched, citations, attention, drafts ready).
-- [Pipeline workbench filters](pipeline-workbench-filters-2026-09-19.md) (`pipeline-workbench-filters-2026-09-19`): View tabs, company/city filter, Export CSV.
-- [Pipeline workbench table](pipeline-workbench-table-2026-09-19.md) (`pipeline-workbench-table-2026-09-19`): Listing rows with stage, citations, and next-action buttons.
-- [Pipeline workbench footer](pipeline-workbench-footer-2026-09-19.md) (`pipeline-workbench-footer-2026-09-19`): Display count, retry interval copy, Previous / Next pager.
+- [Campaign pipeline header](done/campaign-pipeline-header-2026-09-19.md) (`campaign-pipeline-header-2026-09-19`): Campaign id chip, processing badge, guard chip, title, and created/target/rule meta.
+- [Campaign pipeline actions](done/campaign-pipeline-actions-2026-09-19.md) (`campaign-pipeline-actions-2026-09-19`): Pause Research, Campaign Settings, Jump to Review Queue.
+- [Pipeline stage stepper](done/pipeline-stage-stepper-2026-09-19.md) (`pipeline-stage-stepper-2026-09-19`): Six-stage progress grid with linear meters.
+- [Pipeline summary metrics](done/pipeline-summary-metrics-2026-09-19.md) (`pipeline-summary-metrics-2026-09-19`): Five KPI cards (discovered, matched, citations, attention, drafts ready).
+- [Pipeline workbench filters](done/pipeline-workbench-filters-2026-09-19.md) (`pipeline-workbench-filters-2026-09-19`): View tabs, company/city filter, Export CSV.
+- [Pipeline workbench table](done/pipeline-workbench-table-2026-09-19.md) (`pipeline-workbench-table-2026-09-19`): Listing rows with stage, citations, and next-action buttons.
+- [Pipeline workbench footer](done/pipeline-workbench-footer-2026-09-19.md) (`pipeline-workbench-footer-2026-09-19`): Display count, retry interval copy, Previous / Next pager.
 
 ### Layout and navigation
 
@@ -193,13 +193,13 @@ A future Campaign Pipeline page-scaffold story (not in this epic) composes the s
 
 ## 6. Milestone Definition of Done
 
-- [ ] All 7 components exist under `components/campaigns/` and render in isolation with mock props.
-- [ ] Empty, filled, and disabled (or inactive) states are implemented where the Stitch screen implies them.
-- [ ] Visible copy matches the Stitch strings in section 2 (labels, stage names, button labels, table headers, mock rows).
-- [ ] Components compose shadcn/ui primitives listed on each story card; `Progress` and `Table` are CLI-added, not hand-rolled.
-- [ ] Visual tokens match Operator Core (teal primary, chip/card radii, border colors) from the Stitch design system.
-- [ ] Linear stage meters use `Progress`; do not substitute a confidence ring, and do not reuse `pipeline-sequence-rail`.
-- [ ] No page route, sidebar, persistence, CSV writer, or API client is introduced by these stories.
+- [x] All 7 components exist under `components/campaigns/` and render in isolation with mock props.
+- [x] Empty, filled, and disabled (or inactive) states are implemented where the Stitch screen implies them.
+- [x] Visible copy matches the Stitch strings in section 2 (labels, stage names, button labels, table headers, mock rows).
+- [x] Components compose shadcn/ui primitives listed on each story card; `Progress` and `Table` are CLI-added, not hand-rolled.
+- [x] Visual tokens match Operator Core (teal primary, chip/card radii, border colors) from the Stitch design system.
+- [x] Linear stage meters use `Progress`; do not substitute a confidence ring, and do not reuse `pipeline-sequence-rail`.
+- [x] No page route, sidebar, persistence, CSV writer, or API client is introduced by these stories.
 
 ## 7. Dependencies & Sequencing
 

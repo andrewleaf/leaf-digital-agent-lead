@@ -1,12 +1,12 @@
 ---
 id: "campaign-pipeline-actions-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T18:20:00.000Z"
-modified: "2026-09-19T18:20:00.000Z"
-completedAt: null
+modified: "2026-09-19T19:48:00.000Z"
+completedAt: "2026-09-19T19:48:00.000Z"
 labels: ["story", "component", "epic:epic-campaign-pipeline-2026-09-19"]
 order: "a1"
 ---
@@ -15,7 +15,7 @@ order: "a1"
 
 Header-block control cluster: Pause Research, Campaign Settings, and Jump to Review Queue. Presentational buttons only.
 
-Parent epic: [`epic-campaign-pipeline-2026-09-19`](epic-campaign-pipeline-2026-09-19.md)
+Parent epic: [`epic-campaign-pipeline-2026-09-19`](../epic-campaign-pipeline-2026-09-19.md)
 
 ## File and primitives
 
@@ -57,13 +57,13 @@ Filled mock: `readyCount: 14`.
 
 ## Acceptance Criteria
 
-- [ ] Secondary labels are `Pause Research` and `Campaign Settings` (Operator Core secondary spec).
-- [ ] Primary label is `Jump to Review Queue (14 Ready)` when `readyCount` is 14; the count is interpolated from the prop.
-- [ ] Clicks fire `onPause`, `onSettings`, and `onJumpToQueue` only; no fetch, pause job, or navigation occurs inside the component.
-- [ ] Default, disabled (`disabled` or `pauseDisabled`), and pending (`pending` shows busy/disabled on the primary without faking a queue) states render in isolation.
-- [ ] Buttons have accessible names matching the visible labels (icon is decorative).
+- [x] Secondary labels are `Pause Research` and `Campaign Settings` (Operator Core secondary spec).
+- [x] Primary label is `Jump to Review Queue (14 Ready)` when `readyCount` is 14; the count is interpolated from the prop.
+- [x] Clicks fire `onPause`, `onSettings`, and `onJumpToQueue` only; no fetch, pause job, or navigation occurs inside the component.
+- [x] Default, disabled (`disabled` or `pauseDisabled`), and pending (`pending` shows busy/disabled on the primary without faking a queue) states render in isolation.
+- [x] Buttons have accessible names matching the visible labels (icon is decorative).
 
 ## Further breakdown
 
-- [ ] Do not wire `/queue` or campaign settings routes in this story
-- [ ] Ready count `0` still renders `Jump to Review Queue (0 Ready)` rather than hiding the primary
+- [x] Do not wire `/queue` or campaign settings routes in this story
+- [x] Ready count `0` still renders `Jump to Review Queue (0 Ready)` rather than hiding the primary

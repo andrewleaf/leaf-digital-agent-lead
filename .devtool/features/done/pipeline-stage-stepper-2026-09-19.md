@@ -1,12 +1,12 @@
 ---
 id: "pipeline-stage-stepper-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T18:20:00.000Z"
-modified: "2026-09-19T18:20:00.000Z"
-completedAt: null
+modified: "2026-09-19T19:52:00.000Z"
+completedAt: "2026-09-19T19:52:00.000Z"
 labels: ["story", "component", "epic:epic-campaign-pipeline-2026-09-19"]
 order: "a2"
 ---
@@ -15,7 +15,7 @@ order: "a2"
 
 Six-stage run-progress grid with status chips and linear meters. Presentational list only.
 
-Parent epic: [`epic-campaign-pipeline-2026-09-19`](epic-campaign-pipeline-2026-09-19.md)
+Parent epic: [`epic-campaign-pipeline-2026-09-19`](../epic-campaign-pipeline-2026-09-19.md)
 
 ## File and primitives
 
@@ -23,7 +23,7 @@ Parent epic: [`epic-campaign-pipeline-2026-09-19`](epic-campaign-pipeline-2026-0
 - shadcn: `Card` (`CardHeader`, `CardTitle`, `CardContent`, `CardDescription` if needed), `Badge`, `Progress`
 - `Progress` is not in `components/ui/` yet — CLI-add it (`npx shadcn@latest add progress`). Linear bars match this Stitch screen. Do **not** use a circular confidence ring and do not hand-roll a meter div.
 - lucide: `CircleCheck` for Stitch `check_circle`, `Lock` for `lock`. In-progress uses a pulsing 6px teal dot, not a second icon font.
-- Do not import or extend [`pipeline-sequence-rail-2026-09-18`](done/pipeline-sequence-rail-2026-09-18.md). That widget is the Setup preview list with different stage titles.
+- Do not import or extend [`pipeline-sequence-rail-2026-09-18`](pipeline-sequence-rail-2026-09-18.md). That widget is the Setup preview list with different stage titles.
 
 ## Stitch contract
 
@@ -72,15 +72,15 @@ Empty mock: six stages with `status: "pending"`, `progress: 0`, and legend count
 
 ## Acceptance Criteria
 
-- [ ] Header reads `Deterministic Workflow` over `Six-Stage Pipeline Progress`, with legend `Completed (4)`, `Active (1)`, `Pending (1)` on the filled mock.
-- [ ] Six stages render in Stitch order with titles `Campaign Setup`, `Discovery`, `Website Matching`, `Public Scrapes`, `Draft Generation`, `Human Review`.
-- [ ] Status labels, descriptions, metric labels, and metric values match the filled-mock table; `progress` drives shadcn `Progress` (linear), not a ring.
-- [ ] Stage 05 uses the in-progress / ring treatment; stage 06 shows `Manual Only` with a lock icon and is not marked Done.
-- [ ] Empty/pending mock (all `progress: 0`) does not invent yield numbers. Disabled is not required; inactive is the pending tile.
-- [ ] Component does not start jobs, poll, or navigate. `Progress` is CLI-added to `components/ui/`. Each meter has an accessible name from the metric label plus value.
+- [x] Header reads `Deterministic Workflow` over `Six-Stage Pipeline Progress`, with legend `Completed (4)`, `Active (1)`, `Pending (1)` on the filled mock.
+- [x] Six stages render in Stitch order with titles `Campaign Setup`, `Discovery`, `Website Matching`, `Public Scrapes`, `Draft Generation`, `Human Review`.
+- [x] Status labels, descriptions, metric labels, and metric values match the filled-mock table; `progress` drives shadcn `Progress` (linear), not a ring.
+- [x] Stage 05 uses the in-progress / ring treatment; stage 06 shows `Manual Only` with a lock icon and is not marked Done.
+- [x] Empty/pending mock (all `progress: 0`) does not invent yield numbers. Disabled is not required; inactive is the pending tile.
+- [x] Component does not start jobs, poll, or navigate. `Progress` is CLI-added to `components/ui/`. Each meter has an accessible name from the metric label plus value.
 
 ## Further breakdown
 
-- [ ] Do not reuse `PIPELINE_STAGES` from `pipeline-sequence-rail`
-- [ ] Keep `progress` numeric even when `metricValue` is a string like `14 Leads`
-- [ ] CLI-add watch: if `progress` emits a bad `cn` import, correct to `@/lib/utils` as on toggle-group
+- [x] Do not reuse `PIPELINE_STAGES` from `pipeline-sequence-rail`
+- [x] Keep `progress` numeric even when `metricValue` is a string like `14 Leads`
+- [x] CLI-add watch: if `progress` emits a bad `cn` import, correct to `@/lib/utils` as on toggle-group
