@@ -44,15 +44,15 @@ Main column is `grid grid-cols-1 lg:grid-cols-12` with 24px gap and `items-start
 | 1 | Target Business & Location | [`IndustryNicheInput`](industry-niche-input-2026-09-18.md), [`GeographyChipsInput`](geography-chips-input-2026-09-18.md), [`DiscoveryYieldCard`](discovery-yield-card-2026-09-18.md) inline variant |
 | 2 | Proposition & Review Intent | [`ValuePropositionField`](value-proposition-field-2026-09-18.md), [`CallToActionField`](call-to-action-field-2026-09-18.md), [`ComposerVoiceProfile`](composer-voice-profile-2026-09-18.md) |
 | 3 | Negative Constraints & Guardrails | [`NegativeConstraintsInput`](negative-constraints-input-2026-09-18.md) |
-| 4 | Research Depth & Verification Settings | [`ResearchDepthSettings`](../research-depth-settings-2026-09-18.md) |
-| — | Actions panel | [`CampaignSetupActions`](../campaign-setup-actions-2026-09-18.md), followed by the centered note `Discovery will populate the 6-stage pipeline. Every draft requires your manual review and approval.` |
+| 4 | Research Depth & Verification Settings | [`ResearchDepthSettings`](research-depth-settings-2026-09-18.md) |
+| — | Actions panel | [`CampaignSetupActions`](campaign-setup-actions-2026-09-18.md), followed by the centered note `Discovery will populate the 6-stage pipeline. Every draft requires your manual review and approval.` |
 
 **Inspector rail (`lg:col-span-4`)** — four stacked panels
 
 | Port | Status |
 |---|---|
-| Campaign Quality Score | [`DiscoveryYieldCard`](discovery-yield-card-2026-09-18.md) confidence ring plus [`SetupReadinessChips`](../setup-readiness-chips-2026-09-18.md) |
-| Pipeline Sequence | [`PipelineSequenceRail`](../pipeline-sequence-rail-2026-09-18.md) |
+| Campaign Quality Score | [`DiscoveryYieldCard`](discovery-yield-card-2026-09-18.md) confidence ring plus [`SetupReadinessChips`](setup-readiness-chips-2026-09-18.md) |
+| Pipeline Sequence | [`PipelineSequenceRail`](pipeline-sequence-rail-2026-09-18.md) |
 | Target Sample Mockup | No component story yet — leave the port empty and note the gap |
 | Operator Playbook | No component story yet — leave the port empty and note the gap |
 

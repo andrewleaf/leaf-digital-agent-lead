@@ -5,7 +5,7 @@ priority: "high"
 assignee: null
 dueDate: null
 created: "2026-09-18T20:12:00.000Z"
-modified: "2026-09-19T01:50:00.000Z"
+modified: "2026-09-19T16:40:00.000Z"
 completedAt: null
 labels: ["epic"]
 order: "bJ"
@@ -205,19 +205,19 @@ Components receive typed props only. No server actions, no campaign entity write
 
 ## 5. Stories
 
-- [Campaign setup status bar](campaign-setup-status-bar-2026-09-18.md) (`campaign-setup-status-bar-2026-09-18`): Target Campaign select, Lead Engine badge, autosaved timestamp.
-- [Guardrail protocol banner](guardrail-protocol-banner-2026-09-18.md) (`guardrail-protocol-banner-2026-09-18`): RULE_01 human-in-the-loop alert.
-- [Industry niche input](industry-niche-input-2026-09-18.md) (`industry-niche-input-2026-09-18`): Niche chips, NAICS match, quick presets.
-- [Geography chips input](geography-chips-input-2026-09-18.md) (`geography-chips-input-2026-09-18`): Metro chips and add city/county control.
-- [Discovery yield card](discovery-yield-card-2026-09-18.md) (`discovery-yield-card-2026-09-18`): Estimated listing range and confidence ring.
-- [Value proposition field](value-proposition-field-2026-09-18.md) (`value-proposition-field-2026-09-18`): Offer textarea, 80-char hint, crawler helper.
-- [Call to action field](call-to-action-field-2026-09-18.md) (`call-to-action-field-2026-09-18`): Soft-ask textarea and friction helper.
-- [Composer voice profile](composer-voice-profile-2026-09-18.md) (`composer-voice-profile-2026-09-18`): Single-select voice chips.
-- [Negative constraints input](negative-constraints-input-2026-09-18.md) (`negative-constraints-input-2026-09-18`): Prohibition chips for claims the model must not invent.
-- [Research depth settings](research-depth-settings-2026-09-18.md) (`research-depth-settings-2026-09-18`): Website gate, extraction options, low-confidence fallback.
-- [Setup readiness chips](setup-readiness-chips-2026-09-18.md) (`setup-readiness-chips-2026-09-18`): Prohibition / boundary / website-gate status chips.
-- [Pipeline sequence rail](pipeline-sequence-rail-2026-09-18.md) (`pipeline-sequence-rail-2026-09-18`): Six-stage pipeline list.
-- [Campaign setup actions](campaign-setup-actions-2026-09-18.md) (`campaign-setup-actions-2026-09-18`): Save as Draft and Initialize Campaign Pipeline buttons.
+- [Campaign setup status bar](done/campaign-setup-status-bar-2026-09-18.md) (`campaign-setup-status-bar-2026-09-18`): Target Campaign select, Lead Engine badge, autosaved timestamp.
+- [Guardrail protocol banner](done/guardrail-protocol-banner-2026-09-18.md) (`guardrail-protocol-banner-2026-09-18`): RULE_01 human-in-the-loop alert.
+- [Industry niche input](done/industry-niche-input-2026-09-18.md) (`industry-niche-input-2026-09-18`): Niche chips, NAICS match, quick presets.
+- [Geography chips input](done/geography-chips-input-2026-09-18.md) (`geography-chips-input-2026-09-18`): Metro chips and add city/county control.
+- [Discovery yield card](done/discovery-yield-card-2026-09-18.md) (`discovery-yield-card-2026-09-18`): Estimated listing range and confidence ring.
+- [Value proposition field](done/value-proposition-field-2026-09-18.md) (`value-proposition-field-2026-09-18`): Offer textarea, 80-char hint, crawler helper.
+- [Call to action field](done/call-to-action-field-2026-09-18.md) (`call-to-action-field-2026-09-18`): Soft-ask textarea and friction helper.
+- [Composer voice profile](done/composer-voice-profile-2026-09-18.md) (`composer-voice-profile-2026-09-18`): Single-select voice chips.
+- [Negative constraints input](done/negative-constraints-input-2026-09-18.md) (`negative-constraints-input-2026-09-18`): Prohibition chips for claims the model must not invent.
+- [Research depth settings](done/research-depth-settings-2026-09-18.md) (`research-depth-settings-2026-09-18`): Website gate, extraction options, low-confidence fallback.
+- [Setup readiness chips](done/setup-readiness-chips-2026-09-18.md) (`setup-readiness-chips-2026-09-18`): Prohibition / boundary / website-gate status chips.
+- [Pipeline sequence rail](done/pipeline-sequence-rail-2026-09-18.md) (`pipeline-sequence-rail-2026-09-18`): Six-stage pipeline list.
+- [Campaign setup actions](done/campaign-setup-actions-2026-09-18.md) (`campaign-setup-actions-2026-09-18`): Save as Draft and Initialize Campaign Pipeline buttons.
 
 ### Layout and navigation
 
@@ -230,16 +230,16 @@ Page chrome mapped from the same Stitch screen. Section 3 still records shell, s
 - [Form section shell](done/form-section-shell-2026-09-18.md) (`form-section-shell-2026-09-18`): Numbered panel wrapper with eyebrow and guardrail tone.
 - [Campaign setup page scaffold](done/campaign-setup-page-scaffold-2026-09-18.md) (`campaign-setup-page-scaffold-2026-09-18`): Auth layout, `/campaigns/new` route, and the 12 / 8 / 4 grid ports.
 
-The scaffold leaves four ports as `Pending story` placeholders until [research depth settings](research-depth-settings-2026-09-18.md), [campaign setup actions](campaign-setup-actions-2026-09-18.md), [setup readiness chips](setup-readiness-chips-2026-09-18.md), and [pipeline sequence rail](pipeline-sequence-rail-2026-09-18.md) are built.
+The four remaining widget ports are now filled: [research depth settings](done/research-depth-settings-2026-09-18.md), [campaign setup actions](done/campaign-setup-actions-2026-09-18.md), [setup readiness chips](done/setup-readiness-chips-2026-09-18.md), and [pipeline sequence rail](done/pipeline-sequence-rail-2026-09-18.md).
 
 ## 6. Milestone Definition of Done
 
-- [ ] All 13 components exist under `components/campaigns/` and render in isolation with mock props.
-- [ ] Empty, filled, and disabled (or inactive) states are implemented where the Stitch screen implies them.
-- [ ] Visible copy matches the Stitch strings in section 2 (labels, helpers, stage names, button labels).
-- [ ] Components compose shadcn/ui primitives listed on each story card; no one-off button/input primitives.
-- [ ] Visual tokens match Operator Core (teal primary, chip/card radii, border colors) from the Stitch design system.
-- [ ] No page route, sidebar, persistence, or API client is introduced by these stories.
+- [x] All 13 components exist under `components/campaigns/` and render in isolation with mock props.
+- [x] Empty, filled, and disabled (or inactive) states are implemented where the Stitch screen implies them.
+- [x] Visible copy matches the Stitch strings in section 2 (labels, helpers, stage names, button labels).
+- [x] Components compose shadcn/ui primitives listed on each story card; no one-off button/input primitives.
+- [x] Visual tokens match Operator Core (teal primary, chip/card radii, border colors) from the Stitch design system.
+- [x] No page route, sidebar, persistence, or API client is introduced by these stories.
 
 ## 7. Dependencies & Sequencing
 
