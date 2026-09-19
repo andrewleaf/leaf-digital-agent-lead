@@ -62,7 +62,7 @@ Presentational UI work sourced from Stitch and composed with shadcn. Keep the st
 
 ## Stitch contract
 
-Source: screen title (`projects/{id}/screens/{id}`). Tokens: Operator Core **designMd**, not Stitch Material `namedColors`.
+Source: screen title from [stitch-to-shadcn/references/projects.md](../../stitch-to-shadcn/references/projects.md) (`projects/{id}/screens/{id}`). Tokens: Operator Core **designMd**, not Stitch Material `namedColors`.
 
 - Verbatim labels, helpers, and filled-mock copy.
 
@@ -105,7 +105,7 @@ order: "a0"
 Why this epic exists, who it serves, and what business/operational problem it solves.
 
 ## 2. Source Specifications
-Full domain contracts, data tables, explicit business rules, and constraints transcribed directly from proposals/PRDs.
+Full domain contracts, data tables, explicit business rules, and constraints transcribed directly from proposals/PRDs. UI/design epics: Stitch project + screen must be a row from [stitch-to-shadcn/references/projects.md](../../stitch-to-shadcn/references/projects.md) (project, screen path, title, device, Operator Core theme).
 
 ## 3. Scope Boundaries
 - **In Scope (v1)**: Explicit capabilities and outputs delivered.

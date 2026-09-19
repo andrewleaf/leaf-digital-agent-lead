@@ -1,8 +1,6 @@
 # Stitch MCP contract
 
-Project: `13798460973041177032` (agent-lead workspace).  
-Campaign Setup screen: `projects/13798460973041177032/screens/dffcadf839ef470db0d105a117c66826`.  
-Design system: LocalDraft Operator Core `assets/1d9cca68b81c458ea10d71779c1a76ae`.
+Project, screens, and design-system IDs: [projects.md](projects.md). Default is `agent-lead workspace` (`13798460973041177032`) and Operator Core `assets/1d9cca68b81c458ea10d71779c1a76ae`. Do not invent IDs; pick a catalog row before `get_screen`.
 
 ## What to trust
 
