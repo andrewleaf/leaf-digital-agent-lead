@@ -1,0 +1,25 @@
+---
+description: Assess whether durable session learning belongs in a project rule or skill
+alwaysApply: true
+---
+
+# End-of-Session Learning Assessment
+
+Before the final response, assess whether the session produced durable project guidance worth preserving.
+
+Create or recommend a **rule** when the learning is a persistent constraint, safety boundary, coding convention, or file-scoped standard that should govern future work.
+
+Create or recommend a **skill** when the learning is a repeatable workflow, specialized domain procedure, reusable checklist, or process with supporting references/scripts.
+
+Do not create either when the learning is:
+
+- already covered by `AGENTS.md`, `agenda.md`, `.cursor/rules/`, or `.cursor/skills/`;
+- specific to one task, temporary state, or obvious from the code;
+- speculative, unverified, or likely to become stale; or
+- better captured as a Kanban acceptance criterion or normal project documentation.
+
+Keep one concern per artifact. Prefer project scope unless the user explicitly requests a personal artifact. Follow the create-rule or create-skill authoring guidance and avoid duplicating existing instructions.
+
+If the user explicitly authorized rule/skill creation within the current task, create the justified artifact and mention it in the final response. Otherwise, report a concise recommendation and rationale; do not silently expand scope.
+
+If no artifact is warranted, omit routine commentary unless the assessment affects the handoff.
