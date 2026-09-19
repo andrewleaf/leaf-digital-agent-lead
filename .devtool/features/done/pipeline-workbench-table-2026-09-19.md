@@ -1,12 +1,12 @@
 ---
 id: "pipeline-workbench-table-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T18:20:00.000Z"
-modified: "2026-09-19T18:20:00.000Z"
-completedAt: null
+modified: "2026-09-19T19:50:00.000Z"
+completedAt: "2026-09-19T19:50:00.000Z"
 labels: ["story", "component", "epic:epic-campaign-pipeline-2026-09-19"]
 order: "a5"
 ---
@@ -15,7 +15,7 @@ order: "a5"
 
 Listing table with business identity, metro chip, stage badge, confidence/citations, and operator next-action. Mock rows only.
 
-Parent epic: [`epic-campaign-pipeline-2026-09-19`](epic-campaign-pipeline-2026-09-19.md)
+Parent epic: [`epic-campaign-pipeline-2026-09-19`](../epic-campaign-pipeline-2026-09-19.md)
 
 ## File and primitives
 
@@ -68,15 +68,15 @@ This table does not filter; the parent mock passes the already-filtered `rows`.
 
 ## Acceptance Criteria
 
-- [ ] Column headers match `Business Name`, `Metro Location`, `Pipeline Stage`, `Confidence & Citations`, `Operator Next Action`.
-- [ ] Filled mock renders the five Stitch businesses with the names, details, metros, stage labels, citation lines, and action labels above.
-- [ ] `Review Draft` uses the primary teal button; `Add Website URL`, `Verify Source`, and `View Live Research` use secondary. Clicks call `onAction(id)` only.
-- [ ] Apex Cool row uses the attention/rose tint; citation warning text remains visible (not color-only).
-- [ ] Empty `rows` renders a table with headers and an empty body (no invented listings). Isolation: no fetch, no filter logic, no route to the review queue.
-- [ ] `Table` is CLI-added to `components/ui/`. Header cells are `th`; action buttons have accessible names.
+- [x] Column headers match `Business Name`, `Metro Location`, `Pipeline Stage`, `Confidence & Citations`, `Operator Next Action`.
+- [x] Filled mock renders the five Stitch businesses with the names, details, metros, stage labels, citation lines, and action labels above.
+- [x] `Review Draft` uses the primary teal button; `Add Website URL`, `Verify Source`, and `View Live Research` use secondary. Clicks call `onAction(id)` only.
+- [x] Apex Cool row uses the attention/rose tint; citation warning text remains visible (not color-only).
+- [x] Empty `rows` renders a table with headers and an empty body (no invented listings). Isolation: no fetch, no filter logic, no route to the review queue.
+- [x] `Table` is CLI-added to `components/ui/`. Header cells are `th`; action buttons have accessible names.
 
 ## Further breakdown
 
-- [ ] Export the five-row mock constant for page-assembly later
-- [ ] CLI-add watch: if `table` emits a bad `cn` import, correct to `@/lib/utils`
-- [ ] Do not paginate inside this file; footer is a sibling story
+- [x] Export the five-row mock constant for page-assembly later
+- [x] CLI-add watch: if `table` emits a bad `cn` import, correct to `@/lib/utils`
+- [x] Do not paginate inside this file; footer is a sibling story

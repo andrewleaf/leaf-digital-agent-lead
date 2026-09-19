@@ -1,12 +1,12 @@
 ---
 id: "pipeline-workbench-filters-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T18:20:00.000Z"
-modified: "2026-09-19T18:20:00.000Z"
-completedAt: null
+modified: "2026-09-19T19:50:00.000Z"
+completedAt: "2026-09-19T19:50:00.000Z"
 labels: ["story", "component", "epic:epic-campaign-pipeline-2026-09-19"]
 order: "a4"
 ---
@@ -15,7 +15,7 @@ order: "a4"
 
 Workbench view tabs, company/city text filter, and Export CSV. Presentational controls only.
 
-Parent epic: [`epic-campaign-pipeline-2026-09-19`](epic-campaign-pipeline-2026-09-19.md)
+Parent epic: [`epic-campaign-pipeline-2026-09-19`](../epic-campaign-pipeline-2026-09-19.md)
 
 ## File and primitives
 
@@ -66,14 +66,14 @@ Export `WORKBENCH_VIEWS` as `{ value; label }[]` in Stitch order.
 
 ## Acceptance Criteria
 
-- [ ] Four views render in order with labels `All Pipeline Items`, `Needs Attention`, `Ready for Review`, `Completed`.
-- [ ] Filled mock shows counts `128`, `14`, `14`, `84` and has `All Pipeline Items` selected.
-- [ ] Single selection only via `ToggleGroup`; `value` / `onValueChange` are props. Empty query, filled query, and disabled group states render in isolation.
-- [ ] Input placeholder is `Filter company or city...`; it is labelled (visually hidden is fine) and controlled by `query` / `onQueryChange`.
-- [ ] `Export CSV` calls `onExport` only; the component does not build or download a file.
-- [ ] Needs Attention and Ready for Review counts use rose and teal badges respectively; counts remain visible text, not color-only.
+- [x] Four views render in order with labels `All Pipeline Items`, `Needs Attention`, `Ready for Review`, `Completed`.
+- [x] Filled mock shows counts `128`, `14`, `14`, `84` and has `All Pipeline Items` selected.
+- [x] Single selection only via `ToggleGroup`; `value` / `onValueChange` are props. Empty query, filled query, and disabled group states render in isolation.
+- [x] Input placeholder is `Filter company or city...`; it is labelled (visually hidden is fine) and controlled by `query` / `onQueryChange`.
+- [x] `Export CSV` calls `onExport` only; the component does not build or download a file.
+- [x] Needs Attention and Ready for Review counts use rose and teal badges respectively; counts remain visible text, not color-only.
 
 ## Further breakdown
 
-- [ ] Deselecting is not a Stitch state; ignore an empty `onValueChange` the same way composer voice does
-- [ ] Do not filter table rows inside this file
+- [x] Deselecting is not a Stitch state; ignore an empty `onValueChange` the same way composer voice does
+- [x] Do not filter table rows inside this file

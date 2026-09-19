@@ -1,12 +1,12 @@
 ---
 id: "pipeline-workbench-footer-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T18:20:00.000Z"
-modified: "2026-09-19T18:20:00.000Z"
-completedAt: null
+modified: "2026-09-19T19:50:00.000Z"
+completedAt: "2026-09-19T19:50:00.000Z"
 labels: ["story", "component", "epic:epic-campaign-pipeline-2026-09-19"]
 order: "a6"
 ---
@@ -15,7 +15,7 @@ order: "a6"
 
 Workbench count line, retry-interval copy, and Previous / Next pager. Presentational controls only.
 
-Parent epic: [`epic-campaign-pipeline-2026-09-19`](epic-campaign-pipeline-2026-09-19.md)
+Parent epic: [`epic-campaign-pipeline-2026-09-19`](../epic-campaign-pipeline-2026-09-19.md)
 
 ## File and primitives
 
@@ -58,14 +58,14 @@ Filled mock: `shown: 5`, `total: 128`, `retryInterval: "30s"`, `page: 1`, `pageC
 
 ## Acceptance Criteria
 
-- [ ] Filled mock reads `Displaying 5 of 128 targets in execution pipeline`, `Automatic Retry Interval: 30s`, and `1 of 26`.
-- [ ] Count, retry, and page strings are interpolated from props; the component does not hard-code `5`, `128`, or `30s`.
-- [ ] `Previous` is disabled on page 1; `Next` is enabled. On the last page, `Next` is disabled and `Previous` is enabled. Clicks fire `onPrevious` / `onNext` only.
-- [ ] The component does not start a 30s timer, poll, or slice table rows.
-- [ ] Default (page 1), middle page, last page, and single-page (`pageCount: 1`, both buttons disabled) states render in isolation.
-- [ ] Buttons have accessible names `Previous` and `Next`; the page index is text, not color-only.
+- [x] Filled mock reads `Displaying 5 of 128 targets in execution pipeline`, `Automatic Retry Interval: 30s`, and `1 of 26`.
+- [x] Count, retry, and page strings are interpolated from props; the component does not hard-code `5`, `128`, or `30s`.
+- [x] `Previous` is disabled on page 1; `Next` is enabled. On the last page, `Next` is disabled and `Previous` is enabled. Clicks fire `onPrevious` / `onNext` only.
+- [x] The component does not start a 30s timer, poll, or slice table rows.
+- [x] Default (page 1), middle page, last page, and single-page (`pageCount: 1`, both buttons disabled) states render in isolation.
+- [x] Buttons have accessible names `Previous` and `Next`; the page index is text, not color-only.
 
 ## Further breakdown
 
-- [ ] Do not import the table; footer is a sibling composed later on the page
-- [ ] Empty total (`total: 0`, `shown: 0`, `pageCount: 1`) still uses the Stitch sentence pattern
+- [x] Do not import the table; footer is a sibling composed later on the page
+- [x] Empty total (`total: 0`, `shown: 0`, `pageCount: 1`) still uses the Stitch sentence pattern

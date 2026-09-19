@@ -1,12 +1,12 @@
 ---
 id: "pipeline-summary-metrics-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T18:20:00.000Z"
-modified: "2026-09-19T18:20:00.000Z"
-completedAt: null
+modified: "2026-09-19T19:50:00.000Z"
+completedAt: "2026-09-19T19:50:00.000Z"
 labels: ["story", "component", "epic:epic-campaign-pipeline-2026-09-19"]
 order: "a3"
 ---
@@ -15,7 +15,7 @@ order: "a3"
 
 Five KPI cards for discovered businesses, matched websites, fact citations, attention required, and drafts ready. Mock metrics only.
 
-Parent epic: [`epic-campaign-pipeline-2026-09-19`](epic-campaign-pipeline-2026-09-19.md)
+Parent epic: [`epic-campaign-pipeline-2026-09-19`](../epic-campaign-pipeline-2026-09-19.md)
 
 ## File and primitives
 
@@ -61,13 +61,13 @@ Filled mock: the Stitch numbers above (`resolutionRate: "94.5%"`, `avgFactsPerOr
 
 ## Acceptance Criteria
 
-- [ ] Five cards render with labels `Businesses Discovered`, `Websites Matched`, `Fact Citations`, `Attention Required`, `Drafts Ready`.
-- [ ] Filled mock matches Stitch: `128` with `ATX: 78` `RR: 31` `CP: 19`; `121` `/ 128 targets` with `94.5% resolution rate` and `7 offline`; `242` with `2.1 facts/org`; `14` attention with `Missing URLs` `7` and `Low Confidence` `7`; `14` drafts with `Triage Desk Ready` and `Manual Send`.
-- [ ] Empty/zero mock does not invent metro chips counts other than `0`; attention and drafts-ready do not keep the filled-mock warning/teal emphasis when `value` is `0` (muted treatment).
-- [ ] Values come from props; the component does not count table rows or hit an API.
-- [ ] Hero numbers are text, not color-only. Cards use Operator Core surface tokens.
+- [x] Five cards render with labels `Businesses Discovered`, `Websites Matched`, `Fact Citations`, `Attention Required`, `Drafts Ready`.
+- [x] Filled mock matches Stitch: `128` with `ATX: 78` `RR: 31` `CP: 19`; `121` `/ 128 targets` with `94.5% resolution rate` and `7 offline`; `242` with `2.1 facts/org`; `14` attention with `Missing URLs` `7` and `Low Confidence` `7`; `14` drafts with `Triage Desk Ready` and `Manual Send`.
+- [x] Empty/zero mock does not invent metro chips counts other than `0`; attention and drafts-ready do not keep the filled-mock warning/teal emphasis when `value` is `0` (muted treatment).
+- [x] Values come from props; the component does not count table rows or hit an API.
+- [x] Hero numbers are text, not color-only. Cards use Operator Core surface tokens.
 
 ## Further breakdown
 
-- [ ] Keep metro chip prefixes `ATX:`, `RR:`, `CP:` as Stitch copy
-- [ ] `resolutionRate` and `avgFactsPerOrg` are display strings so `94.5%` and `2.1 facts/org` stay exact
+- [x] Keep metro chip prefixes `ATX:`, `RR:`, `CP:` as Stitch copy
+- [x] `resolutionRate` and `avgFactsPerOrg` are display strings so `94.5%` and `2.1 facts/org` stay exact
