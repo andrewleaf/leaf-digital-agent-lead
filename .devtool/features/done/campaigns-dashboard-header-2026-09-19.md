@@ -1,12 +1,12 @@
 ---
 id: "campaigns-dashboard-header-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T21:00:00.000Z"
-modified: "2026-09-19T21:00:00.000Z"
-completedAt: null
+modified: "2026-09-19T21:15:00.000Z"
+completedAt: "2026-09-19T21:15:00.000Z"
 labels: ["story", "component", "epic:epic-campaigns-admin-dashboard-2026-09-19"]
 order: "a7"
 ---
@@ -15,15 +15,15 @@ order: "a7"
 
 Title cluster for the admin dashboard: telemetry eyebrow, description, manual-gate chip, and exclusive metro filter. Presentational only.
 
-Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](epic-campaigns-admin-dashboard-2026-09-19.md)
+Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](../epic-campaigns-admin-dashboard-2026-09-19.md)
 
 ## File and primitives
 
 - File: `components/campaigns/campaigns-dashboard-header.tsx`
 - shadcn: `Badge`, `ToggleGroup` / `ToggleGroupItem` (already in `components/ui/`)
 - lucide: `Shield` for Stitch `shield`. Do not use the Material icon font.
-- Do not add a second `New Campaign` button. That control already lives on [`workspace-top-bar-2026-09-18`](done/workspace-top-bar-2026-09-18.md).
-- Do not reuse [`page-header`](done/workspace-page-header-2026-09-18.md); this cluster has metro chips and a guard chip, not a spec strip.
+- Do not add a second `New Campaign` button. That control already lives on [`workspace-top-bar-2026-09-18`](workspace-top-bar-2026-09-18.md).
+- Do not reuse [`page-header`](workspace-page-header-2026-09-18.md); this cluster has metro chips and a guard chip, not a spec strip.
 
 ## Stitch contract
 
@@ -64,14 +64,14 @@ Filled mock: the Stitch strings above; `selectedMetroId` is `all` with labels ma
 
 ## Acceptance Criteria
 
-- [ ] Filled mock renders `Campaigns Admin Dashboard`, `Operator Core Live Telemetry`, the Stitch description, and `100% Manual Gate Enforced • 6 Active Pipelines • 0 Blast Automations Permitted`.
-- [ ] Title is a single `h1`. Guard chip is not color-only (visible text remains).
-- [ ] Four metros render in order: `All Metros`, `Central TX`, `North Dallas`, `Chicagoland`. Selection calls `onMetroChange(id)` only.
-- [ ] `disabled` prevents metro changes. Empty `metros` hides the ToggleGroup rather than inventing cities.
-- [ ] No `New Campaign` control. Isolation: no route, no campaign fetch.
-- [ ] ToggleGroup uses the registry primitive; do not hand-roll a filter chip row with raw buttons.
+- [x] Filled mock renders `Campaigns Admin Dashboard`, `Operator Core Live Telemetry`, the Stitch description, and `100% Manual Gate Enforced • 6 Active Pipelines • 0 Blast Automations Permitted`.
+- [x] Title is a single `h1`. Guard chip is not color-only (visible text remains).
+- [x] Four metros render in order: `All Metros`, `Central TX`, `North Dallas`, `Chicagoland`. Selection calls `onMetroChange(id)` only.
+- [x] `disabled` prevents metro changes. Empty `metros` hides the ToggleGroup rather than inventing cities.
+- [x] No `New Campaign` control. Isolation: no route, no campaign fetch.
+- [x] ToggleGroup uses the registry primitive; do not hand-roll a filter chip row with raw buttons.
 
 ## Further breakdown
 
-- [ ] Associate the ToggleGroup with an accessible name such as `Filter by metro`
-- [ ] Guard label comes from `guardLabel`; do not hard-code `6 Active Pipelines`
+- [x] Associate the ToggleGroup with an accessible name such as `Filter by metro`
+- [x] Guard label comes from `guardLabel`; do not hard-code `6 Active Pipelines`

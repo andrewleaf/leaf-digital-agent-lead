@@ -1,12 +1,12 @@
 ---
 id: "dashboard-telemetry-metrics-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T21:00:00.000Z"
-modified: "2026-09-19T21:00:00.000Z"
-completedAt: null
+modified: "2026-09-19T21:20:00.000Z"
+completedAt: "2026-09-19T21:20:00.000Z"
 labels: ["story", "component", "epic:epic-campaigns-admin-dashboard-2026-09-19"]
 order: "a8"
 ---
@@ -15,7 +15,7 @@ order: "a8"
 
 Five KPI cards for active pipelines, live domain validity, average triage time, citation integrity, and owner reply rate. Mock metrics only.
 
-Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](epic-campaigns-admin-dashboard-2026-09-19.md)
+Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](../epic-campaigns-admin-dashboard-2026-09-19.md)
 
 ## File and primitives
 
@@ -65,13 +65,13 @@ Export `DASHBOARD_TELEMETRY_MOCK` for the page scaffold.
 
 ## Acceptance Criteria
 
-- [ ] Five cards render with labels `Active Pipelines`, `Live Domain Valid`, `Avg Triage Time`, `Citation Integrity`, `Owner Reply Rate`.
-- [ ] Filled mock shows `6`, `94.2%`, `42s`, `99.4%`, `26.8%` plus the Stitch chips, deltas, and captions above.
-- [ ] No sixth card for `1,428`. Empty/zero mock still shows the five labels.
-- [ ] Isolation: no fetch. Do not import `PipelineSummaryMetrics`.
-- [ ] Card titles are text, not color-only. Icons are decorative (`aria-hidden`) when labels already name the metric.
+- [x] Five cards render with labels `Active Pipelines`, `Live Domain Valid`, `Avg Triage Time`, `Citation Integrity`, `Owner Reply Rate`.
+- [x] Filled mock shows `6`, `94.2%`, `42s`, `99.4%`, `26.8%` plus the Stitch chips, deltas, and captions above.
+- [x] No sixth card for `1,428`. Empty/zero mock still shows the five labels.
+- [x] Isolation: no fetch. Do not import `PipelineSummaryMetrics`.
+- [x] Card titles are text, not color-only. Icons are decorative (`aria-hidden`) when labels already name the metric.
 
 ## Further breakdown
 
-- [ ] `0 halluc.` stays verbatim from the Stitch string (including abbreviation)
-- [ ] Reply caption `High intent conversations` is a prop, not hard-coded in the component if `replyRate.caption` is provided
+- [x] `0 halluc.` stays verbatim from the Stitch string (including abbreviation)
+- [x] Reply caption `High intent conversations` is a prop, not hard-coded in the component if `replyRate.caption` is provided

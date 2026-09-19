@@ -1,12 +1,12 @@
 ---
 id: "dashboard-audit-alerts-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T21:00:00.000Z"
-modified: "2026-09-19T21:00:00.000Z"
-completedAt: null
+modified: "2026-09-19T21:20:00.000Z"
+completedAt: "2026-09-19T21:20:00.000Z"
 labels: ["story", "component", "epic:epic-campaigns-admin-dashboard-2026-09-19"]
 order: "aC"
 ---
@@ -15,7 +15,7 @@ order: "aC"
 
 Stage bottleneck alerts for missing storefront domains and guardrail intercepts. Presentational only.
 
-Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](epic-campaigns-admin-dashboard-2026-09-19.md)
+Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](../epic-campaigns-admin-dashboard-2026-09-19.md)
 
 ## File and primitives
 
@@ -60,13 +60,13 @@ Empty mock: `alerts: []` still shows the heading and no invented incidents.
 
 ## Acceptance Criteria
 
-- [ ] Heading is `Stage Bottlenecks & Audit Alerts`.
-- [ ] Filled mock shows both Stitch sentences (missing domains and guardrail intercepts) with amber vs rose treatment.
-- [ ] Empty `alerts` renders the heading and no placeholder incidents.
-- [ ] Isolation: no URL capture, no intercept API. Does not import `GuardrailProtocolBanner`.
-- [ ] Each alert has a text title; icons are supplementary. `Alert` is the registry primitive.
+- [x] Heading is `Stage Bottlenecks & Audit Alerts`.
+- [x] Filled mock shows both Stitch sentences (missing domains and guardrail intercepts) with amber vs rose treatment.
+- [x] Empty `alerts` renders the heading and no placeholder incidents.
+- [x] Isolation: no URL capture, no intercept API. Does not import `GuardrailProtocolBanner`.
+- [x] Each alert has a text title; icons are supplementary. `Alert` is the registry primitive.
 
 ## Further breakdown
 
-- [ ] Keep `14` and `3` in the title strings so implementers do not drop the counts into an icon-only badge
-- [ ] Do not add a third invented bottleneck
+- [x] Keep `14` and `3` in the title strings so implementers do not drop the counts into an icon-only badge
+- [x] Do not add a third invented bottleneck

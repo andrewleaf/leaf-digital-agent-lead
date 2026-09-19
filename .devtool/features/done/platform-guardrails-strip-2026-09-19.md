@@ -1,12 +1,12 @@
 ---
 id: "platform-guardrails-strip-2026-09-19"
-status: "todo"
+status: "done"
 priority: "medium"
 assignee: null
 dueDate: null
 created: "2026-09-19T21:00:00.000Z"
-modified: "2026-09-19T21:00:00.000Z"
-completedAt: null
+modified: "2026-09-19T21:20:00.000Z"
+completedAt: "2026-09-19T21:20:00.000Z"
 labels: ["story", "component", "epic:epic-campaigns-admin-dashboard-2026-09-19"]
 order: "aD"
 ---
@@ -15,7 +15,7 @@ order: "aD"
 
 Manual-dispatch proof strip: cliché intercepts, unverified-claim blocks, SMTP daemon count, and zero-blast footer. Presentational only.
 
-Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](epic-campaigns-admin-dashboard-2026-09-19.md)
+Parent epic: [`epic-campaigns-admin-dashboard-2026-09-19`](../epic-campaigns-admin-dashboard-2026-09-19.md)
 
 ## File and primitives
 
@@ -60,13 +60,13 @@ Export `PLATFORM_GUARDRAILS_MOCK` for the page scaffold.
 
 ## Acceptance Criteria
 
-- [ ] Header shows `Platform Guardrails` and chip `100% Manual`.
-- [ ] Filled mock renders the three Stitch stat labels and values, including `0 (Permanently Disabled)`.
-- [ ] Footer matches `Zero automated blasts. Every message is individually dispatched via operator native mail clients.`
-- [ ] Isolation: no SMTP client, no intercept writer. Strings come from props.
-- [ ] Manual chip and footer are not color-only. SMTP zero is not styled as an active error.
+- [x] Header shows `Platform Guardrails` and chip `100% Manual`.
+- [x] Filled mock renders the three Stitch stat labels and values, including `0 (Permanently Disabled)`.
+- [x] Footer matches `Zero automated blasts. Every message is individually dispatched via operator native mail clients.`
+- [x] Isolation: no SMTP client, no intercept writer. Strings come from props.
+- [x] Manual chip and footer are not color-only. SMTP zero is not styled as an active error.
 
 ## Further breakdown
 
-- [ ] Do not add a Start SMTP or Enable blast control
-- [ ] Empty `stats` still shows title, chip, and footer
+- [x] Do not add a Start SMTP or Enable blast control
+- [x] Empty `stats` still shows title, chip, and footer
