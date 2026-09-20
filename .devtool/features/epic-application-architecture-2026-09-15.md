@@ -5,7 +5,7 @@ priority: "critical"
 assignee: null
 dueDate: null
 created: "2026-09-15T13:41:00.000Z"
-modified: "2026-09-16T22:52:00.000Z"
+modified: "2026-09-20T05:15:00.000Z"
 completedAt: null
 labels: ["epic"]
 order: "bG"
@@ -33,10 +33,11 @@ This epic establishes the complete technical foundation for LocalDraft before an
 | **UI Library** | shadcn/ui | Latest | Copy-paste component ownership, zero runtime overhead, RSC-compatible by default, full design control |
 | **Styling** | Tailwind CSS | v4 | Utility-first, CSS variables for theming, excellent DX with shadcn/ui |
 | **Primitives** | Radix UI | Latest | Accessible (WAI-ARIA), unstyled, composable — powers shadcn/ui |
-| **Database** | SQLite | 3.x | Zero-config local dev, single-file portability, sufficient for pilot scale |
+| **Database** | SQLite | 3.x | Zero-config local default, single-file portability, sufficient for pilot scale |
 | **ORM** | Drizzle ORM | Latest | Type-safe schema, excellent SQLite support, simple migrations with drizzle-kit |
-| **SQLite Driver** | better-sqlite3 | Latest | Synchronous, high-performance local development |
-| **Production DB Path** | Turso / libSQL | — | Easy migration path when ready for hosted deployment |
+| **SQLite Driver** | better-sqlite3 | Latest | Default local driver; high-performance file database |
+| **PostgreSQL Driver** | postgres.js (`postgres`) | Latest | Installed so the dialect switch is real; unused unless `DB_DIALECT=postgres` |
+| **Production DB Path** | PostgreSQL | — | Same Drizzle schema; hosted cutover later, not required to run the pilot |
 | **Language** | TypeScript | 5.x | Strict mode, full type safety across all layers |
 | **Package Manager** | pnpm | 9.x | Fast, efficient disk usage, strict dependency resolution |
 
@@ -60,31 +61,37 @@ This epic establishes the complete technical foundation for LocalDraft before an
 
 ### C. Database & ORM Selection Rationale
 
-**SQLite + Drizzle ORM** was selected for the pilot phase:
+**SQLite + Drizzle ORM** is the default local stack; PostgreSQL is the growth path through the same schema:
 
 | Aspect | Choice | Rationale |
 |--------|--------|-----------|
-| Database | SQLite | Zero infrastructure, single-file, sufficient for single-operator pilot |
-| ORM | Drizzle | Type-safe, schema-as-code, excellent SQLite support |
-| Driver | better-sqlite3 | Synchronous queries, fast local dev |
-| Migration Path | Turso / libSQL | Drop-in replacement when scaling beyond local |
+| Default database | SQLite | Zero infrastructure, single-file, sufficient for single-operator pilot |
+| ORM | Drizzle | Type-safe, schema-as-code, portable column types across dialects |
+| Local driver | better-sqlite3 | File database for local install / seed / reset |
+| Growth driver | postgres.js (`postgres`) | Selected by `DB_DIALECT=postgres` and `DATABASE_URL`; not required to run the pilot |
+| Hosted cutover | PostgreSQL | Same Drizzle schema; no Turso / libSQL |
 
 **Explicit Non-Goals:**
-- PostgreSQL or MySQL setup during pilot (unnecessary infrastructure)
+- Running hosted PostgreSQL for the pilot operator (local SQLite remains the default)
+- MySQL
 - Prisma ORM (heavier, less SQLite-native)
+- Turso / libSQL
 
 ## 3. Scope Boundaries
 
 ### In Scope (v1 Architecture)
 - Technology stack documentation with selection rationale
 - Project directory structure conventions
-- Drizzle schema design for all core entities
+- Dialect-aware Drizzle connection (`DB_DIALECT`, `SQLITE_PATH`, `DATABASE_URL`), empty schema barrel, data SQL folders, and install / seed / reset CLI
+- Drizzle schema design for all core entities (owned by the campaign data-model epic, not by connection scaffolding)
 - shadcn/ui component inventory mapped to UI requirements
 - Server action and API route contracts
 - TypeScript interfaces for pipeline services (discovery, scraping, drafting)
 - Mermaid architecture diagrams
 
 ### Explicit Non-Goals (v2+)
+- Domain tables, indexes, and first real migration (campaign data-model persistence story)
+- Hosted PostgreSQL, Docker Compose Postgres, or Turso / libSQL
 - Multi-tenant database isolation
 - Microservices or serverless function decomposition
 - CI/CD pipeline configuration
@@ -133,9 +140,15 @@ localdraft/
 │       └── empty-state.tsx
 ├── lib/
 │   ├── db/                       # Database layer
-│   │   ├── index.ts              # Drizzle client export
-│   │   ├── schema.ts             # Drizzle schema definitions
-│   │   └── migrations/           # Generated migrations
+│   │   ├── env.ts                # Parse DB_DIALECT / SQLITE_PATH / DATABASE_URL
+│   │   ├── index.ts              # Dialect-aware Drizzle client
+│   │   ├── schema.ts             # Empty barrel until persistence story
+│   │   ├── migrations/           # drizzle-kit generated; never hand-edited
+│   │   └── sql/                  # Data scripts only (not schema)
+│   │       ├── sqlite/
+│   │       │   └── seed.sql
+│   │       └── postgres/
+│   │           └── seed.sql
 │   ├── actions/                  # Server actions
 │   │   ├── campaigns.ts          # Campaign CRUD actions
 │   │   ├── queue.ts              # Queue status mutations
@@ -160,7 +173,12 @@ localdraft/
 │   └── constants/                # Application constants
 │       ├── statuses.ts           # Queue status enum
 │       └── categories.ts         # Business category presets
-├── drizzle.config.ts             # Drizzle Kit configuration
+├── scripts/
+│   └── db/
+│       └── cli.ts                # install | seed | reset
+├── data/                         # Gitignored SQLite file (default localdraft.sqlite)
+├── drizzle.config.ts             # Drizzle Kit; dialect from env
+├── .env.example                  # DB_DIALECT, SQLITE_PATH, DATABASE_URL
 ├── tailwind.config.ts            # Tailwind configuration
 ├── components.json               # shadcn/ui configuration
 ├── next.config.ts                # Next.js configuration
@@ -298,28 +316,44 @@ flowchart TD
         Drafting["DraftingService<br/>(LLM Generation)"]
     end
 
-    subgraph Data [Data Layer - Drizzle + SQLite]
-        DB[(SQLite Database)]
+    subgraph Data [Data Layer - Drizzle]
+        Env["DB_DIALECT env"]
+        SQLite[(SQLite default)]
+        Postgres[(PostgreSQL selectable)]
         Schema["Drizzle Schema"]
+        DataSql["lib/db/sql dialect seeds"]
+        Cli["scripts/db/cli.ts"]
     end
+
+    Env --> SQLite
+    Env --> Postgres
+    Cli -->|"install"| Schema
+    Cli -->|"seed"| DataSql
+    SQLite --> Schema
+    Postgres --> Schema
 
     CampaignForm --> CreateCampaign
     CreateCampaign --> Discovery
     Discovery --> Scraper
     Scraper --> Enrichment
     Enrichment --> Drafting
-    Drafting --> DB
+    Drafting --> SQLite
+    Drafting --> Postgres
 
     QueueTable --> UpdateStatus
-    UpdateStatus --> DB
+    UpdateStatus --> SQLite
+    UpdateStatus --> Postgres
     DraftPanel --> SaveDraft
-    SaveDraft --> DB
+    SaveDraft --> SQLite
+    SaveDraft --> Postgres
     SendActions --> AddSuppression
-    AddSuppression --> DB
+    AddSuppression --> SQLite
+    AddSuppression --> Postgres
 
-    DB --> Schema
-    DB --> QueueTable
-    DB --> DraftPanel
+    SQLite --> QueueTable
+    Postgres --> QueueTable
+    SQLite --> DraftPanel
+    Postgres --> DraftPanel
 ```
 
 ### D. Queue Status State Machine
@@ -394,6 +428,7 @@ flowchart TD
 
 - [Stack selection rationale](stack-selection-rationale-2026-09-15.md) (`stack-selection-rationale-2026-09-15`): Document framework, UI, and database technology choices with decision rationale.
 - [Project structure conventions](project-structure-conventions-2026-09-15.md) (`project-structure-conventions-2026-09-15`): Define directory layout, module boundaries, and import conventions.
+- [Database connection and CLI scaffolding](database-connection-and-cli-scaffolding-2026-09-20.md) (`database-connection-and-cli-scaffolding-2026-09-20`): Env, dialect-aware client, empty schema barrel, data SQL folders, and install / seed / reset CLI. No domain tables.
 - [Database schema design](database-schema-design-2026-09-15.md) (`database-schema-design-2026-09-15`): Design Drizzle schema for Campaign, Listing, Website, Fact, Draft, QueueRecord, and Suppression entities.
 - [UI component inventory](ui-component-inventory-2026-09-15.md) (`ui-component-inventory-2026-09-15`): Map shadcn/ui components to UI requirements and document customization needs.
 - [API route design](api-route-design-2026-09-15.md) (`api-route-design-2026-09-15`): Define server action signatures and API route contracts with TypeScript types.
@@ -404,12 +439,12 @@ flowchart TD
 
 - [ ] Technology stack selection document is finalized with rationale for each choice.
 - [ ] Project directory structure is documented with clear module boundary rules.
+- [ ] Database connection scaffolding exists: dialect switch, empty schema barrel, data SQL folders, and install / seed / reset CLI. Domain tables remain on the campaign data-model epic.
 - [ ] Drizzle schema is designed for all core entities with relationship constraints.
 - [ ] Required shadcn/ui components are inventoried and mapped to UI mockups.
 - [ ] Server action and API route contracts are defined with TypeScript signatures.
 - [ ] Pipeline service interfaces are documented with input/output types.
 - [ ] All architecture diagrams (ER, flow, state machine, component) are complete.
-- [ ] No implementation code is written — this epic is design-only.
 
 ## 7. Dependencies & Sequencing
 
