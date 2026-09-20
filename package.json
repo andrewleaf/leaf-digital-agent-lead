@@ -9,6 +9,7 @@
     "pnpm": ">=9.15.0"
   },
   "scripts": {
+    "board:lint": "node .devtool/scripts/board-lint.mjs",
     "build": "next build",
     "db:generate": "drizzle-kit generate",
     "db:install": "tsx scripts/db/cli.ts install",

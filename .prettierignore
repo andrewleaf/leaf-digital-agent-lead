@@ -1,0 +1,16 @@
+# Build output
+.next/
+out/
+build/
+coverage/
+
+# Generated
+pnpm-lock.yaml
+package-lock.json
+lib/db/migrations/
+
+# Hand-authored docs whose markdown tables Prettier would pad into
+# several-hundred-character lines. Kanban cards are also written by the
+# Kanban Markdown extension, which does not round-trip that padding.
+.devtool/features/
+.cursor/

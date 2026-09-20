@@ -33,10 +33,12 @@ This epic converts the written process into executable checks: a board linter, a
 | Invariant (source) | Specified in | Observed state |
 |---|---|---|
 | One Doing card per agent | `kanban-markdown/SKILL.md` §Card protocol 4 | 2 cards `in-progress`; `project-structure-conventions-2026-09-15` stale since 2026-09-16 with every criterion unchecked while its deliverables (`app/README.md`, `components/README.md`, `lib/README.md`, 23 `.gitkeep` files) all exist |
-| Done cards have satisfied criteria | `agenda.md` §Hard gate 3–4 | 4 cards under `done/` retain unchecked boxes: `project-dependency-manifest-2026-09-16` (4), `campaign-setup-page-scaffold-2026-09-18`, `campaign-setup-status-bar-2026-09-18`, `workspace-page-header-2026-09-18` |
-| `order` is a unique fractional index per column | `references/data-model.md` §Fractional Index Ordering | `bG` and `bH` each held by two backlog cards; `a0` held by both Todo cards |
+| Done cards have satisfied criteria | `agenda.md` §Hard gate 3–4 | Clean, but only once the rule is scoped: the 4 cards under `done/` with unchecked boxes carry them under `## Further breakdown`, which the card format defines as candidate follow-ups rather than gates |
+| `order` is a unique fractional index per column | `references/data-model.md` §Fractional Index Ordering | `bG` and `bH` each held by two backlog cards; `a0` held by both Todo cards. Done has ~20 collisions because a finished card keeps the index it held in its previous column, so uniqueness is enforceable only in active columns |
 | `modified` updates on edit | `references/data-model.md` §Frontmatter Fields | Equal to `created` on cards edited after creation |
-| `assignee` identifies the claiming agent | `references/data-model.md` §Frontmatter Fields | `null` on all 134 cards; the per-agent Doing rule is therefore unverifiable |
+| `assignee` identifies the claiming agent | `references/data-model.md` §Frontmatter Fields | `null` on every card an agent has touched; only the human operator sets it (`"Andrew"` on `database-connection-and-cli-scaffolding-2026-09-20`), so the per-agent Doing rule is unverifiable |
+| Frontmatter carries only documented fields | `references/data-model.md` §Frontmatter Fields | 20 cards carry an undocumented `epic:` key, always `null`, written by the board extension between `assignee` and `dueDate` |
+| `pnpm lint` is a usable gate | `package.json` | Already broken on `main`: `eslint-plugin-react@7.37.5` calls `context.getFilename()`, removed in ESLint 10, so `eslint .` crashes on the first file it reads |
 | pnpm is the package manager | `package.json` `packageManager: pnpm@9.15.9` | `package-lock.json` committed alongside `pnpm-lock.yaml` |
 
 ### B. Cursor Hook Events Available to Cloud Agents
@@ -63,12 +65,12 @@ Constraints that shape the design:
 The linter is the single definition of a valid board, consumed by both humans (`pnpm board:lint`) and the `stop` hook:
 
 1. `id` equals the filename without `.md`.
-2. Frontmatter keys appear in the exact order and quoting given in `references/data-model.md` §Exact Serialization Format.
+2. The documented fields appear in the order and quoting given in `references/data-model.md` §Exact Serialization Format. Fields the board extension writes itself (`epic`) are tolerated in any position; anything else is an unknown field.
 3. `status` is one of `backlog`, `todo`, `in-progress`, `review`, `done`; `priority` is one of `critical`, `high`, `medium`, `low`.
 4. `status: "done"` implies the file is under `done/` with a non-null `completedAt`; any other status implies the features root with `completedAt: null`.
-5. `order` is unique within a column and uses base-62 characters only.
+5. `order` uses base-62 characters only and is unique within each **active** column. Done is exempt.
 6. Every `epic:<id>` label resolves to an existing epic card, and that card carries the `epic` label.
-7. A card under `done/` has no unchecked `- [ ]` acceptance criteria.
+7. A done card has no unchecked boxes under `## Acceptance Criteria` or `## N. Milestone Definition of Done`. `## Further breakdown` and fenced code blocks are ignored.
 8. Every claimed (`in-progress`) card has a non-null `assignee`, and no assignee holds more than one.
 9. `modified` is not earlier than `created`; `completedAt` is not earlier than `created`.
 10. Story cards carry both `story` and exactly one `epic:<id>` label; epic cards carry `epic`.
@@ -149,6 +151,8 @@ stateDiagram-v2
 - [Cloud Agent environment manifest](cloud-agent-environment-manifest-2026-09-20.md) (`cloud-agent-environment-manifest-2026-09-20`): Pin install and start so cloud runs boot with dependencies present.
 - [Subagent claim protocol](subagent-claim-protocol-2026-09-20.md) (`subagent-claim-protocol-2026-09-20`): Use `assignee` as the claim token and document fan-out, review, and hand-back rules.
 - [Board drift reconciliation](board-drift-reconciliation-2026-09-20.md) (`board-drift-reconciliation-2026-09-20`): Clear the §2A violations so the linter's first run is green.
+- [Restore the ESLint gate](restore-eslint-gate-2026-09-20.md) (`restore-eslint-gate-2026-09-20`): Make `pnpm lint` run again under ESLint 10 so it can be part of a pre-Done gate. Not required by the rest of the epic.
+- [Normalize repository formatting](normalize-repo-formatting-2026-09-20.md) (`normalize-repo-formatting-2026-09-20`): Run `pnpm format` once on its own so the format hook does not drag whole-file reformats into unrelated diffs.
 
 ## 6. Milestone Definition of Done
 
@@ -159,7 +163,8 @@ stateDiagram-v2
 - [ ] `npm install`, `npm ci`, and `yarn` are denied in favour of pnpm.
 - [ ] `.cursor/environment.json` installs dependencies with a frozen lockfile and is valid against the published schema.
 - [ ] Every `in-progress` card has an `assignee`, and the kanban skill documents the claim, fan-out, and hand-back contract.
-- [ ] `pnpm lint`, `pnpm typecheck`, and `pnpm test` pass with the tooling and its tests in place.
+- [ ] `pnpm typecheck` and `pnpm test` pass with the tooling and its tests in place. `pnpm lint` is excluded: it crashes on `main` for reasons unrelated to this epic and is tracked by `restore-eslint-gate-2026-09-20`.
+- [ ] `pnpm format` cannot reformat Kanban cards or skill docs, so the format hook never fights hand-authored markdown.
 
 ## 7. Dependencies & Sequencing
 
