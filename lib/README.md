@@ -10,6 +10,8 @@ Structure defined by [`epic-application-architecture-2026-09-15`](../.devtool/fe
 |------|------|
 | `db/` | Drizzle client (`index.ts`) and schema (`schema.ts`) for Campaign, Listing, Website, Fact, Draft, QueueRecord, Suppression. |
 | `db/migrations/` | drizzle-kit generated migrations. Never hand-edited. |
+| `db/sql/{sqlite,postgres}/` | Hand-written data scripts (seed and fixture SQL) per dialect. Never schema DDL — that belongs to a generated migration. |
+| `contracts/` | Zod command, source, and read-model contracts plus the pure mappers and fixtures that derive UI-facing values from source records. |
 | `actions/` | Server actions — the mutation entry points called from `app/`: campaign CRUD, queue status changes, suppression list. |
 | `services/discovery/` | Maps / Places API client that discovers listings. |
 | `services/scraper/` | Polite HTML fetcher for key website pages. |
@@ -27,7 +29,8 @@ app/  ->  actions/  ->  services/  ->  db/
                     \______________/
 ```
 
-- `actions/` may import from `services/`, `db/`, `constants/`, and `utils/`. Every action validates its input and is the transaction boundary.
+- `actions/` may import from `contracts/`, `services/`, `db/`, `constants/`, and `utils/`. Every action validates its input and is the transaction boundary.
+- `contracts/` is the shared vocabulary: it may import from `constants/` and `utils/` only, stays free of I/O, and is safe to import from a client component.
 - Each `services/*` module exposes its contract through `types.ts` and its implementation through `index.ts`, so callers depend on the interface rather than the provider.
 - `services/` may import from `db/`, `constants/`, and `utils/`, but never from a sibling service. Compose services in `actions/` instead.
 - `db/` may import from `constants/` only.

@@ -4,9 +4,9 @@ status: "in-progress"
 priority: "high"
 assignee: null
 epic: null
-dueDate: null
+dueDate: "2026-09-20"
 created: "2026-09-19T23:42:00.000Z"
-modified: "2026-09-20T00:05:03.232Z"
+modified: "2026-09-20T15:10:00.000Z"
 completedAt: null
 labels: ["story", "epic:epic-campaign-data-model-2026-09-19"]
 order: "a1"
