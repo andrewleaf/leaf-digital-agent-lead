@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "command": ".cursor/hooks/story-gate.mjs",
+        "matcher": "Write|Delete|EditNotebook",
+        "timeout": 10
+      }
+    ],
+    "beforeShellExecution": [
+      {
+        "command": ".cursor/hooks/package-manager-guard.mjs",
+        "timeout": 10
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": ".cursor/hooks/format-edited-file.mjs",
+        "timeout": 30
+      }
+    ],
+    "stop": [
+      {
+        "command": ".cursor/hooks/board-audit.mjs",
+        "timeout": 20,
+        "loop_limit": 2
+      }
+    ],
+    "subagentStop": [
+      {
+        "command": ".cursor/hooks/subagent-reconcile.mjs",
+        "timeout": 10,
+        "loop_limit": 1
+      }
+    ]
+  }
+}

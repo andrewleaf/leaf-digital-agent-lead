@@ -14,7 +14,7 @@ Use this workflow for any change that creates, modifies, or consumes LocalDraft 
 ## Workflow
 
 1. Read [`agenda.md`](../../../agenda.md) and list relevant cards in [`.devtool/features/`](../../../.devtool/features/). Do not write application code until the matching story is in Doing.
-2. Read [`references/domain-contract.md`](references/domain-contract.md) and the source epics/cards it identifies.
+2. Read [`references/domain-contract.md`](references/domain-contract.md) and the source epics/cards it identifies. For schema, migrations, or `lib/db` connection work, also read [`references/persistence.md`](references/persistence.md).
 3. Inventory the affected UI fields, commands, persisted entities, derived read models, lifecycle states, and evidence requirements.
 4. Assign one owner for every field:
    - persisted source of truth;

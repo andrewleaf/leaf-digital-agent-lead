@@ -20,12 +20,13 @@ UI/design work (`component` label, Stitch-sourced epic, or presentational widget
 
 ## Card protocol
 
-1. Put new work in `status: "backlog"` or `status: "todo"` (root of `.devtool/features/`).
-2. Before coding, set `status: "in-progress"` (Doing). Keep the file in the features root.
-3. When finished, set `status: "done"`, set `completedAt`, and move the file into `.devtool/features/done/`.
-4. Subagents claim their own card. One Doing (`in-progress`) card per agent.
+1. Put new work in `status: "backlog"` or `status: "todo"` (root of `.devtool/features/`) — `pnpm board:new "Title" --epic <epic-id>`.
+2. Before coding, `pnpm board:claim <id> --assignee <you>` (`status: "in-progress"`). Keep the file in the features root.
+3. When finished, `pnpm board:finish <id>` (sets `status: "done"` and `completedAt`, then moves the file into `.devtool/features/done/`).
+4. `assignee` is the claim token. One Doing (`in-progress`) card **per assignee**. Subagents claim their own card — see [references/subagent-protocol.md](references/subagent-protocol.md).
 5. Card format: [references/card-format.md](references/card-format.md)
 6. Full field / serialization rules: [references/data-model.md](references/data-model.md)
+7. Do not hand-edit frontmatter. `pnpm board:lint` is the executable definition of a valid board.
 
 Do not invent a second board. Do not skip the Doing column.
 

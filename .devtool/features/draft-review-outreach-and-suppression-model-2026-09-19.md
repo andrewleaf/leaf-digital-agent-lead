@@ -9,7 +9,7 @@ created: "2026-09-19T23:42:00.000Z"
 modified: "2026-09-19T23:54:40.254Z"
 completedAt: null
 labels: ["story", "epic:epic-campaign-data-model-2026-09-19"]
-order: "a0"
+order: "a1"
 ---
 # Draft review outreach and suppression model
 

@@ -29,6 +29,13 @@ yarn-error.log*
 .env*.local
 .env
 
+# competing lockfile — this repo is pnpm-only
+package-lock.json
+
+# local SQLite files (data/.gitkeep stays tracked)
+/data/*.sqlite
+/data/*.db
+
 # vercel
 .vercel
 

@@ -1,0 +1,28 @@
+---
+description: Reuse the dialect-aware Drizzle client; generate portable migrations
+globs: "{lib/db,scripts/db}/**/*.{ts,sql,json},drizzle.config.ts"
+alwaysApply: false
+---
+
+# Database connection conventions
+
+One client: `lib/db/env.ts` + `index.ts`. Callers use `runQuery`. Do not add a second Drizzle/Turso/Prisma path.
+
+- `schema.ts` is a barrel. Domain tables belong in modules it re-exports.
+- Column types must generate SQLite now and PostgreSQL later. No UI-presentation columns.
+- DDL: `pnpm db:generate` → `lib/db/migrations/` (never hand-edit). Data: `lib/db/sql/<dialect>/*.sql`.
+- Workflow and field ownership: [campaign-domain-modeling](../skills/campaign-domain-modeling/SKILL.md) ([persistence.md](../skills/campaign-domain-modeling/references/persistence.md)).
+
+```ts
+// BAD — new client, sync SQLite-only API, presentation column
+import Database from "better-sqlite3";
+export const db = drizzle(new Database("app.db"));
+export const campaigns = sqliteTable("campaigns", {
+  readinessPct: integer("readiness_pct"),
+});
+
+// GOOD — existing barrel + portable fields + async helper
+import { runQuery } from "@/lib/db";
+import { campaigns } from "@/lib/db/schema";
+await runQuery((db) => db.select().from(campaigns));
+```

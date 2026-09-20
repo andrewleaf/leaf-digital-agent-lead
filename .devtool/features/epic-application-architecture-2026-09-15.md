@@ -149,6 +149,7 @@ localdraft/
 │   │       │   └── seed.sql
 │   │       └── postgres/
 │   │           └── seed.sql
+│   ├── contracts/                # Zod command / read-model contracts, mappers, fixtures
 │   ├── actions/                  # Server actions
 │   │   ├── campaigns.ts          # Campaign CRUD actions
 │   │   ├── queue.ts              # Queue status mutations
