@@ -12,5 +12,6 @@ lib/db/migrations/
 # Hand-authored docs whose markdown tables Prettier would pad into
 # several-hundred-character lines. Kanban cards are also written by the
 # Kanban Markdown extension, which does not round-trip that padding.
+# Code under .cursor/hooks/ stays formatted.
 .devtool/features/
-.cursor/
+.cursor/**/*.md

@@ -131,6 +131,42 @@ export function serializeCard(fields, body) {
   return `---\n${lines.join("\n")}\n---\n\n${content}\n`;
 }
 
+/**
+ * Rewrites only the given frontmatter values, leaving every other byte of the
+ * card untouched. Used instead of `serializeCard` for transitions so extension
+ * fields survive and diffs stay to the lines that actually changed.
+ */
+export function updateCardText(text, updates) {
+  const normalized = text.replace(/\r\n/g, "\n");
+  const closing = normalized.indexOf("\n---\n", 3);
+  if (!normalized.startsWith("---\n") || closing === -1) {
+    throw new Error("cannot update a file without frontmatter delimiters");
+  }
+
+  const head = normalized.slice(4, closing + 1);
+  const tail = normalized.slice(closing + 1);
+  const seen = new Set();
+
+  const rewritten = head
+    .split("\n")
+    .map((line) => {
+      const separator = line.indexOf(":");
+      if (separator === -1) return line;
+      const key = line.slice(0, separator).trim();
+      if (!(key in updates)) return line;
+      seen.add(key);
+      return `${key}: ${encodeValue(updates[key])}`;
+    })
+    .join("\n");
+
+  const missing = Object.keys(updates).filter((key) => !seen.has(key));
+  if (missing.length > 0) {
+    throw new Error(`card has no ${missing.join(", ")} field to update`);
+  }
+
+  return `---\n${rewritten}${tail}`;
+}
+
 export function expectedKind(key) {
   if (key === "labels") return "array";
   if (EXTENSION_FIELDS.has(key)) return "string|null";

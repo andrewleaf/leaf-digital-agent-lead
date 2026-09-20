@@ -156,15 +156,15 @@ stateDiagram-v2
 
 ## 6. Milestone Definition of Done
 
-- [ ] `pnpm board:lint` exits `0` on the reconciled board and non-zero for each of the ten invariants in §2C.
-- [ ] `pnpm board:claim` and `pnpm board:finish` perform the status transitions, timestamp updates, and `done/` move without hand-edited frontmatter.
-- [ ] A write to `app/`, `components/`, `lib/`, or `scripts/` with no claimed card is denied by `preToolUse` with an actionable `agent_message`.
-- [ ] Ending a turn on a board that violates any invariant produces a `stop` followup naming the offending card and rule.
-- [ ] `npm install`, `npm ci`, and `yarn` are denied in favour of pnpm.
-- [ ] `.cursor/environment.json` installs dependencies with a frozen lockfile and is valid against the published schema.
-- [ ] Every `in-progress` card has an `assignee`, and the kanban skill documents the claim, fan-out, and hand-back contract.
-- [ ] `pnpm typecheck` and `pnpm test` pass with the tooling and its tests in place. `pnpm lint` is excluded: it crashes on `main` for reasons unrelated to this epic and is tracked by `restore-eslint-gate-2026-09-20`.
-- [ ] `pnpm format` cannot reformat Kanban cards or skill docs, so the format hook never fights hand-authored markdown.
+- [x] `pnpm board:lint` exits `0` on the reconciled board and non-zero for each of the ten invariants in §2C.
+- [x] `pnpm board:claim` and `pnpm board:finish` perform the status transitions, timestamp updates, and `done/` move without hand-edited frontmatter.
+- [x] A write to `app/`, `components/`, `lib/`, or `scripts/` with no claimed card is denied by `preToolUse` with an actionable `agent_message`.
+- [x] Ending a turn on a board that violates any invariant produces a `stop` followup naming the offending card and rule.
+- [x] `npm install`, `npm ci`, and `yarn` are denied in favour of pnpm.
+- [x] `.cursor/environment.json` installs dependencies with a frozen lockfile and is valid against the published schema.
+- [x] Every `in-progress` card has an `assignee`, and the kanban skill documents the claim, fan-out, and hand-back contract.
+- [x] `pnpm typecheck` and `pnpm test` pass with the tooling and its tests in place. `pnpm lint` is excluded: it crashes on `main` for reasons unrelated to this epic and is tracked by `restore-eslint-gate-2026-09-20`.
+- [x] `pnpm format` cannot reformat Kanban cards or skill docs, so the format hook never fights hand-authored markdown.
 
 ## 7. Dependencies & Sequencing
 

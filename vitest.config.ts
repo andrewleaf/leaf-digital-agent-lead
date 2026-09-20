@@ -21,6 +21,7 @@ export default defineConfig({
     include: [
       "**/*.{test,spec}.?(c|m)[jt]s?(x)",
       ".devtool/scripts/**/*.test.mjs",
+      ".cursor/hooks/**/*.test.mjs",
     ],
   },
 });

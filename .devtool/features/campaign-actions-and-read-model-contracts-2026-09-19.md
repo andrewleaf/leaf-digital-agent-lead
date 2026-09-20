@@ -1,15 +1,15 @@
 ---
 id: "campaign-actions-and-read-model-contracts-2026-09-19"
-status: "in-progress"
+status: "todo"
 priority: "high"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-09-19T23:42:00.000Z"
-modified: "2026-09-20T00:05:03.232Z"
+modified: "2026-09-20T16:30:00.000Z"
 completedAt: null
 labels: ["story", "epic:epic-campaign-data-model-2026-09-19"]
-order: "a1"
+order: "a2"
 ---
 # Campaign actions and read model contracts
 

@@ -9,7 +9,10 @@
     "pnpm": ">=9.15.0"
   },
   "scripts": {
+    "board:claim": "node .devtool/scripts/board-card.mjs claim",
+    "board:finish": "node .devtool/scripts/board-card.mjs finish",
     "board:lint": "node .devtool/scripts/board-lint.mjs",
+    "board:new": "node .devtool/scripts/board-card.mjs new",
     "build": "next build",
     "db:generate": "drizzle-kit generate",
     "db:install": "tsx scripts/db/cli.ts install",
