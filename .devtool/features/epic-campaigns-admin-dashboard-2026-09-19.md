@@ -21,7 +21,7 @@ The outcome is a reusable component kit that matches the Stitch visual contract,
 
 App chrome (256px rail, 56px top bar) already exists from [`epic-campaign-setup-2026-09-18`](epic-campaign-setup-2026-09-18.md) and is **reused**, not rebuilt.
 
-This screen is on the board ahead of Review Queue because that is the requested next UI surface. Review Queue (`projects/13798460973041177032/screens/edf29e27a2824c4da2952f5bd12988fa`) stays unmapped.
+Review Queue is claimed on [`epic-review-queue-2026-09-20`](epic-review-queue-2026-09-20.md) and is not implemented in this epic.
 
 ## 2. Source Specifications
 
@@ -151,7 +151,7 @@ These titles are **not** the Setup preview titles on [`pipeline-sequence-rail-20
   - Campaign fetch, persistence, APIs, polling, or CSV export.
   - Pause/resume research, overflow menus that write campaign state, SMTP, or blast automation.
   - Zod or server-side validation, database writes.
-  - Review Queue screen (`projects/13798460973041177032/screens/edf29e27a2824c4da2952f5bd12988fa`).
+  - Review Queue screen (`projects/13798460973041177032/screens/edf29e27a2824c4da2952f5bd12988fa`) — claimed by [`epic-review-queue-2026-09-20`](epic-review-queue-2026-09-20.md); do not implement it here.
   - Product landing page or Campaign & Review Manager screens.
 
 ## 4. Architecture & Flow
@@ -222,4 +222,4 @@ Page chrome is reused from Campaign Setup. These cards are **not** created in th
 ## 7. Dependencies & Sequencing
 
 - **Prerequisites**: [`epic-campaign-setup-2026-09-18`](epic-campaign-setup-2026-09-18.md) (shell, nav, top bar, campaign widget folder, `/campaigns/new`), [`epic-application-architecture-2026-09-15`](epic-application-architecture-2026-09-15.md) (folder layout, shadcn at `components/ui/`), [`epic-ui-design-system-2026-09-15`](epic-ui-design-system-2026-09-15.md) (Operator Core tokens). Campaign Pipeline widgets in [`epic-campaign-pipeline-2026-09-19`](epic-campaign-pipeline-2026-09-19.md) may land in parallel; this epic must not import them.
-- **Unblocks**: Operators can open `/campaigns` as the Campaigns landing page. Later Review Queue work from the sibling Stitch screen remains a separate epic.
+- **Unblocks**: Operators can open `/campaigns` as the Campaigns landing page. Review Queue UI is a separate epic ([`epic-review-queue-2026-09-20`](epic-review-queue-2026-09-20.md)).
