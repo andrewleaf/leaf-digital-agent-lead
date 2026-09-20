@@ -5,7 +5,7 @@ priority: "critical"
 assignee: null
 dueDate: null
 created: "2026-09-19T23:42:00.000Z"
-modified: "2026-09-19T23:42:00.000Z"
+modified: "2026-09-20T05:15:00.000Z"
 completedAt: null
 labels: ["epic"]
 order: "bM"
@@ -26,7 +26,7 @@ The model must preserve evidence provenance, support idempotent pipeline retries
 1. [`app/(auth)/campaigns/new/page.tsx`](../../app/(auth)/campaigns/new/page.tsx) defines the fields and actions currently exposed to the operator.
 2. [`epic-campaign-intake-fields-2026-09-12`](epic-campaign-intake-fields-2026-09-12.md) defines required fields, optional discovery filters, and excluded firmographics.
 3. [`epic-data-and-enrichment-2026-09-12`](epic-data-and-enrichment-2026-09-12.md) defines listing capture, public-page extraction, provenance, caching, and no-invention rules.
-4. [`epic-application-architecture-2026-09-15`](epic-application-architecture-2026-09-15.md) fixes the pilot stack at SQLite, Drizzle ORM, and `better-sqlite3`.
+4. [`epic-application-architecture-2026-09-15`](epic-application-architecture-2026-09-15.md) fixes the pilot default at SQLite, Drizzle ORM, and `better-sqlite3`, with PostgreSQL as the growth dialect via the same schema.
 5. [`epic-agent-workspace-2026-09-12`](epic-agent-workspace-2026-09-12.md) and [`full-status-model-2026-09-12`](full-status-model-2026-09-12.md) define operator queue states.
 6. [`epic-compliance-and-risk-2026-09-12`](epic-compliance-and-risk-2026-09-12.md) defines storage, suppression, and sensitive-data boundaries.
 
@@ -114,7 +114,7 @@ Commands use stable IDs and optimistic concurrency. Derived labels and counters 
   - Automated email delivery or autonomous campaign blasts.
   - Password-protected, paywalled, portal, payment, patient, or student data.
   - Persisting UI colors, prose labels, confidence-ring presentation, or mock-only counters as source-of-truth columns.
-  - Hosted production database migration; Turso/libSQL remains a future path.
+  - Hosted production database cutover; PostgreSQL remains the future path. Schema columns stay portable so that cutover does not invent a second model.
 
 ## 4. Architecture & Flow
 

@@ -8,7 +8,7 @@ Read only the sources relevant to the current card:
 - Current setup surface: `app/(auth)/campaigns/new/page.tsx`
 - Intake: `.devtool/features/epic-campaign-intake-fields-2026-09-12.md`
 - Enrichment and evidence: `.devtool/features/epic-data-and-enrichment-2026-09-12.md`
-- Persistence stack and original ER model: `.devtool/features/epic-application-architecture-2026-09-15.md`
+- Persistence stack and original ER model: `.devtool/features/epic-application-architecture-2026-09-15.md` (SQLite default, PostgreSQL growth path)
 - Queue lifecycle: `.devtool/features/epic-agent-workspace-2026-09-12.md`
 - Compliance boundaries: `.devtool/features/epic-compliance-and-risk-2026-09-12.md`
 
