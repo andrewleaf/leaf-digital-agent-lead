@@ -1,0 +1,30 @@
+---
+description: In Plan mode, plan and write Kanban cards before any implementation
+alwaysApply: true
+---
+
+# Plan-mode Kanban cards first
+
+When Plan mode is active, or the user asked to plan work, the plan **is** the Kanban cards. Follow [`kanban-markdown`](../skills/kanban-markdown/SKILL.md). List existing cards before proposing new ones.
+
+Allowed without cards: reading the repo, and creating/updating agenda, board, skills, or rules ([`agenda.md`](../../agenda.md)).
+
+## Split
+
+- One independent unit of work → one **story**.
+- Two or more stories → an **epic** plus child stories (`labels: ["story", "epic:<epic-id>"]`).
+- Do not invent a second task list in CreatePlan.
+
+## Plan deliverable
+
+Cursor plan todos are card work: IDs, acceptance criteria, and (for epics) the seven sections in [`card-format.md`](../skills/kanban-markdown/references/card-format.md). Do not make application-code file edits the primary todos.
+
+Component/UI cards: [`component-story-cards.mdc`](component-story-cards.mdc).
+
+## Build cards first
+
+After the user confirms the plan, write the markdown files under [`.devtool/features/`](../../.devtool/features/) (`backlog` or `todo`). Epics stay planning parents; do not put an epic in Doing.
+
+## Implementation is a second permission
+
+If the user did not ask to implement, stop after cards exist. If they grant implementation, claim the matching **story** card (`status: "in-progress"`) and implement only that card’s acceptance criteria. Never implement from Cursor plan todos alone.

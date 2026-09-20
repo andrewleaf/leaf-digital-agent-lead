@@ -12,7 +12,7 @@ description: >-
 
 Board: [`.devtool/features/`](../../../.devtool/features/) (LachyFS Kanban Markdown).
 
-Process gate: [`agenda.md`](../../../agenda.md) — **do not write application code without a story card in Doing**.
+Process gate: [`agenda.md`](../../../agenda.md) — **do not write application code without a story card in Doing**. Plan mode: [`plan-mode-kanban-cards.mdc`](../../rules/plan-mode-kanban-cards.mdc) — plan and write cards first; implement only after permission, from a claimed story.
 
 List cards before planning or starting work.
 

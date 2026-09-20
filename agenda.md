@@ -23,7 +23,7 @@ If the user asks for code and no card exists, create the story first (or ask the
 - Card format reference: [`.cursor/skills/kanban-markdown/references/card-format.md`](.cursor/skills/kanban-markdown/references/card-format.md)
 - Full data model: [`.cursor/skills/kanban-markdown/references/data-model.md`](.cursor/skills/kanban-markdown/references/data-model.md)
 
-When planning, break work into story cards on the board. Do not keep a second task list outside Kanban.
+When planning (including Plan mode), plan and write Kanban cards first: one story, or an epic plus child stories if the work splits. Implementation is a second permission and must use a claimed story card — never Cursor plan todos alone. Rule: [`.cursor/rules/plan-mode-kanban-cards.mdc`](.cursor/rules/plan-mode-kanban-cards.mdc). Do not keep a second task list outside Kanban.
 
 ## UI style guide: shadcn
 
