@@ -1,16 +1,16 @@
 ---
 id: "draft-review-outreach-and-suppression-model-2026-09-19"
-status: "backlog"
+status: "todo"
 priority: "critical"
 assignee: null
+epic: null
 dueDate: null
 created: "2026-09-19T23:42:00.000Z"
-modified: "2026-09-19T23:42:00.000Z"
+modified: "2026-09-19T23:54:40.254Z"
 completedAt: null
 labels: ["story", "epic:epic-campaign-data-model-2026-09-19"]
-order: "bS"
+order: "a0"
 ---
-
 # Draft review outreach and suppression model
 
 Model evidence-backed draft versions, human review, public business contacts, outreach outcomes, and suppression checks.
