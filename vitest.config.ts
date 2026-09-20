@@ -16,5 +16,12 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
+    // Default globs skip dot-directories, so the board tooling tests under
+    // `.devtool/` need an explicit entry.
+    include: [
+      "**/*.{test,spec}.?(c|m)[jt]s?(x)",
+      ".devtool/scripts/**/*.test.mjs",
+      ".cursor/hooks/**/*.test.mjs",
+    ],
   },
 });

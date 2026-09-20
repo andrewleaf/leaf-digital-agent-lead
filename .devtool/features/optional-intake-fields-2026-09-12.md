@@ -8,7 +8,7 @@ created: "2026-09-12T14:54:00.000Z"
 modified: "2026-09-12T14:54:00.000Z"
 completedAt: null
 labels: ["story", "epic:epic-campaign-intake-fields-2026-09-12"]
-order: "bH"
+order: "bW"
 ---
 
 # Optional intake fields

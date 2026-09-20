@@ -9,7 +9,7 @@ created: "2026-09-19T23:42:00.000Z"
 modified: "2026-09-20T15:10:00.000Z"
 completedAt: "2026-09-20T15:25:00.000Z"
 labels: ["story", "epic:epic-campaign-data-model-2026-09-19"]
-order: "a1"
+order: "a2"
 ---
 # Campaign actions and read model contracts
 

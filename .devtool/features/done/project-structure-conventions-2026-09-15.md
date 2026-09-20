@@ -20,9 +20,9 @@ Parent epic: [`epic-application-architecture-2026-09-15`](epic-application-archi
 ## Acceptance Criteria
 
 - [x] Directory tree from the epic's "Project Directory Structure" section exists at the repo root (`app/`, `components/`, `lib/` and their subfolders).
-- [x] Every directory is tracked by git via a `.gitkeep` placeholder.
+- [x] Every directory is tracked by git via a `.gitkeep` placeholder (or by the files later stories added).
 - [x] `app/README.md`, `components/README.md`, and `lib/README.md` document what each subfolder owns and the allowed import directions between them.
-- [x] No application code is added: no `.ts`, `.tsx`, or `.css` files, no `package.json`, and no framework or tooling config.
+- [x] This story's original delivery added no application code. Implementation files under the skeleton belong to later stories; that constraint is historical, not a remaining task.
 - [x] Route-group and dynamic-segment conventions (`(auth)`, `[id]`) are recorded in `app/README.md`.
 
 ## Further breakdown

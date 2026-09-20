@@ -21,6 +21,10 @@ Each feature is a markdown file with YAML frontmatter. Files live in `.devtool/f
 | `labels` | `array` | `[]` | List of label strings |
 | `order` | `string` (quoted) | Fractional index (e.g. `"a0"`) | Lexicographic sort position within column |
 
+The board extension also writes an `epic` key (always `null` on this board) when a card is saved from the board UI. It is not part of the contract and carries no data; `board-lint.mjs` tolerates it in any position and rejects every other unknown field. Do not hand-author it — parent epics are expressed as the `epic:<epic-id>` label.
+
+`assignee` is the claim token: the agent or person holding the card. `board-lint.mjs` requires it on every `in-progress` card and allows at most one claimed card per assignee.
+
 ### Enum Values
 
 **status**: `backlog` | `todo` | `in-progress` | `review` | `done`
@@ -70,6 +74,8 @@ Rules:
 
 - Empty column: `"a0"`
 - Append after last: `"a0"` → `"a1"` → … (base-62: `0-9`, `A-Z`, `a-z`)
+- Unique within each active column. Done is exempt: a finished card keeps the index it held in its previous column.
+- Do not compute this by hand — `pnpm board:new` derives it and `pnpm board:lint` verifies it.
 
 ## File Storage
 

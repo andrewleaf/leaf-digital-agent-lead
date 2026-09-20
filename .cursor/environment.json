@@ -1,0 +1,12 @@
+{
+  "name": "localdraft",
+  "install": "corepack enable && pnpm install --frozen-lockfile",
+  "terminals": [
+    {
+      "name": "dev",
+      "command": "pnpm dev",
+      "description": "Next.js App Router dev server. After it reports Ready, the app is at the forwarded web port."
+    }
+  ],
+  "ports": [{ "name": "web", "port": 3000 }]
+}
