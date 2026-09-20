@@ -1,13 +1,13 @@
 ---
 id: "campaign-actions-and-read-model-contracts-2026-09-19"
-status: "in-progress"
+status: "done"
 priority: "high"
 assignee: null
 epic: null
-dueDate: null
+dueDate: "2026-09-20"
 created: "2026-09-19T23:42:00.000Z"
-modified: "2026-09-20T00:05:03.232Z"
-completedAt: null
+modified: "2026-09-20T15:10:00.000Z"
+completedAt: "2026-09-20T15:25:00.000Z"
 labels: ["story", "epic:epic-campaign-data-model-2026-09-19"]
 order: "a1"
 ---
@@ -19,23 +19,44 @@ Parent epic: `epic-campaign-data-model-2026-09-19`
 
 ## Acceptance Criteria
 
-- \[ \] The approved contract allows syntactically valid partial Save Draft data and models a receipt with stable campaign identity/version/timestamps and a null pipeline run.
-- \[ \] The approved Initialize Campaign contract requires the complete aggregate, expected version, and idempotency key, and models one pending pipeline run on success.
-- \[ \] Action errors use field paths and bounded domain codes for validation, stale version, duplicate initialization, invalid transition, and persistence failure.
-- \[ \] Setup read-model mappers derive autosave time, completeness, prohibition count, local-boundary readiness, website-gate readiness, and initialization availability from source fields.
-- \[ \] Discovery-preview mappers derive estimated yield, confidence, detail caption, and staleness metadata without treating those presentation values as Campaign write fields.
-- \[ \] Pipeline/workbench mappers preserve canonical run, listing, and queue keys while producing documented presentation DTOs.
-- \[ \] Dashboard mappers derive campaign portfolio status, funnel counts, velocity metrics, and audit alerts with definitions tested against source rows.
-- \[ \] Contract validation rejects UI prose labels, colors, tones, percentages, counters, and forbidden firmographics as authoritative write fields.
-- \[ \] Filled, empty, stale, paused, and failed fixtures pass focused schema and mapper tests.
+- \[x\] The approved contract allows syntactically valid partial Save Draft data and models a receipt with stable campaign identity/version/timestamps and a null pipeline run.
+- \[x\] The approved Initialize Campaign contract requires the complete aggregate, expected version, and idempotency key, and models one pending pipeline run on success.
+- \[x\] Action errors use field paths and bounded domain codes for validation, stale version, duplicate initialization, invalid transition, and persistence failure.
+- \[x\] Setup read-model mappers derive autosave time, completeness, prohibition count, local-boundary readiness, website-gate readiness, and initialization availability from source fields.
+- \[x\] Discovery-preview mappers derive estimated yield, confidence, detail caption, and staleness metadata without treating those presentation values as Campaign write fields.
+- \[x\] Pipeline/workbench mappers preserve canonical run, listing, and queue keys while producing documented presentation DTOs.
+- \[x\] Dashboard mappers derive campaign portfolio status, funnel counts, velocity metrics, and audit alerts with definitions tested against source rows.
+- \[x\] Contract validation rejects UI prose labels, colors, tones, percentages, counters, and forbidden firmographics as authoritative write fields.
+- \[x\] Filled, empty, stale, paused, and failed fixtures pass focused schema and mapper tests.
 
 ## Further breakdown
 
 - \[x\] Specify JSON command/result envelopes and idempotency fields.
 - \[x\] Define JSON query DTOs for Campaign Setup, Pipeline, and Admin Dashboard.
 - \[x\] Add contract fixtures matching current filled, empty, stale, paused, and failed UI states.
-- \[ \] Implement approved contracts as Zod schemas and inferred TypeScript types.
-- \[ \] Implement pure read-model mappers and focused contract tests.
+- \[x\] Implement approved contracts as Zod schemas and inferred TypeScript types.
+- \[x\] Implement pure read-model mappers and focused contract tests.
+
+## Implementation
+
+Contract-only build under [`lib/contracts/`](../../lib/contracts/): `shared.ts` (status families and stage ordinals), `campaign-commands.ts` (Save Draft / Initialize inputs, receipts, bounded `ActionError` envelope, `validationFailure`), `campaign-sources.ts` (persisted shapes the query side reads), `read-models/{setup,discovery,pipeline,dashboard,stages}.ts` (pure mappers), and `fixtures.ts` (filled, empty, stale, paused, failed). Colocated tests cover both schemas and mappers.
+
+Derivation rules settled while building:
+
+| Derived value | Rule |
+|---|---|
+| `autosavedLabel` | Relative to now: just now under a minute, then minutes, hours, days. `null` autosave renders "Not autosaved yet". |
+| `completeness.percent` | Quarters of the four required fields (niches, geographies, offer, CTA). |
+| `localBoundary` / `websiteGate` | Geography count and `requireWebsite` only; both emit a canonical ready flag beside the label. |
+| `initialization.available` | Complete required fields **and** `lifecycle === "draft"`; every blocker is listed in `reasons`. |
+| Discovery `confidence` | Provider coverage of the requested geographies: ≥0.9 high, ≥0.6 medium, >0 low; stale or unobserved never exceeds low/unknown. |
+| Discovery `detailCaption` | Locality portion of each requested geography label, never an invented region name. |
+| Stage `progress` / `metricValue` | `processedCount / totalCount`; null when the source reports no totals. |
+| Workbench `needsAttention` | Attention queue status, thin record, suppression match, or low draft confidence. |
+| Velocity `unit` | `per-hour` when the source window has duration, otherwise raw `count`. |
+| Audit `severity` | Fixed per finding code; zero-count findings are dropped so an alert always has an observed count. |
+
+Strict object schemas are what reject prose labels, tones, colours, percentages, counters, and firmographics as write fields. Persistence, transactional writes, and route wiring remain with the aggregate and persistence stories.
 
 ## Review checkpoint
 
