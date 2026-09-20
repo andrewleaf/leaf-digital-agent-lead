@@ -42,6 +42,7 @@ All UI work follows **shadcn/ui** plus **LocalDraft Operator Core** tokens.
 |------|----------|
 | Kanban workflow | `.cursor/skills/kanban-markdown/` |
 | Kanban card / data model | `.cursor/skills/kanban-markdown/references/` |
+| Campaign domain + persistence | `.cursor/skills/campaign-domain-modeling/` |
 | shadcn UI | `.cursor/skills/shadcn-ui/` |
 | Stitch catalog + mapping | `.cursor/skills/stitch-to-shadcn/` |
 | Operator Core tokens | `.cursor/skills/shadcn-ui/references/operator-core.md` |

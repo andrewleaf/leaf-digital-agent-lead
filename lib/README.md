@@ -8,9 +8,9 @@ Structure defined by [`epic-application-architecture-2026-09-15`](../.devtool/fe
 
 | Path | Owns |
 |------|------|
-| `db/` | Drizzle client (`index.ts`) and schema (`schema.ts`) for Campaign, Listing, Website, Fact, Draft, QueueRecord, Suppression. |
-| `db/migrations/` | drizzle-kit generated migrations. Never hand-edited. |
-| `db/sql/{sqlite,postgres}/` | Hand-written data scripts (seed and fixture SQL) per dialect. Never schema DDL — that belongs to a generated migration. |
+| `db/` | Dialect-aware Drizzle connection. `env.ts` reads `DB_DIALECT` / `SQLITE_PATH` / `DATABASE_URL`. `index.ts` builds `better-sqlite3` or `postgres`. `schema.ts` is an empty barrel until the campaign persistence story adds tables. |
+| `db/migrations/` | drizzle-kit generated SQL and `meta/_journal.json`. Never hand-edited. |
+| `db/sql/sqlite/` and `db/sql/postgres/` | Lexical data scripts for `db:seed`. Placeholders only until fixture stories add `INSERT`s. Not schema. |
 | `contracts/` | Zod command, source, and read-model contracts plus the pure mappers and fixtures that derive UI-facing values from source records. |
 | `actions/` | Server actions — the mutation entry points called from `app/`: campaign CRUD, queue status changes, suppression list. |
 | `services/discovery/` | Maps / Places API client that discovers listings. |
@@ -19,6 +19,19 @@ Structure defined by [`epic-application-architecture-2026-09-15`](../.devtool/fe
 | `services/drafting/` | LLM draft generation and prompt templates. |
 | `utils/` | Framework-agnostic helpers, e.g. the Tailwind class merger `cn`. |
 | `constants/` | Shared enums and presets: queue statuses, business category presets. |
+
+## Connection and CLI
+
+Copy `.env.example` to `.env` when you need to override defaults. SQLite is the default (`DB_DIALECT=sqlite`, file `data/localdraft.sqlite`). PostgreSQL is selected with `DB_DIALECT=postgres` and `DATABASE_URL`.
+
+| Script | Behavior |
+|--------|----------|
+| `pnpm db:install` | Ensure the SQLite file exists (or ping Postgres), then `drizzle-kit migrate`. Succeeds with zero generated migrations. |
+| `pnpm db:seed` | Run `lib/db/sql/<dialect>/*.sql` in lexical order. |
+| `pnpm db:reset` | Delete the SQLite file, or `DROP SCHEMA public CASCADE` + recreate on Postgres, then install and seed. Refuses `NODE_ENV=production` unless `--force`. |
+| `pnpm db:generate` / `db:migrate` / `db:push` / `db:studio` | drizzle-kit. Config is `drizzle.config.ts` (`schema` → `lib/db/schema.ts`, `out` → `lib/db/migrations`). |
+
+Use `runQuery` from `lib/db` so call sites stay async when the dialect switches to Postgres. Do not import Turso / libSQL.
 
 ## Layering
 

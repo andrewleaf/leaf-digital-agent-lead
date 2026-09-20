@@ -1,0 +1,3 @@
+-- LocalDraft data scripts (not schema).
+-- Domain INSERTs are added by later fixture stories.
+-- This file is a commented placeholder so `db:seed` has a lexical target.
