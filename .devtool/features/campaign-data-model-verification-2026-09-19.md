@@ -1,16 +1,16 @@
 ---
 id: "campaign-data-model-verification-2026-09-19"
-status: "backlog"
+status: "todo"
 priority: "high"
 assignee: null
+epic: null
 dueDate: null
 created: "2026-09-19T23:42:00.000Z"
-modified: "2026-09-19T23:42:00.000Z"
+modified: "2026-09-20T00:05:11.308Z"
 completedAt: null
 labels: ["story", "epic:epic-campaign-data-model-2026-09-19"]
-order: "bU"
+order: "a0"
 ---
-
 # Campaign data model verification
 
 Prove the schema, contracts, lifecycle rules, provenance, and current Campaign Setup coverage before UI data wiring begins.
