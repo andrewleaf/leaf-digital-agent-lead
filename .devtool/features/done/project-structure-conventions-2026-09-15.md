@@ -3,10 +3,10 @@ id: "project-structure-conventions-2026-09-15"
 status: "done"
 priority: "critical"
 assignee: null
-dueDate: null
+dueDate: "2026-09-20"
 created: "2026-09-16T22:56:00.000Z"
-modified: "2026-09-20T16:30:00.000Z"
-completedAt: "2026-09-20T16:30:00.000Z"
+modified: "2026-09-20T15:10:00.000Z"
+completedAt: "2026-09-20T15:20:00.000Z"
 labels: ["story", "epic:epic-application-architecture-2026-09-15"]
 order: "a0"
 ---

@@ -11,6 +11,7 @@ Structure defined by [`epic-application-architecture-2026-09-15`](../.devtool/fe
 | `db/` | Dialect-aware Drizzle connection. `env.ts` reads `DB_DIALECT` / `SQLITE_PATH` / `DATABASE_URL`. `index.ts` builds `better-sqlite3` or `postgres`. `schema.ts` is an empty barrel until the campaign persistence story adds tables. |
 | `db/migrations/` | drizzle-kit generated SQL and `meta/_journal.json`. Never hand-edited. |
 | `db/sql/sqlite/` and `db/sql/postgres/` | Lexical data scripts for `db:seed`. Placeholders only until fixture stories add `INSERT`s. Not schema. |
+| `contracts/` | Zod command, source, and read-model contracts plus the pure mappers and fixtures that derive UI-facing values from source records. |
 | `actions/` | Server actions — the mutation entry points called from `app/`: campaign CRUD, queue status changes, suppression list. |
 | `services/discovery/` | Maps / Places API client that discovers listings. |
 | `services/scraper/` | Polite HTML fetcher for key website pages. |
@@ -41,7 +42,8 @@ app/  ->  actions/  ->  services/  ->  db/
                     \______________/
 ```
 
-- `actions/` may import from `services/`, `db/`, `constants/`, and `utils/`. Every action validates its input and is the transaction boundary.
+- `actions/` may import from `contracts/`, `services/`, `db/`, `constants/`, and `utils/`. Every action validates its input and is the transaction boundary.
+- `contracts/` is the shared vocabulary: it may import from `constants/` and `utils/` only, stays free of I/O, and is safe to import from a client component.
 - Each `services/*` module exposes its contract through `types.ts` and its implementation through `index.ts`, so callers depend on the interface rather than the provider.
 - `services/` may import from `db/`, `constants/`, and `utils/`, but never from a sibling service. Compose services in `actions/` instead.
 - `db/` may import from `constants/` only.
