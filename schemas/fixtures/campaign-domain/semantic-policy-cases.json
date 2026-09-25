@@ -1,0 +1,74 @@
+{
+  "description": "Structurally valid values that later domain and persistence tests must reject or constrain.",
+  "cases": [
+    {
+      "name": "stale-version",
+      "expectedError": "stale-version",
+      "input": {
+        "kind": "save-campaign-draft",
+        "requestId": "6ad453e6-bcda-4d37-843f-cdbebf640d4f",
+        "campaignId": "2e4133a0-39b7-4c41-bdef-6654d7c38dc5",
+        "expectedVersion": 7,
+        "data": {
+          "name": "Stale title"
+        }
+      },
+      "existingState": {
+        "campaignVersion": 8
+      }
+    },
+    {
+      "name": "duplicate-initialization",
+      "expectedError": "duplicate-initialization",
+      "input": {
+        "kind": "initialize-campaign",
+        "requestId": "7ad453e6-bcda-4d37-843f-cdbebf640d4f",
+        "campaignId": "2e4133a0-39b7-4c41-bdef-6654d7c38dc5",
+        "expectedVersion": 4,
+        "idempotencyKey": "campaign-init:2e4133a0:v4",
+        "data": {
+          "niches": [{ "label": "HVAC contractors", "order": 0 }],
+          "geographies": [{ "label": "Austin, TX", "order": 0 }],
+          "offerSummary": "A concise public-website audit.",
+          "callToAction": "Reply for the audit."
+        }
+      },
+      "existingState": {
+        "idempotencyKey": "campaign-init:2e4133a0:v4",
+        "pipelineRunId": "662f84ab-0434-4efe-a8e4-34404048a2ab"
+      }
+    },
+    {
+      "name": "thin-low-confidence-cannot-be-ready",
+      "expectedError": "invalid-transition",
+      "queueRecord": {
+        "status": "ready",
+        "needsManualResearch": true,
+        "lowConfidenceReason": "Only business name and city are available.",
+        "humanApprovedAt": null,
+        "suppressionCheckedAt": null
+      }
+    },
+    {
+      "name": "suppressed-contact-cannot-be-sent",
+      "expectedError": "suppression-match",
+      "contact": {
+        "type": "email",
+        "normalizedValue": "hello@blocked.example"
+      },
+      "suppression": {
+        "scope": "global",
+        "matchType": "domain",
+        "normalizedValue": "blocked.example"
+      }
+    },
+    {
+      "name": "review-theme-abstains-below-threshold",
+      "expectedOutcome": "abstained",
+      "listing": {
+        "reviewCount": 9
+      },
+      "factType": "review-theme"
+    }
+  ]
+}

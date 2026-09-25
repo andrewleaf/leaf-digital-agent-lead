@@ -1,0 +1,903 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://localdraft.dev/schemas/campaign-domain.v1.schema.json",
+  "title": "LocalDraft campaign domain v1",
+  "description": "Review contract for persisted campaign-domain records, write commands, read models, and representative aggregate graphs. Relational constraints remain authoritative in Drizzle and SQLite.",
+  "oneOf": [
+    { "$ref": "#/$defs/SaveCampaignDraftInput" },
+    { "$ref": "#/$defs/InitializeCampaignInput" },
+    { "$ref": "#/$defs/CampaignDomainGraph" },
+    { "$ref": "#/$defs/SetupReadModel" },
+    { "$ref": "#/$defs/DiscoveryPreviewReadModel" },
+    { "$ref": "#/$defs/PipelineReadModel" },
+    { "$ref": "#/$defs/DashboardReadModel" }
+  ],
+  "$defs": {
+    "Uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "UtcDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "NullableUtcDateTime": {
+      "oneOf": [
+        { "$ref": "#/$defs/UtcDateTime" },
+        { "type": "null" }
+      ]
+    },
+    "NullableUuid": {
+      "oneOf": [
+        { "$ref": "#/$defs/Uuid" },
+        { "type": "null" }
+      ]
+    },
+    "CampaignLifecycle": {
+      "type": "string",
+      "enum": ["draft", "active", "paused", "archived"]
+    },
+    "PipelineRunStatus": {
+      "type": "string",
+      "enum": ["pending", "running", "succeeded", "failed", "cancelled"]
+    },
+    "PipelineStageKey": {
+      "type": "string",
+      "enum": [
+        "discovery",
+        "website-matching",
+        "public-scrape",
+        "fact-extraction",
+        "draft-generation",
+        "human-review"
+      ]
+    },
+    "StageExecutionStatus": {
+      "type": "string",
+      "enum": ["pending", "running", "succeeded", "failed", "skipped"]
+    },
+    "QueueStatus": {
+      "type": "string",
+      "enum": [
+        "new",
+        "enriched",
+        "drafted",
+        "needs-edit",
+        "no-email",
+        "skipped",
+        "ready",
+        "sent",
+        "replied",
+        "follow-up-due"
+      ]
+    },
+    "Confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low", "unknown"]
+    },
+    "VoiceProfile": {
+      "type": "string",
+      "enum": [
+        "helpful-direct",
+        "peer-collegial",
+        "concise-technical",
+        "audit-led",
+        "conversational"
+      ]
+    },
+    "ContactPointType": {
+      "type": "string",
+      "enum": ["email", "phone", "contact-form"]
+    },
+    "FactType": {
+      "type": "string",
+      "enum": [
+        "business-identity",
+        "service",
+        "call-to-action",
+        "contact-path",
+        "site-gap",
+        "about-quote",
+        "review-theme"
+      ]
+    },
+    "PageKind": {
+      "type": "string",
+      "enum": ["home", "about", "service", "contact", "review", "other"]
+    },
+    "RobotsDecision": {
+      "type": "string",
+      "enum": ["allowed", "denied", "unknown"]
+    },
+    "DraftReviewStatus": {
+      "type": "string",
+      "enum": ["unreviewed", "needs-edit", "approved", "rejected"]
+    },
+    "OutreachEventType": {
+      "type": "string",
+      "enum": ["sent", "bounced", "replied", "meeting-booked", "follow-up", "disqualified"]
+    },
+    "SuppressionScope": {
+      "type": "string",
+      "enum": ["global", "campaign"]
+    },
+    "SuppressionMatchType": {
+      "type": "string",
+      "enum": ["email", "domain", "business-identity"]
+    },
+    "OrderedLabelInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "order"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "order": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "CampaignProofInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "order"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "text": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "order": { "type": "integer", "minimum": 0 },
+        "authorship": { "type": "string", "const": "operator" }
+      }
+    },
+    "DiscoverySettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requireWebsite", "requireEmail", "minimumRating", "minimumReviewCount"],
+      "properties": {
+        "requireWebsite": { "type": "boolean" },
+        "requireEmail": { "type": "boolean" },
+        "minimumRating": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "minimumReviewCount": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        }
+      }
+    },
+    "ResearchSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["extractProofPoints", "fallbackAction"],
+      "properties": {
+        "extractProofPoints": { "type": "boolean" },
+        "fallbackAction": { "type": "string", "const": "flag-unverified" }
+      }
+    },
+    "CampaignDraftData": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Syntactically valid subsets may be saved while the campaign remains draft.",
+      "properties": {
+        "name": { "type": "string", "maxLength": 160 },
+        "niches": {
+          "type": "array",
+          "maxItems": 25,
+          "items": { "$ref": "#/$defs/OrderedLabelInput" }
+        },
+        "geographies": {
+          "type": "array",
+          "maxItems": 25,
+          "items": { "$ref": "#/$defs/OrderedLabelInput" }
+        },
+        "offerSummary": { "type": "string", "maxLength": 2000 },
+        "callToAction": { "type": "string", "maxLength": 1000 },
+        "voiceProfile": {
+          "oneOf": [
+            { "$ref": "#/$defs/VoiceProfile" },
+            { "type": "null" }
+          ]
+        },
+        "proofs": {
+          "type": "array",
+          "maxItems": 50,
+          "items": { "$ref": "#/$defs/CampaignProofInput" }
+        },
+        "constraints": {
+          "type": "array",
+          "maxItems": 50,
+          "items": { "$ref": "#/$defs/OrderedLabelInput" }
+        },
+        "discoverySettings": { "$ref": "#/$defs/DiscoverySettings" },
+        "researchSettings": { "$ref": "#/$defs/ResearchSettings" }
+      }
+    },
+    "CampaignInitializationData": {
+      "allOf": [
+        { "$ref": "#/$defs/CampaignDraftData" },
+        {
+          "type": "object",
+          "required": ["niches", "geographies", "offerSummary", "callToAction"],
+          "properties": {
+            "niches": { "type": "array", "minItems": 1 },
+            "geographies": { "type": "array", "minItems": 1 },
+            "offerSummary": { "type": "string", "minLength": 1 },
+            "callToAction": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "SaveCampaignDraftInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "requestId", "data"],
+      "properties": {
+        "kind": { "type": "string", "const": "save-campaign-draft" },
+        "requestId": { "$ref": "#/$defs/Uuid" },
+        "campaignId": { "$ref": "#/$defs/Uuid" },
+        "expectedVersion": { "type": "integer", "minimum": 0 },
+        "data": { "$ref": "#/$defs/CampaignDraftData" }
+      }
+    },
+    "InitializeCampaignInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "requestId",
+        "campaignId",
+        "expectedVersion",
+        "idempotencyKey",
+        "data"
+      ],
+      "properties": {
+        "kind": { "type": "string", "const": "initialize-campaign" },
+        "requestId": { "$ref": "#/$defs/Uuid" },
+        "campaignId": { "$ref": "#/$defs/Uuid" },
+        "expectedVersion": { "type": "integer", "minimum": 1 },
+        "idempotencyKey": {
+          "type": "string",
+          "minLength": 16,
+          "maxLength": 200,
+          "pattern": "^[A-Za-z0-9._:-]+$"
+        },
+        "data": { "$ref": "#/$defs/CampaignInitializationData" }
+      }
+    },
+    "Campaign": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "lifecycle",
+        "version",
+        "offerSummary",
+        "callToAction",
+        "voiceProfile",
+        "requireWebsite",
+        "requireEmail",
+        "minimumRating",
+        "minimumReviewCount",
+        "extractProofPoints",
+        "fallbackAction",
+        "createdAt",
+        "updatedAt",
+        "initializedAt"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "code": { "type": ["string", "null"], "maxLength": 40 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "lifecycle": { "$ref": "#/$defs/CampaignLifecycle" },
+        "version": { "type": "integer", "minimum": 1 },
+        "offerSummary": { "type": ["string", "null"], "maxLength": 2000 },
+        "callToAction": { "type": ["string", "null"], "maxLength": 1000 },
+        "voiceProfile": {
+          "oneOf": [
+            { "$ref": "#/$defs/VoiceProfile" },
+            { "type": "null" }
+          ]
+        },
+        "requireWebsite": { "type": "boolean" },
+        "requireEmail": { "type": "boolean" },
+        "minimumRating": { "type": ["number", "null"], "minimum": 0, "maximum": 5 },
+        "minimumReviewCount": { "type": ["integer", "null"], "minimum": 0 },
+        "extractProofPoints": { "type": "boolean" },
+        "fallbackAction": { "type": "string", "const": "flag-unverified" },
+        "createdAt": { "$ref": "#/$defs/UtcDateTime" },
+        "updatedAt": { "$ref": "#/$defs/UtcDateTime" },
+        "initializedAt": { "$ref": "#/$defs/NullableUtcDateTime" }
+      }
+    },
+    "CampaignOrderedValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "campaignId", "displayValue", "normalizedValue", "order"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "campaignId": { "$ref": "#/$defs/Uuid" },
+        "displayValue": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "normalizedValue": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "order": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "CampaignProof": {
+      "allOf": [
+        { "$ref": "#/$defs/CampaignOrderedValue" },
+        {
+          "type": "object",
+          "required": ["authorship"],
+          "properties": {
+            "authorship": { "type": "string", "const": "operator" }
+          }
+        }
+      ]
+    },
+    "DiscoveryCacheEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "provider",
+        "queryFingerprint",
+        "locale",
+        "region",
+        "providerContractVersion",
+        "rawPayload",
+        "responseMetadata",
+        "fetchedAt",
+        "expiresAt"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "provider": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "queryFingerprint": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "locale": { "type": "string", "minLength": 2, "maxLength": 35 },
+        "region": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "providerContractVersion": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "rawPayload": {},
+        "responseMetadata": { "type": "object" },
+        "fetchedAt": { "$ref": "#/$defs/UtcDateTime" },
+        "expiresAt": { "$ref": "#/$defs/UtcDateTime" }
+      }
+    },
+    "Listing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "campaignId",
+        "provider",
+        "providerListingId",
+        "identityFingerprint",
+        "identityAmbiguous",
+        "legalName",
+        "tradeName",
+        "address",
+        "normalizedAddress",
+        "city",
+        "region",
+        "postalCode",
+        "countryCode",
+        "publicPhone",
+        "canonicalWebsiteUrl",
+        "primaryCategory",
+        "secondaryCategories",
+        "rating",
+        "reviewCount",
+        "publicHours",
+        "needsManualResearch",
+        "firstDiscoveredAt",
+        "lastObservedAt"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "campaignId": { "$ref": "#/$defs/Uuid" },
+        "provider": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "providerListingId": { "type": ["string", "null"], "maxLength": 256 },
+        "identityFingerprint": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "identityAmbiguous": { "type": "boolean" },
+        "legalName": { "type": ["string", "null"], "maxLength": 300 },
+        "tradeName": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "address": { "type": ["string", "null"], "maxLength": 500 },
+        "normalizedAddress": { "type": ["string", "null"], "maxLength": 500 },
+        "city": { "type": ["string", "null"], "maxLength": 160 },
+        "region": { "type": ["string", "null"], "maxLength": 160 },
+        "postalCode": { "type": ["string", "null"], "maxLength": 30 },
+        "countryCode": { "type": ["string", "null"], "pattern": "^[A-Z]{2}$" },
+        "publicPhone": { "type": ["string", "null"], "maxLength": 40 },
+        "canonicalWebsiteUrl": { "type": ["string", "null"], "format": "uri" },
+        "primaryCategory": { "type": ["string", "null"], "maxLength": 160 },
+        "secondaryCategories": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 160 },
+          "uniqueItems": true
+        },
+        "rating": { "type": ["number", "null"], "minimum": 0, "maximum": 5 },
+        "reviewCount": { "type": ["integer", "null"], "minimum": 0 },
+        "publicHours": {
+          "oneOf": [
+            { "type": "object" },
+            { "type": "null" }
+          ]
+        },
+        "needsManualResearch": { "type": "boolean" },
+        "firstDiscoveredAt": { "$ref": "#/$defs/UtcDateTime" },
+        "lastObservedAt": { "$ref": "#/$defs/UtcDateTime" }
+      }
+    },
+    "ContactPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "listingId",
+        "type",
+        "value",
+        "normalizedValue",
+        "sourceUrl",
+        "verificationStatus",
+        "observedAt"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "listingId": { "$ref": "#/$defs/Uuid" },
+        "type": { "$ref": "#/$defs/ContactPointType" },
+        "value": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "normalizedValue": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "sourceUrl": { "type": "string", "format": "uri" },
+        "verificationStatus": {
+          "type": "string",
+          "enum": ["observed", "verified", "invalid", "unknown"]
+        },
+        "observedAt": { "$ref": "#/$defs/UtcDateTime" }
+      }
+    },
+    "WebsiteSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "listingId",
+        "canonicalUrl",
+        "pageKind",
+        "httpStatus",
+        "robotsDecision",
+        "contentHash",
+        "allowedText",
+        "fetchedAt",
+        "expiresAt"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "listingId": { "$ref": "#/$defs/Uuid" },
+        "canonicalUrl": { "type": "string", "format": "uri" },
+        "pageKind": { "$ref": "#/$defs/PageKind" },
+        "httpStatus": { "type": ["integer", "null"], "minimum": 100, "maximum": 599 },
+        "robotsDecision": { "$ref": "#/$defs/RobotsDecision" },
+        "contentHash": { "type": ["string", "null"], "maxLength": 128 },
+        "allowedText": { "type": ["string", "null"] },
+        "fetchedAt": { "$ref": "#/$defs/UtcDateTime" },
+        "expiresAt": { "$ref": "#/$defs/UtcDateTime" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "robotsDecision": { "const": "denied" } },
+            "required": ["robotsDecision"]
+          },
+          "then": {
+            "properties": {
+              "allowedText": { "type": "null" },
+              "contentHash": { "type": "null" }
+            }
+          }
+        }
+      ]
+    },
+    "Fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "listingId",
+        "snapshotId",
+        "type",
+        "sourceUrl",
+        "sourceSnippet",
+        "normalizedContent",
+        "confidence",
+        "extractorVersion",
+        "extractedAt",
+        "abstained",
+        "abstentionReason"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "listingId": { "$ref": "#/$defs/Uuid" },
+        "snapshotId": { "$ref": "#/$defs/NullableUuid" },
+        "type": { "$ref": "#/$defs/FactType" },
+        "sourceUrl": { "type": "string", "format": "uri" },
+        "sourceSnippet": { "type": "string", "minLength": 1 },
+        "normalizedContent": { "type": "string" },
+        "confidence": { "$ref": "#/$defs/Confidence" },
+        "extractorVersion": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "extractedAt": { "$ref": "#/$defs/UtcDateTime" },
+        "abstained": { "type": "boolean" },
+        "abstentionReason": { "type": ["string", "null"], "maxLength": 500 }
+      }
+    },
+    "PipelineRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "campaignId",
+        "idempotencyKey",
+        "status",
+        "createdAt",
+        "startedAt",
+        "completedAt"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "campaignId": { "$ref": "#/$defs/Uuid" },
+        "idempotencyKey": { "type": "string", "minLength": 16, "maxLength": 200 },
+        "status": { "$ref": "#/$defs/PipelineRunStatus" },
+        "createdAt": { "$ref": "#/$defs/UtcDateTime" },
+        "startedAt": { "$ref": "#/$defs/NullableUtcDateTime" },
+        "completedAt": { "$ref": "#/$defs/NullableUtcDateTime" }
+      }
+    },
+    "PipelineStageRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "pipelineRunId",
+        "key",
+        "ordinal",
+        "status",
+        "attemptCount",
+        "idempotencyKey",
+        "startedAt",
+        "completedAt",
+        "errorSummary"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "pipelineRunId": { "$ref": "#/$defs/Uuid" },
+        "key": { "$ref": "#/$defs/PipelineStageKey" },
+        "ordinal": { "type": "integer", "minimum": 1, "maximum": 6 },
+        "status": { "$ref": "#/$defs/StageExecutionStatus" },
+        "attemptCount": { "type": "integer", "minimum": 0 },
+        "idempotencyKey": { "type": "string", "minLength": 16, "maxLength": 200 },
+        "startedAt": { "$ref": "#/$defs/NullableUtcDateTime" },
+        "completedAt": { "$ref": "#/$defs/NullableUtcDateTime" },
+        "errorSummary": { "type": ["string", "null"], "maxLength": 1000 }
+      }
+    },
+    "Draft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "listingId",
+        "version",
+        "subject",
+        "body",
+        "confidence",
+        "lowConfidenceReason",
+        "generatorVersion",
+        "generatedAt",
+        "reviewStatus",
+        "editedBy",
+        "reviewedBy",
+        "reviewedAt"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "listingId": { "$ref": "#/$defs/Uuid" },
+        "version": { "type": "integer", "minimum": 1 },
+        "subject": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "body": { "type": "string", "minLength": 1 },
+        "confidence": { "$ref": "#/$defs/Confidence" },
+        "lowConfidenceReason": { "type": ["string", "null"], "maxLength": 500 },
+        "generatorVersion": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "generatedAt": { "$ref": "#/$defs/UtcDateTime" },
+        "reviewStatus": { "$ref": "#/$defs/DraftReviewStatus" },
+        "editedBy": { "type": ["string", "null"], "maxLength": 160 },
+        "reviewedBy": { "type": ["string", "null"], "maxLength": 160 },
+        "reviewedAt": { "$ref": "#/$defs/NullableUtcDateTime" }
+      }
+    },
+    "DraftCitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "draftId", "factId", "ordinal", "citedText"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "draftId": { "$ref": "#/$defs/Uuid" },
+        "factId": { "$ref": "#/$defs/Uuid" },
+        "ordinal": { "type": "integer", "minimum": 0 },
+        "citedText": { "type": "string", "minLength": 1 }
+      }
+    },
+    "QueueRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "listingId",
+        "status",
+        "preferredContactPointId",
+        "needsManualResearch",
+        "lowConfidenceReason",
+        "humanApprovedAt",
+        "suppressionCheckedAt",
+        "nextTouchAt",
+        "followUpNote",
+        "disqualificationReason",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "listingId": { "$ref": "#/$defs/Uuid" },
+        "status": { "$ref": "#/$defs/QueueStatus" },
+        "preferredContactPointId": { "$ref": "#/$defs/NullableUuid" },
+        "needsManualResearch": { "type": "boolean" },
+        "lowConfidenceReason": { "type": ["string", "null"], "maxLength": 500 },
+        "humanApprovedAt": { "$ref": "#/$defs/NullableUtcDateTime" },
+        "suppressionCheckedAt": { "$ref": "#/$defs/NullableUtcDateTime" },
+        "nextTouchAt": { "$ref": "#/$defs/NullableUtcDateTime" },
+        "followUpNote": { "type": ["string", "null"], "maxLength": 2000 },
+        "disqualificationReason": { "type": ["string", "null"], "maxLength": 500 },
+        "createdAt": { "$ref": "#/$defs/UtcDateTime" },
+        "updatedAt": { "$ref": "#/$defs/UtcDateTime" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": { "enum": ["ready", "sent"] }
+            },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "needsManualResearch": { "const": false },
+              "lowConfidenceReason": { "type": "null" },
+              "humanApprovedAt": { "$ref": "#/$defs/UtcDateTime" },
+              "suppressionCheckedAt": { "$ref": "#/$defs/UtcDateTime" }
+            }
+          }
+        }
+      ]
+    },
+    "OutreachEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "queueRecordId",
+        "draftId",
+        "contactPointId",
+        "type",
+        "occurredAt",
+        "idempotencyKey",
+        "metadata"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "queueRecordId": { "$ref": "#/$defs/Uuid" },
+        "draftId": { "$ref": "#/$defs/NullableUuid" },
+        "contactPointId": { "$ref": "#/$defs/NullableUuid" },
+        "type": { "$ref": "#/$defs/OutreachEventType" },
+        "occurredAt": { "$ref": "#/$defs/UtcDateTime" },
+        "idempotencyKey": { "type": "string", "minLength": 16, "maxLength": 200 },
+        "metadata": { "type": "object" }
+      }
+    },
+    "SuppressionEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "scope",
+        "campaignId",
+        "matchType",
+        "normalizedValue",
+        "source",
+        "reason",
+        "createdAt"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/Uuid" },
+        "scope": { "$ref": "#/$defs/SuppressionScope" },
+        "campaignId": { "$ref": "#/$defs/NullableUuid" },
+        "matchType": { "$ref": "#/$defs/SuppressionMatchType" },
+        "normalizedValue": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "source": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "createdAt": { "$ref": "#/$defs/UtcDateTime" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "scope": { "const": "global" } },
+            "required": ["scope"]
+          },
+          "then": {
+            "properties": { "campaignId": { "type": "null" } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "scope": { "const": "campaign" } },
+            "required": ["scope"]
+          },
+          "then": {
+            "properties": { "campaignId": { "$ref": "#/$defs/Uuid" } }
+          }
+        }
+      ]
+    },
+    "CampaignDomainGraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "campaign",
+        "niches",
+        "geographies",
+        "proofs",
+        "constraints",
+        "discoveryCacheEntries",
+        "listings",
+        "contactPoints",
+        "websiteSnapshots",
+        "facts",
+        "pipelineRuns",
+        "pipelineStageRuns",
+        "drafts",
+        "draftCitations",
+        "queueRecords",
+        "outreachEvents",
+        "suppressionEntries"
+      ],
+      "properties": {
+        "kind": { "type": "string", "const": "campaign-domain-graph" },
+        "campaign": { "$ref": "#/$defs/Campaign" },
+        "niches": { "type": "array", "items": { "$ref": "#/$defs/CampaignOrderedValue" } },
+        "geographies": { "type": "array", "items": { "$ref": "#/$defs/CampaignOrderedValue" } },
+        "proofs": { "type": "array", "items": { "$ref": "#/$defs/CampaignProof" } },
+        "constraints": { "type": "array", "items": { "$ref": "#/$defs/CampaignOrderedValue" } },
+        "discoveryCacheEntries": { "type": "array", "items": { "$ref": "#/$defs/DiscoveryCacheEntry" } },
+        "listings": { "type": "array", "items": { "$ref": "#/$defs/Listing" } },
+        "contactPoints": { "type": "array", "items": { "$ref": "#/$defs/ContactPoint" } },
+        "websiteSnapshots": { "type": "array", "items": { "$ref": "#/$defs/WebsiteSnapshot" } },
+        "facts": { "type": "array", "items": { "$ref": "#/$defs/Fact" } },
+        "pipelineRuns": { "type": "array", "items": { "$ref": "#/$defs/PipelineRun" } },
+        "pipelineStageRuns": { "type": "array", "items": { "$ref": "#/$defs/PipelineStageRun" } },
+        "drafts": { "type": "array", "items": { "$ref": "#/$defs/Draft" } },
+        "draftCitations": { "type": "array", "items": { "$ref": "#/$defs/DraftCitation" } },
+        "queueRecords": { "type": "array", "items": { "$ref": "#/$defs/QueueRecord" } },
+        "outreachEvents": { "type": "array", "items": { "$ref": "#/$defs/OutreachEvent" } },
+        "suppressionEntries": { "type": "array", "items": { "$ref": "#/$defs/SuppressionEntry" } }
+      }
+    },
+    "ReadinessIndicator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ready", "label"],
+      "properties": {
+        "ready": { "type": "boolean" },
+        "label": { "type": "string", "minLength": 1 }
+      }
+    },
+    "SetupReadModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "campaignId",
+        "version",
+        "lifecycle",
+        "autosavedAt",
+        "autosavedLabel",
+        "completeness",
+        "prohibitionCount",
+        "localBoundary",
+        "websiteGate",
+        "initialization"
+      ],
+      "properties": {
+        "kind": { "type": "string", "const": "setup-read-model" },
+        "campaignId": { "$ref": "#/$defs/Uuid" },
+        "version": { "type": "integer", "minimum": 1 },
+        "lifecycle": { "$ref": "#/$defs/CampaignLifecycle" },
+        "autosavedAt": { "$ref": "#/$defs/NullableUtcDateTime" },
+        "autosavedLabel": { "type": "string" },
+        "completeness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["complete", "percent", "missingFields"],
+          "properties": {
+            "complete": { "type": "boolean" },
+            "percent": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "missingFields": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": ["niches", "geographies", "offerSummary", "callToAction"]
+              }
+            }
+          }
+        },
+        "prohibitionCount": { "type": "integer", "minimum": 0 },
+        "localBoundary": { "$ref": "#/$defs/ReadinessIndicator" },
+        "websiteGate": { "$ref": "#/$defs/ReadinessIndicator" },
+        "initialization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["available", "reasons"],
+          "properties": {
+            "available": { "type": "boolean" },
+            "reasons": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+          }
+        }
+      }
+    },
+    "DiscoveryPreviewReadModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "estimatedYield",
+        "confidence",
+        "detailCaption",
+        "observedAt",
+        "expiresAt",
+        "stale"
+      ],
+      "properties": {
+        "kind": { "type": "string", "const": "discovery-preview-read-model" },
+        "estimatedYield": { "type": ["integer", "null"], "minimum": 0 },
+        "confidence": { "$ref": "#/$defs/Confidence" },
+        "detailCaption": { "type": "string" },
+        "observedAt": { "$ref": "#/$defs/NullableUtcDateTime" },
+        "expiresAt": { "$ref": "#/$defs/NullableUtcDateTime" },
+        "stale": { "type": "boolean" }
+      }
+    },
+    "PipelineReadModel": {
+      "type": "object",
+      "description": "Implemented contract remains authoritative in lib/contracts/read-models/pipeline.ts.",
+      "required": ["kind", "campaignId", "runId", "lifecycle", "stages", "rows", "generatedAt"],
+      "properties": {
+        "kind": { "type": "string", "const": "pipeline-read-model" },
+        "campaignId": { "$ref": "#/$defs/Uuid" },
+        "runId": { "$ref": "#/$defs/Uuid" },
+        "lifecycle": { "$ref": "#/$defs/CampaignLifecycle" },
+        "stages": { "type": "array", "maxItems": 6 },
+        "rows": { "type": "array" },
+        "generatedAt": { "$ref": "#/$defs/UtcDateTime" }
+      }
+    },
+    "DashboardReadModel": {
+      "type": "object",
+      "description": "Implemented contract remains authoritative in lib/contracts/read-models/dashboard.ts.",
+      "required": ["kind", "portfolio", "funnel", "velocity", "auditAlerts", "generatedAt"],
+      "properties": {
+        "kind": { "type": "string", "const": "dashboard-read-model" },
+        "portfolio": { "type": "array" },
+        "funnel": { "type": "array" },
+        "velocity": { "type": "array" },
+        "auditAlerts": { "type": "array" },
+        "generatedAt": { "$ref": "#/$defs/UtcDateTime" }
+      }
+    }
+  }
+}

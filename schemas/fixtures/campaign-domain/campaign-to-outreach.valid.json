@@ -1,0 +1,234 @@
+{
+  "kind": "campaign-domain-graph",
+  "campaign": {
+    "id": "2e4133a0-39b7-4c41-bdef-6654d7c38dc5",
+    "code": "AUS-HVAC-01",
+    "name": "Austin HVAC",
+    "lifecycle": "active",
+    "version": 5,
+    "offerSummary": "A concise public-website audit with actionable conversion fixes.",
+    "callToAction": "Reply if you would like the three-point audit.",
+    "voiceProfile": "helpful-direct",
+    "requireWebsite": true,
+    "requireEmail": false,
+    "minimumRating": 3.5,
+    "minimumReviewCount": 10,
+    "extractProofPoints": true,
+    "fallbackAction": "flag-unverified",
+    "createdAt": "2026-09-20T12:00:00.000Z",
+    "updatedAt": "2026-09-20T12:05:00.000Z",
+    "initializedAt": "2026-09-20T12:05:00.000Z"
+  },
+  "niches": [
+    {
+      "id": "9a867b92-9b92-4e24-a644-8434606af8b1",
+      "campaignId": "2e4133a0-39b7-4c41-bdef-6654d7c38dc5",
+      "displayValue": "HVAC contractors",
+      "normalizedValue": "hvac contractors",
+      "order": 0
+    }
+  ],
+  "geographies": [
+    {
+      "id": "70d546e2-04b6-4823-a194-edfd0f5fdc7e",
+      "campaignId": "2e4133a0-39b7-4c41-bdef-6654d7c38dc5",
+      "displayValue": "Austin, TX",
+      "normalizedValue": "austin tx",
+      "order": 0
+    }
+  ],
+  "proofs": [],
+  "constraints": [
+    {
+      "id": "af903540-2d9d-4956-89d0-bbfe82db7743",
+      "campaignId": "2e4133a0-39b7-4c41-bdef-6654d7c38dc5",
+      "displayValue": "Do not claim revenue or employee count",
+      "normalizedValue": "do not claim revenue or employee count",
+      "order": 0
+    }
+  ],
+  "discoveryCacheEntries": [
+    {
+      "id": "4447a66d-2a6b-49d0-b32f-a0450d54f173",
+      "provider": "maps-provider",
+      "queryFingerprint": "sha256:austin-hvac-v1",
+      "locale": "en-US",
+      "region": "Austin, TX",
+      "providerContractVersion": "v1",
+      "rawPayload": {
+        "resultCount": 1
+      },
+      "responseMetadata": {
+        "requestId": "provider-request-123"
+      },
+      "fetchedAt": "2026-09-20T12:06:00.000Z",
+      "expiresAt": "2026-10-20T12:06:00.000Z"
+    }
+  ],
+  "listings": [
+    {
+      "id": "6c2fb883-3c0b-454c-a441-391fed2e23e2",
+      "campaignId": "2e4133a0-39b7-4c41-bdef-6654d7c38dc5",
+      "provider": "maps-provider",
+      "providerListingId": "maps-987",
+      "identityFingerprint": "sha256:bright-air-austin",
+      "identityAmbiguous": false,
+      "legalName": "Bright Air LLC",
+      "tradeName": "Bright Air",
+      "address": "100 Congress Ave, Austin, TX 78701",
+      "normalizedAddress": "100 congress ave austin tx 78701",
+      "city": "Austin",
+      "region": "TX",
+      "postalCode": "78701",
+      "countryCode": "US",
+      "publicPhone": "+1-512-555-0100",
+      "canonicalWebsiteUrl": "https://bright-air.example/",
+      "primaryCategory": "HVAC contractor",
+      "secondaryCategories": ["Air conditioning repair service"],
+      "rating": 4.7,
+      "reviewCount": 24,
+      "publicHours": {
+        "monday": ["08:00-17:00"]
+      },
+      "needsManualResearch": false,
+      "firstDiscoveredAt": "2026-09-20T12:06:00.000Z",
+      "lastObservedAt": "2026-09-20T12:06:00.000Z"
+    }
+  ],
+  "contactPoints": [
+    {
+      "id": "d6c751b4-ff84-4386-9221-e5e6bebc3492",
+      "listingId": "6c2fb883-3c0b-454c-a441-391fed2e23e2",
+      "type": "email",
+      "value": "hello@bright-air.example",
+      "normalizedValue": "hello@bright-air.example",
+      "sourceUrl": "https://bright-air.example/contact",
+      "verificationStatus": "observed",
+      "observedAt": "2026-09-20T12:08:00.000Z"
+    }
+  ],
+  "websiteSnapshots": [
+    {
+      "id": "471e64e7-aa1d-4763-bea9-58dac99a7f83",
+      "listingId": "6c2fb883-3c0b-454c-a441-391fed2e23e2",
+      "canonicalUrl": "https://bright-air.example/services",
+      "pageKind": "service",
+      "httpStatus": 200,
+      "robotsDecision": "allowed",
+      "contentHash": "sha256:bright-air-services-v1",
+      "allowedText": "Emergency AC repair and seasonal maintenance for Austin businesses.",
+      "fetchedAt": "2026-09-20T12:08:00.000Z",
+      "expiresAt": "2026-10-20T12:08:00.000Z"
+    }
+  ],
+  "facts": [
+    {
+      "id": "26b30624-08b4-4302-8cf2-a7a31808aa3d",
+      "listingId": "6c2fb883-3c0b-454c-a441-391fed2e23e2",
+      "snapshotId": "471e64e7-aa1d-4763-bea9-58dac99a7f83",
+      "type": "service",
+      "sourceUrl": "https://bright-air.example/services",
+      "sourceSnippet": "Emergency AC repair and seasonal maintenance",
+      "normalizedContent": "Offers emergency AC repair and seasonal maintenance.",
+      "confidence": "high",
+      "extractorVersion": "facts-v1",
+      "extractedAt": "2026-09-20T12:09:00.000Z",
+      "abstained": false,
+      "abstentionReason": null
+    }
+  ],
+  "pipelineRuns": [
+    {
+      "id": "662f84ab-0434-4efe-a8e4-34404048a2ab",
+      "campaignId": "2e4133a0-39b7-4c41-bdef-6654d7c38dc5",
+      "idempotencyKey": "campaign-init:2e4133a0:v4",
+      "status": "succeeded",
+      "createdAt": "2026-09-20T12:05:00.000Z",
+      "startedAt": "2026-09-20T12:05:01.000Z",
+      "completedAt": "2026-09-20T12:12:00.000Z"
+    }
+  ],
+  "pipelineStageRuns": [
+    {
+      "id": "66b0beb0-303f-4cc8-882e-a7dd7a3fa9d8",
+      "pipelineRunId": "662f84ab-0434-4efe-a8e4-34404048a2ab",
+      "key": "discovery",
+      "ordinal": 1,
+      "status": "succeeded",
+      "attemptCount": 1,
+      "idempotencyKey": "run:662f84ab:discovery:1",
+      "startedAt": "2026-09-20T12:05:01.000Z",
+      "completedAt": "2026-09-20T12:06:30.000Z",
+      "errorSummary": null
+    }
+  ],
+  "drafts": [
+    {
+      "id": "e58ad47b-120d-4ea9-a46c-f27709f4d6f7",
+      "listingId": "6c2fb883-3c0b-454c-a441-391fed2e23e2",
+      "version": 1,
+      "subject": "A quick idea for Bright Air",
+      "body": "I noticed Bright Air offers emergency AC repair and seasonal maintenance.",
+      "confidence": "high",
+      "lowConfidenceReason": null,
+      "generatorVersion": "draft-v1",
+      "generatedAt": "2026-09-20T12:10:00.000Z",
+      "reviewStatus": "approved",
+      "editedBy": "operator@example.test",
+      "reviewedBy": "operator@example.test",
+      "reviewedAt": "2026-09-20T12:11:00.000Z"
+    }
+  ],
+  "draftCitations": [
+    {
+      "id": "2ecefcb4-9ef5-47f5-ad1b-e6867ca9b002",
+      "draftId": "e58ad47b-120d-4ea9-a46c-f27709f4d6f7",
+      "factId": "26b30624-08b4-4302-8cf2-a7a31808aa3d",
+      "ordinal": 0,
+      "citedText": "emergency AC repair and seasonal maintenance"
+    }
+  ],
+  "queueRecords": [
+    {
+      "id": "736a17eb-7125-49e2-8d2a-d67c85968218",
+      "listingId": "6c2fb883-3c0b-454c-a441-391fed2e23e2",
+      "status": "sent",
+      "preferredContactPointId": "d6c751b4-ff84-4386-9221-e5e6bebc3492",
+      "needsManualResearch": false,
+      "lowConfidenceReason": null,
+      "humanApprovedAt": "2026-09-20T12:11:00.000Z",
+      "suppressionCheckedAt": "2026-09-20T12:11:30.000Z",
+      "nextTouchAt": null,
+      "followUpNote": null,
+      "disqualificationReason": null,
+      "createdAt": "2026-09-20T12:06:00.000Z",
+      "updatedAt": "2026-09-20T12:12:00.000Z"
+    }
+  ],
+  "outreachEvents": [
+    {
+      "id": "9d38cd40-fe22-4611-8338-0a91536cc6b1",
+      "queueRecordId": "736a17eb-7125-49e2-8d2a-d67c85968218",
+      "draftId": "e58ad47b-120d-4ea9-a46c-f27709f4d6f7",
+      "contactPointId": "d6c751b4-ff84-4386-9221-e5e6bebc3492",
+      "type": "sent",
+      "occurredAt": "2026-09-20T12:12:00.000Z",
+      "idempotencyKey": "send:736a17eb:draft-v1",
+      "metadata": {
+        "channel": "manual-email"
+      }
+    }
+  ],
+  "suppressionEntries": [
+    {
+      "id": "d11f975b-3577-4f50-a9a9-dcc211e6e5e1",
+      "scope": "global",
+      "campaignId": null,
+      "matchType": "domain",
+      "normalizedValue": "example.invalid",
+      "source": "operator",
+      "reason": "Do not contact test domain.",
+      "createdAt": "2026-09-20T11:00:00.000Z"
+    }
+  ]
+}

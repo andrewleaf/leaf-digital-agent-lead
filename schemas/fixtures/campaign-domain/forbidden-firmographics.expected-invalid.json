@@ -1,0 +1,9 @@
+{
+  "kind": "save-campaign-draft",
+  "requestId": "4ad453e6-bcda-4d37-843f-cdbebf640d4f",
+  "data": {
+    "name": "Austin HVAC",
+    "employeeCount": 25,
+    "annualRevenue": 5000000
+  }
+}
