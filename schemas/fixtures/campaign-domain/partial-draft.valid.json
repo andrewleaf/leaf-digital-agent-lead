@@ -1,0 +1,17 @@
+{
+  "kind": "save-campaign-draft",
+  "requestId": "2ad453e6-bcda-4d37-843f-cdbebf640d4f",
+  "campaignId": "2e4133a0-39b7-4c41-bdef-6654d7c38dc5",
+  "expectedVersion": 3,
+  "data": {
+    "name": "Austin HVAC",
+    "niches": [
+      {
+        "label": "HVAC contractors",
+        "order": 0
+      }
+    ],
+    "offerSummary": "A concise public-website audit with actionable conversion fixes.",
+    "voiceProfile": "helpful-direct"
+  }
+}

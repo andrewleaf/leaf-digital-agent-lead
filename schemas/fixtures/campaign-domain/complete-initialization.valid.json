@@ -1,0 +1,50 @@
+{
+  "kind": "initialize-campaign",
+  "requestId": "3ad453e6-bcda-4d37-843f-cdbebf640d4f",
+  "campaignId": "2e4133a0-39b7-4c41-bdef-6654d7c38dc5",
+  "expectedVersion": 4,
+  "idempotencyKey": "campaign-init:2e4133a0:v4",
+  "data": {
+    "name": "Austin HVAC",
+    "niches": [
+      {
+        "id": "9a867b92-9b92-4e24-a644-8434606af8b1",
+        "label": "HVAC contractors",
+        "order": 0
+      }
+    ],
+    "geographies": [
+      {
+        "id": "70d546e2-04b6-4823-a194-edfd0f5fdc7e",
+        "label": "Austin, TX",
+        "order": 0
+      }
+    ],
+    "offerSummary": "A concise public-website audit with actionable conversion fixes.",
+    "callToAction": "Reply if you would like the three-point audit.",
+    "voiceProfile": "helpful-direct",
+    "proofs": [
+      {
+        "text": "Operator-supplied proof; not an extracted website fact.",
+        "order": 0,
+        "authorship": "operator"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Do not claim revenue or employee count",
+        "order": 0
+      }
+    ],
+    "discoverySettings": {
+      "requireWebsite": true,
+      "requireEmail": false,
+      "minimumRating": 3.5,
+      "minimumReviewCount": 10
+    },
+    "researchSettings": {
+      "extractProofPoints": true,
+      "fallbackAction": "flag-unverified"
+    }
+  }
+}
